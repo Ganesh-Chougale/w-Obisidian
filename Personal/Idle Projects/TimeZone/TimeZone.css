@@ -1,0 +1,21 @@
+body {
+  font-family: system-ui;
+}
+
+.select2-container--default .select2-selection--single {
+  height: 42px;
+  padding: 6px;
+}
+
+.select2-selection__rendered {
+  color: black !important;
+}
+
+.card {
+  font-size: 14px;
+}
+
+#copyBtn {
+  font-size: 15px;
+  color: white;
+}

@@ -1,0 +1,62 @@
+DDL
+Data Definition Language = Create, Alter, Drop, Truncate
+______________________________________________________________________________
+
+1. Create commands: create DB or table
+- create a database
+```sql
+CREATE DATABASE CompanyDB;
+```  
+- create a table
+```sql
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    HireDate DATE
+);
+```
+______________________________________________________________________________
+
+2. Alter commands: add/edit/delete column
+- add new column to table
+```sql
+ALTER TABLE Employees
+ADD Email VARCHAR(100);
+```  
+- increase size of column
+```sql
+ALTER TABLE Employees
+MODIFY COLUMN LastName VARCHAR(150);
+-- Syntax might vary (e.g., ALTER COLUMN) by DB system
+```  
+- remove column
+```sql
+ALTER TABLE Employees
+DROP COLUMN HireDate;
+```  
+______________________________________________________________________________
+
+3.  Drop commands: permanently removes DB or table
+- drop database
+```sql
+DROP TABLE DB_name;
+```  
+- drop table
+```sql
+DROP DATABASE table_name;
+```  
+______________________________________________________________________________
+
+4. Truncate command: cleans the records & rows from a table
+```sql
+TRUNCATE TABLE table_name;
+```  
+______________________________________________________________________________
+
+5. Rename Command: rename table
+```sql
+RENAME TABLE Employees TO Staff; 
+-- Syntax might vary by DB system (e.g., ALTER TABLE... RENAME TO)
+```  
+______________________________________________________________________________

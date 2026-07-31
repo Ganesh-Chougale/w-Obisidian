@@ -1,0 +1,86 @@
+DQL
+
+Data Query Language = Select
+
+______________________________________________________________________________
+
+table we gonna use for further DQL commands
+```sql
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Category VARCHAR(50),
+    Price DECIMAL(10, 2),
+    StockQuantity INT
+);
+
+-- Example Data might look like this:
+-- (1, 'Laptop', 'Electronics', 1200.00, 50)
+-- (2, 'T-Shirt', 'Apparel', 25.50, 200)
+-- (3, 'Monitor', 'Electronics', 300.00, 75)
+-- (4, 'Jeans', 'Apparel', 50.00, 120)
+-- (5, 'Keyboard', 'Electronics', 75.00, 30)
+```  
+______________________________________________________________________________
+
+1. Basic Select
+- wildcard select
+```sql
+SELECT * FROM Products;
+```
+- select specific columns only
+```sql
+SELECT ProductName, Price FROM Products;
+```
+- use Aliases (renaming columns in the output)
+```sql
+SELECT ProductName AS Name, Price AS UnitPrice FROM Products;
+``` 
+______________________________________________________________________________
+
+2. WHERE clause(Filter)
+- single condition
+```sql
+SELECT * FROM Products
+WHERE Category = 'Electronics';
+``` 
+- multiple condition
+```sql
+SELECT * FROM Products
+WHERE Category = 'Electronics' AND StockQuantity > 40;
+``` 
+- filter using numerical comparisons
+```sql
+SELECT ProductName, Price FROM Products
+WHERE Price < 100.00;
+``` 
+______________________________________________________________________________
+
+3. Order By clause(Sorting)
+- ascending sort
+```sql
+SELECT * FROM Products
+ORDER BY Price ASC;
+``` 
+- descending sort
+```sql
+SELECT * FROM Products
+ORDER BY Price DESC;
+``` 
+______________________________________________________________________________
+
+4. Limit/Offset clause (Paging result)
+- select top 3
+```sql
+SELECT * FROM Products
+ORDER BY Price ASC
+LIMIT 3; -- syntax may vary via different DBs
+``` 
+______________________________________________________________________________
+
+5. Distinct keyword
+- find unique values from column, removing different
+```sql
+SELECT DISTINCT Category FROM Products;
+``` 
+______________________________________________________________________________

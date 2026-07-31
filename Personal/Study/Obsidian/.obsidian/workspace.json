@@ -1,0 +1,222 @@
+{
+  "main": {
+    "id": "7080bdd077809460",
+    "type": "split",
+    "children": [
+      {
+        "id": "b4025c8d65d2d3c6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bdbb4fe3e2191c7c",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3d0c8586f5be8b04",
+    "type": "split",
+    "children": [
+      {
+        "id": "6e23dd3821c901f5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "acdb3107e86d0915",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "62e0c7370d76e6a6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "922ab29c27454244",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "a96aa1b3f49e6234",
+    "type": "split",
+    "children": [
+      {
+        "id": "5f1039e415f20630",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f2a1fee6ce5d6dc6",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "a2884a40f898eba9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "01 Headings.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 01 Headings"
+            }
+          },
+          {
+            "id": "e7f7b7126192f572",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "6d2be2a9d4d68ca2",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "fdeb98629a790aec",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "01 Headings.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 01 Headings"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "bdbb4fe3e2191c7c",
+  "lastOpenFiles": [
+    "Untitled.base",
+    "Basics/08 Properties.md",
+    "Basics/00 Index.md",
+    "Basics/07 Tags.md",
+    "Basics/06 Obsidian Callouts.md",
+    "Z_Access/in File pdf.pdf",
+    "Z_Access/Clickable Image.png",
+    "Basics/05 Image In markdown.md",
+    "Z_Access/Clickable pdf.pdf",
+    "Z_Access/Clickable image.pdf",
+    "Z_Access/in File image.pdf",
+    "Z_Access/in File image copy.png",
+    "Z_Access/in File image.png",
+    "Z_Access/temp.pdf",
+    "Z_Access/output.md",
+    "05 Image From Markdown markdown.md",
+    "Basics/06 Direct Embed Image.md",
+    "Basics/05 Embed Image.md",
+    "Basics/04 Partial Embed.md",
+    "Z_Access/temp_image.png",
+    "Basics/03 Embeded Link.md",
+    "Basics/02 Wikilinks.md",
+    "Basics/01 Starter.md",
+    "temp folder/output.md",
+    "temp folder",
+    "Basics/03 Embede Link",
+    "Z_Access",
+    "File Name.md",
+    "Basics/02 WikiLinks.md",
+    "02 Internal Links.md",
+    "01 Headings.md",
+    "Complexities/00 Index.md",
+    "Complexities/Z_Acess.md",
+    "Complexities/04 Small input Vs Large input.md",
+    "Complexities/Temp Writing.md",
+    "Complexities/05 Growth.md",
+    "Complexities/03 Introduction to n.md",
+    "Complexities/02 Expressions Have Multiple Steps.md",
+    "Complexities"
+  ]
+}

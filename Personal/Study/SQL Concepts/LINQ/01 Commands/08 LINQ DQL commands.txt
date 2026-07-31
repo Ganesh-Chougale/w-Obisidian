@@ -1,0 +1,122 @@
+DQL - LINQ
+
+Data Query Language commands = Select
+
+LINQ DQL (Data Query Language) is where LINQ really shines. It allows you to write powerfully expressive queries directly in C#, which can query various data sources like in-memory lists, databases, or XML.
+These operations are available in two forms: Method Syntax (using extension methods and lambda expressions) and Query Syntax (using keywords like from...where...select).
+
+______________________________________________________________________________
+
+1. Where / Filtering Data
+- Used to filter sequences based on a condition, exactly like the SQL WHERE clause.
+
+SQL: SELECT * FROM Products WHERE Category = 'Electronics'
+
+A. Method Syntax
+```csharp
+var electronics = productsList.Where(p => p.Category == "Electronics");
+```
+
+B. Query Syntax
+```csharp
+var electronics = from p in productsList
+                  where p.Category == "Electronics"
+                  select p;
+```  
+______________________________________________________________________________
+
+2. Select / Projecting Data
+- Used to transform elements into a new form or shape, often selecting only specific columns/properties.
+
+SQL: SELECT ProductName, Price FROM Products
+
+A. Method Syntax
+```csharp
+// Selects only the Name and Price properties into an anonymous type
+var namesAndPrices = productsList.Select(p => new { 
+    Name = p.ProductName, 
+    Price = p.Price 
+});
+```  
+
+B. Query Syntax
+```csharp
+var namesAndPrices = from p in productsList
+                     select new { 
+                         Name = p.ProductName, 
+                         Price = p.Price 
+                     };
+```
+______________________________________________________________________________
+
+3. Order By / Sorting Data
+- Used to sort the results based on one or more properties.
+
+SQL: SELECT * FROM Products ORDER BY Price DESC
+
+A. Method Syntax
+```csharp
+// Sorts by Price descending, then by Name ascending
+var sortedProducts = productsList.OrderByDescending(p => p.Price)
+                                 .ThenBy(p => p.ProductName);
+```  
+
+B. Query Syntax
+```csharp
+var sortedProducts = from p in productsList
+                     orderby p.Price descending, p.ProductName ascending
+                     select p;
+```
+______________________________________________________________________________
+
+4. Aggregating Data (COUNT, SUM, AVG, MAX, MIN)
+- Used to perform calculations over a set of data and return a single value. These always use the Method Syntax because they force immediate execution.
+
+SQL: SELECT AVG(Price) FROM Products WHERE Category = 'Electronics'
+
+A. Method Syntax
+```csharp
+var averagePrice = productsList.Where(p => p.Category == "Electronics")
+                               .Average(p => p.Price);
+
+var totalStock = productsList.Sum(p => p.StockQuantity);
+
+var productCount = productsList.Count();
+```  
+
+B. Query Syntax
+```csharp
+// You build the filtering part using query syntax:
+var electronicsQuery = from p in productsList
+                       where p.Category == "Electronics"
+                       select p;
+
+// But you *must* use Method Syntax to get the average:
+var averagePrice = electronicsQuery.Average(p => p.Price);
+```
+______________________________________________________________________________
+
+5. Group By / Grouping Data
+- Organizes results into groups that share a common key, often used before applying an aggregate function.
+
+SQL: SELECT Category, COUNT(*) FROM Products GROUP BY Category
+
+A. Method Syntax
+```csharp
+var productsByCategory = productsList.GroupBy(p => p.Category)
+                                     .Select(g => new { 
+                                         CategoryName = g.Key, 
+                                         Count = g.Count() 
+                                     });
+```
+
+B. Query Syntax
+```csharp
+var productsByCategory = from p in productsList
+                         group p by p.Category into g
+                         select new { 
+                             CategoryName = g.Key, 
+                             Count = g.Count() 
+                         };
+```
+________________________________________________________________________

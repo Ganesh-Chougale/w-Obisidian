@@ -1,0 +1,25 @@
+SQL Joins
+
+1. Inner Join = Returns only the rows that perfectly match in both tables.
+- ❌no left | ✅only mid common | ❌no right
+
+2. Left Join = Guarantees all rows from the Left Table are returned, and brings along any matching information from the Right Table.
+- ✅left + mid common | ❌no right uncommon
+
+3. Right Join = Guarantees all rows from the Right Table are returned, and brings along any matching information from the Left Table.
+- ❌no left uncommon | ✅mid common + right
+
+4. Full Join = all values from both tables.
+- ✅left | ✅ mid common | ✅right
+- basically everything
+
+5. Outer Join = It is a Category, Not a standalone join. Left Join, Right Join & Full join us sub-categories of Outer Join.
+
+6. Cross Join = Combination of : each left table rows x  each right table rows
+- Example: If you have a Colors table (Red, Blue) and a Sizes table (Small, Medium), a CROSS JOIN gives you:
+(Red, Small), (Red, Medium), (Blue, Small), (Blue, Medium)
+
+7. Self Join = A SELF JOIN is a concept, not a unique keyword. You use the existing INNER or LEFT JOIN syntax but apply it to the same table twice, using different temporary names (aliases) for the table instances to differentiate them.
+
+
+- learn Cross Join & Self Join while doing the work

@@ -1,0 +1,66 @@
+TCL
+
+Transactional Control Language = Commit, Rollback, Savepoint
+
+______________________________________________________________________________
+
+1. Commit
+- The COMMIT command permanently saves the work done during the current transaction. Once you commit changes, they are visible to all other users and cannot be rolled back (undone) using the ROLLBACK command.
+Scenario: You insert a new employee record and want to make sure it's permanently stored.
+```sql
+-- Start a transaction (often automatic depending on DB settings)
+BEGIN TRANSACTION; -- or just BEGIN; or START TRANSACTION;
+
+-- DML Operation: Insert a new record
+INSERT INTO Staff (EmployeeID, FirstName, LastName)
+VALUES (103, 'John', 'Cena');
+
+-- TCL Operation: Permanently save the insertion
+COMMIT;
+-- Now, the record for John Cena is permanently in the database.
+```  
+______________________________________________________________________________
+
+2. Rollback
+- The ROLLBACK command is used to undo the changes since the last BEGIN TRANSACTION or COMMIT command was issued. It restores the database to the state it was in before the DML statements were executed.
+Scenario: You realize you made a mistake while updating data and want to undo the changes.
+```sql
+BEGIN TRANSACTION;
+
+-- DML Operation: Update the whole table by mistake
+UPDATE Staff
+SET LastName = 'ErrorName';
+
+-- You realize you messed up! The WHERE clause was missing.
+-- TCL Operation: Undo the incorrect update
+ROLLBACK;
+
+-- The table data is now restored to its state before the UPDATE command ran.
+```  
+______________________________________________________________________________
+
+3. Savepoint
+- SAVEPOINT allows you to set a marker within a complex transaction. This lets you partially roll back a transaction to a specific savepoint, rather than rolling back the entire transaction.
+Scenario: A complex series of operations where you might need to undo one specific part.
+```sql
+BEGIN TRANSACTION;
+
+-- Operation 1: Insert record A
+INSERT INTO Staff VALUES (104, 'Manager', 'One');
+
+-- Set a SAVEPOINT here
+SAVEPOINT BeforeSecondInsert;
+
+-- Operation 2: Insert record B (Potential error area)
+INSERT INTO Staff VALUES (105, 'Manager', 'Two');
+
+-- Assume you realize Operation 2 was incorrect.
+-- Roll back *only* to the savepoint marker
+ROLLBACK TO BeforeSecondInsert;
+
+-- Operation 2 is undone, but Operation 1 is still part of the active transaction.
+
+-- Commit the valid changes (Operation 1 only)
+COMMIT;
+```  
+______________________________________________________________________________

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprite Sheet Mapper</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body { padding: 15px; }
+.tag {
+    display: inline-flex;
+    align-items: center;
+    background: #0d6efd;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 4px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.tag span {
+    margin-left: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+textarea { height: 200px; }
+</style>
+</head>
+
+<body class="bg-light">
+
+<div class="container">
+
+<h4 class="mb-3">Sprite Sheet Mapper</h4>
+
+<!-- 1. Character Block -->
+<div class="mb-3">
+<label class="form-label">Character Block Size</label>
+<div class="d-flex">
+<input id="blockX" type="number" class="form-control me-2" placeholder="64">
+<span class="align-self-center">x</span>
+<input id="blockY" type="number" class="form-control ms-2" placeholder="64">
+</div>
+</div>
+
+<!-- 2. States -->
+<div class="mb-3">
+<label class="form-label">States</label>
+<div id="stateTags"></div>
+
+<div class="input-group mt-2">
+<input id="stateInput" type="text" class="form-control" placeholder="Add custom state">
+<button class="btn btn-primary" onclick="addState()">Add</button>
+</div>
+
+<div class="mt-2">
+<button class="btn btn-sm btn-success" onclick="addDefault()">Default</button>
+</div>
+</div>
+
+<!-- Frame Count -->
+<div class="mb-3">
+<label class="form-label">Frame Count per State</label>
+<div id="frameInputs"></div>
+</div>
+
+<!-- 2a / 2b -->
+<div class="mb-3">
+<label class="form-label">Sheet Type</label>
+<select id="sheetType" class="form-select">
+<option value="single">Single Sheet</option>
+<option value="split">Split (3 per sheet)</option>
+</select>
+</div>
+
+<!-- 3. Mapper -->
+<div class="mb-3">
+<label class="form-label">Output Format</label>
+<select id="format" class="form-select">
+<option value="json">JSON</option>
+<option value="yaml">YAML</option>
+</select>
+</div>
+
+<div class="mb-3 d-flex gap-2">
+<button class="btn btn-primary w-100" onclick="generate()">Generate</button>
+<button class="btn btn-outline-secondary w-100" onclick="copyOutput()">Copy</button>
+</div>
+
+<!-- Output -->
+<div class="mb-3">
+<label class="form-label">Output</label>
+<textarea id="output" class="form-control"></textarea>
+</div>
+
+</div>
+
+<script>
+
+let states = []
+
+// ===== STATE MANAGEMENT =====
+
+function renderStates() {
+    const container = document.getElementById('stateTags')
+    container.innerHTML = ''
+
+    states.forEach((s, i) => {
+        const tag = document.createElement('div')
+        tag.className = 'tag'
+        tag.innerHTML = `${s} <span onclick="removeState(${i})">x</span>`
+        container.appendChild(tag)
+    })
+
+    renderFrameInputs()
+}
+
+function addState() {
+    const input = document.getElementById('stateInput')
+    const val = input.value.trim()
+
+    if (!val) return
+
+    if (!states.includes(val)) {
+        states.push(val)
+    }
+
+    input.value = ''
+    renderStates()
+}
+
+function removeState(index) {
+    states.splice(index, 1)
+    renderStates()
+}
+
+function addDefault() {
+    states = ["Idle","Walk","Run","Jump"]
+    renderStates()
+}
+
+// ===== FRAME INPUTS =====
+
+function renderFrameInputs() {
+    const container = document.getElementById('frameInputs')
+    container.innerHTML = ''
+
+    states.forEach(s => {
+        const div = document.createElement('div')
+        div.className = 'mb-2'
+
+        div.innerHTML = `
+            <label>${s}</label>
+            <input type="number" class="form-control" id="frame-${s}" placeholder="Frames">
+        `
+
+        container.appendChild(div)
+    })
+}
+
+// ===== GENERATOR =====
+
+function generate() {
+
+    const block = parseInt(document.getElementById('blockX').value) || 64
+
+    let result = {
+        variableName: {
+            spriteName: {
+                spriteSheetWidth: 1000,
+                spriteSheetHeight: 1000,
+                characterBlock: block
+            },
+            statesInfo: {}
+        }
+    }
+
+    states.forEach((state, i) => {
+        const frames = parseInt(document.getElementById(`frame-${state}`).value) || 1
+
+        result.variableName.statesInfo[state] = {
+            row: i,
+            frameCount: frames,
+            position: { x: 0, y: i * block },
+            width: block,
+            height: block
+        }
+    })
+
+    const format = document.getElementById('format').value
+
+    let outputText = ''
+
+    if (format === 'json') {
+        outputText = JSON.stringify(result, null, 4)
+    } else {
+        outputText = toYAML(result)
+    }
+
+    document.getElementById('output').value = outputText
+}
+
+// ===== YAML CONVERTER =====
+
+function toYAML(obj, indent = 0) {
+    let yaml = ''
+    const space = ' '.repeat(indent)
+
+    for (let key in obj) {
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+            yaml += `${space}${key}:\n`
+            yaml += toYAML(obj[key], indent + 2)
+        } else {
+            yaml += `${space}${key}: ${obj[key]}\n`
+        }
+    }
+    return yaml
+}
+
+// ===== COPY =====
+
+function copyOutput() {
+    const text = document.getElementById('output')
+    text.select()
+    document.execCommand('copy')
+}
+
+</script>
+
+</body>
+</html>

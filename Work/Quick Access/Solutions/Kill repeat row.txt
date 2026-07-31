@@ -1,0 +1,19 @@
+@{
+    string repeatRow = null;
+}
+<tbody>
+    @foreach (var item in toolObj)
+    {
+        <tr>
+            <td class="text-center">
+                @if (item.OperationName != repeatRow)
+                {
+                    @item.OperationName
+                    repeatRow = item.OperationName;
+                }
+            </td>
+
+            <td class="text-center"> @item.MaterialName</td>
+        </tr>
+    }
+</tbody>

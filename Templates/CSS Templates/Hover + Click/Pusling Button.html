@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: Pusling Button</title>
+
+  <style>
+    body { background: #000000; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    :root {
+        --primary-btn-color: #ffffff;
+        --text-main: #777777;
+        --shadow-dark: rgba(0, 0, 0, 0.2);
+        
+        /* Auto shade calculation for hover states */
+        --btn-hover-bg: var(--primary-btn-color);
+        --btn-after-opacity: 0;
+    }
+
+    .text-box {
+        position: relative;
+    }
+
+    .btn:link,
+    .btn:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 15px 40px;
+        display: inline-block;
+        border-radius: 100px;
+        transition: all .2s;
+        position: relative;
+        font-size: 16px;
+    }
+
+    .btn-white {
+        background-color: var(--primary-btn-color);
+        color: var(--text-main);
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px var(--shadow-dark);
+    }
+
+    .btn:active {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 10px var(--shadow-dark);
+    }
+
+    .btn::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 100px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all .4s;
+    }
+
+    .btn-white::after {
+        background-color: var(--primary-btn-color);
+    }
+
+    .btn:hover::after {
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: var(--btn-after-opacity);
+    }
+
+    .btn-animated {
+        animation: moveInBottom 0.5s ease-out 0.75s;
+        animation-fill-mode: backwards;
+    }
+
+    @keyframes moveInBottom {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+<div class="text-box">
+    <a href="#" class="btn btn-white btn-animated">click me</a>
+</div>
+<!-- HTML -->
+
+
+</body>
+</html>

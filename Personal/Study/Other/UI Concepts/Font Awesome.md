@@ -1,0 +1,4 @@
+fa: `This is the base class required for all Font Awesome icons in Version 4. It provides the core styling that renders the element as an icon, such as setting the font-family and basic display properties.`  
+fa-lg: `This class increases the size of the icon by 33% relative to its container's font size. Other size classes available are fa-2x, fa-3x, fa-4x, and fa-5x.`  
+fa-fw: `This class sets the icon to a fixed width. This is especially useful in lists or navigation menus where icons of varying widths (e.g., a "tall" icon and a "wide" icon) would otherwise misalign vertically.`  
+fa-search: `This class specifies which icon to display—in this case, the "search" icon.`  

@@ -1,0 +1,10 @@
+```sql
+DECLARE @MENU_ID INT = ''
+SELECT 
+	VOU_TYPE AS DOC_TYPE,
+	* 
+FROM 
+	ERP_MASTERS..MST_MENU 
+where 
+	MENU_ID = @MENU_ID
+```   

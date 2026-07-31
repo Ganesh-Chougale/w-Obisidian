@@ -1,0 +1,19 @@
+Front end place holder
+1. created simple frontend folder & places index.html & Main.js in it
+
+2. in html created 3 sections. 
+a] show register area button, show login area button 
+b] hidden register area & hidden login area
+
+3. in js, cached all required variables
+
+4. trigger show/hide switches between register & login areas.
+
+5. which ever area is visible, get their input values, place them into an object & console log that object
+
+Backend Placeholder
+1. create a Backend folder & do `npm init -y` inside that folder's terminal. it will create Package.json. create main_server.js manually
+
+2. in main_server have HTTP, port number, url builder, createServer & server listener which hears the routes.   
+
+3. by default all URLs are GET urls, we need fetch() call to make them other than GET. tried did this but having CORS problem

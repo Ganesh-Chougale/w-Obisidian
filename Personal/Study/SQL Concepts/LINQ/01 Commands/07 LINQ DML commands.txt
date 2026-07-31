@@ -1,0 +1,107 @@
+DML - LINQ
+
+Data Manipulation Language Commands	= Insert, Update, Delete
+
+In LINQ and the broader C# data access world (primarily using Entity Framework Core, the standard LINQ provider for databases), DML operations (INSERT, UPDATE, DELETE) are handled differently than in raw SQL.
+In SQL, DML commands are part of the query language itself. In LINQ/C#, DML operations are performed by calling methods on your data context (the bridge between your C# application and the database).
+
+
+______________________________________________________________________________
+
+1. INSERT (Adding New Record)
+- You create a new C# object and tell the data context to track it as a new item.
+
+SQL Idea: INSERT INTO Products VALUES (...)
+
+- three step process. 
+	A. Create object instance 
+	B. Add instance to DB 
+	C. Save the changes.
+
+```csharp
+// 1. Create the new item as a C# object
+var newProduct = new Product
+{
+    ProductName = "Mouse",
+    Category = "Electronics",
+    Price = 35.00m,
+    StockQuantity = 150
+};
+
+// 2. Tell the database context that this object needs to be added
+dbContext.Products.Add(newProduct);
+
+// 3. Execute the operation (sends the actual SQL INSERT command to the DB)
+dbContext.SaveChanges();
+```
+______________________________________________________________________________
+
+2. Update (Modify Existing Data)
+- You first use LINQ DQL to retrieve an existing item, modify its properties using standard C# syntax, and then save the changes. The LINQ provider automatically detects what changed.
+
+SQL Idea: UPDATE Products SET Price = ... WHERE ProductID = ...
+
+- four step process
+	A. Retrieve data from DB & assign it to C# obeject
+	B. Check the record that we want to update is available or not
+	C. If record found update that record
+	D. Save the changes
+
+```csharp
+// 1. Use LINQ DQL to select the specific item you want to modify
+var productToUpdate = dbContext.Products
+                               .SingleOrDefault(p => p.ProductName == "Laptop");
+
+// 2. Check if the item was found before trying to update it
+if (productToUpdate != null)
+{
+    // 3. Modify the C# object's properties (happens in memory)
+    productToUpdate.Price = 1150.00m;      // Lowering the price
+    productToUpdate.StockQuantity = 45;    // Updating stock count
+
+    // 4. Execute the operation (sends the actual SQL UPDATE command to the DB)
+    dbContext.SaveChanges();
+}
+```  
+______________________________________________________________________________
+
+3. Delete (Removing Data)
+- similar to Update but instead of modify existing we remove he record
+
+SQL Idea: DELETE FROM Products WHERE ProductID = ...
+
+- four step process
+	A. Retrieve data from DB & assign it to C# obeject
+	B. Check the record that we want to Remove is available or not
+	C. If record found remove that record
+	D. Save the changes
+
+```csharp
+// 1. Use LINQ DQL to select the specific item you want to remove
+var productToDelete = dbContext.Products
+                               .SingleOrDefault(p => p.ProductName == "T-Shirt");
+
+// 2. Check if the item was found before trying to remove it
+if (productToDelete != null)
+{
+    // 3. Tell the database context that this object needs to be removed
+    dbContext.Products.Remove(productToDelete);
+
+    // 4. Execute the operation (sends the actual SQL DELETE command to the DB)
+    dbContext.SaveChanges();
+}
+
+```  
+______________________________________________________________________________
+
+The key takeaway is that LINQ DML is object-oriented: you interact with C# objects and methods (.Add(), .Remove()) rather than writing raw SQL keywords (INSERT, DELETE).
+______________________________________________________________________________
+```csharp
+
+```  
+```csharp
+
+```  
+```csharp
+
+```  

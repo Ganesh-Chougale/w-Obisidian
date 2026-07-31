@@ -1,0 +1,9 @@
+- Track Active Item in Solution Explorer
+CTRL + [ + S
+
+- Persistant via settings
+1. Go to Tools → Options
+2. Expand Projects and Solutions
+3. Click General
+4. Uncheck → Track Active Item in Solution Explorer
+5. Click OK 

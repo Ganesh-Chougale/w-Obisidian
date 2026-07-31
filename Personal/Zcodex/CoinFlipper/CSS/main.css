@@ -1,0 +1,72 @@
+/* ===== RESET (Prevents ALL overflow issues) ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* prevents scrollbars completely */
+}
+
+/* ===== ROOT APP CONTAINER ===== */
+#wholeApp {
+    width: 100%;
+    height: 100dvh; /* dynamic viewport height (mobile safe) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f5f5;
+    position: relative;
+    overflow: hidden; /* no overflow allowed */
+}
+
+/* ===== PLAYGROUND (CENTERED + RESPONSIVE) ===== */
+#playground {
+    position: relative;
+    width: min(95vw, 1200px);
+    height: min(95dvh, 800px);
+
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+    overflow: hidden; /* widget cannot visually escape */
+}
+
+/* ===== DRAGGABLE SETTING WIDGET ===== */
+#setting-widget-floater {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    background: #222;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: grab;
+    z-index: 9999;
+
+    transition: opacity 0.4s ease;
+}
+
+/* inactive state (you'll toggle this via JS) */
+#setting-widget-floater.inactive {
+    opacity: 0.5;
+}
+
+/* active interaction state */
+#setting-widget-floater:active {
+    cursor: grabbing;
+}

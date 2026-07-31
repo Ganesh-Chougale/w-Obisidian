@@ -1,0 +1,5 @@
+Monolithic: single codebase & deployment which has large code files. tightly coupled & interdependent. one mistake in codebase can cause entire app crash. hard to debug & maintain.
+
+Modular Monolith: single codebase & deployment which has smaller chunk files distributed in well organised packages. interdependent but loosely coupled. easy to debug & maintain.
+
+Microservices: multiple codebase (polyglot = might have own tech stacks to each codebase) but they work with each other seamlessly, they are easy to maintain. since they care isolated mini projects working together to form a one major project they communicate with each others using APIs.

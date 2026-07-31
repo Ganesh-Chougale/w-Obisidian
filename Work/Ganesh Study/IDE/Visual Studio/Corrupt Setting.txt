@@ -1,0 +1,1 @@
+deleted .suo file from .vs folder

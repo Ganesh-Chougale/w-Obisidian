@@ -1,0 +1,3 @@
+Status code = 0		: Normal
+Status code = 1		: Deleted
+Status code = 101	: Un-Approved

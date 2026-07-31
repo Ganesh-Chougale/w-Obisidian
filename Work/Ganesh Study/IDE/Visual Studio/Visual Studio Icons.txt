@@ -1,0 +1,9 @@
+1. Visual Studio Icons
+- Globe/Earth: Web page
+- Flask: Test/unit tests
+- C#: c# codebase
+
+2. Run
+- F5 = run with debugger
+- ctrl + F5 = run without debugger
+

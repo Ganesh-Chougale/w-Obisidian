@@ -1,0 +1,50 @@
+1. Syntax Errors
+- Happens when: We violate the grammatical rules of the programming language. mostly known as typos. 
+- Occurrence time : While writing the code or During the compilation phase. 
+- Detection: Most modern IDEs and compilers detect them while writing or compiling the code, often pointing out the exact line number & position.
+- Reason: The compiler or interpreter cannot understand the instructions provided.
+- Example: 
+	a. A missing semicolon at the end of a statement.
+	b. Mismatched parentheses or brackets.
+	c. Misspelled keywords (e.g., using whle instead of while).
+- Consequences: The program fails to compile and will not run at all until fixed.
+- Difficulty solving: Easy
+
+
+2. Compile-time Errors
+- Happens when: The source code is being translated into machine code or bytecode by the compiler.
+- Occurrence time: During the compilation phase, before execution begins.
+- Detection: The compiler halts the process and outputs a list of errors with descriptions and line numbers.
+- Reason: The compiler identifies code that is syntactically incorrect or semantically invalid for the language specifications.
+- Example: 
+	a. Syntax Error (comes under compile-time error)
+	b. Using a variable that hasn't been declared/initialized.
+	c. variable type & value type mismatch (e.g., int name = "bro";)
+- Consequences: The program fails to build; no executable file is generated.
+- Difficulty solving: Easy to Moderate (depends on the complexity of the semantic error).
+
+
+3. Runtime Errors
+- Happens when: The program is running just fine, but then it tries to do something impossible or forbidden by the computer's operating system, so it just quits unexpectedly. It's like asking your car to drive on water—the car is running, but the action simply can't be done.
+- Occurrence time: After compilation (or interpretation) is done and the program has started executing.
+- Detection: Gives an error message or "exception" message. Almost all the time, an "exception" error means it's a runtime error.
+- Reason: The program attempts an operation that the underlying system or language rules prohibit at that specific moment.
+- Example: 
+	a. Division by zero.
+	b. Accessing an array element using an index that is out of bounds.
+	c. A program running out of memory (memory leak).
+- Consequences: The program stops abruptly and "crashes."
+- Difficulty solving: Moderate
+
+
+4. Logical Errors
+- Happens when: The program runs successfully with no crashes but produces incorrect or unexpected output.
+- Occurrence time: During program execution (runtime).
+- Detection: Requires thorough testing by the programmer comparing expected results to actual results; the computer itself provides no error messages.
+- Reason: A flaw in the programmer's algorithm, reasoning, or implementation of the solution. The logic is wrong.
+- Example: 
+	a. Calculating a discount of 10% when it should have been 20%. human error.
+	b. An infinite loop that prevents a function from completing.
+	c. Sorting a list in descending order when it needed to be ascending.
+- Consequences: The software produces flawed results or behaves in unintended ways without the user knowing it's "broken."
+- Difficulty solving: Hard

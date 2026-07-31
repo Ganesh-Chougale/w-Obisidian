@@ -1,0 +1,35 @@
+DCL (permission)
+
+Data Controll Language = Grant, Revoke
+
+______________________________________________________________________________
+
+1. Grant
+- The GRANT command is used to give specific access privileges or permissions to a user or a role. 
+Purpose: To allow a user to perform DQL, DML, or even DDL operations on certain objects. 
+A. Example:
+This grants a user named 'John' permission to read (SELECT) and update (UPDATE) data only in the Products table.
+```sql
+GRANT SELECT, UPDATE ON Products TO John;
+```  
+B. Example:
+- This grants a user the ability to connect to the database system itself (a system privilege).
+```sql
+GRANT CREATE SESSION TO John;
+```  
+______________________________________________________________________________
+
+2. Revoke
+- The REVOKE command is used to remove privileges that were previously granted to a user or a role. It performs the opposite action of the GRANT command. 
+Purpose: To tighten security or restrict a user's capabilities when their role changes. 
+A. Example:
+This takes away the DELETE permission that might have previously been given to the user 'John' on the Products table.
+```sql
+REVOKE DELETE ON Products FROM John;
+```  
+B. Example:
+This removes all basic permissions John had on the Products table.
+```sql
+REVOKE SELECT, UPDATE ON Products FROM John;
+```  
+______________________________________________________________________________

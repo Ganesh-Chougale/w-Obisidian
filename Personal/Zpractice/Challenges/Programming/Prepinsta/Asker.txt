@@ -1,0 +1,18 @@
+i was using website like fivesql & sqlTEST online to polish my SQL skills
+
+now for programming i'm choosing the wesite PREP-INSTA but note that.
+i will be using you to give me hints & not the actual answer. if i get too stucked i will ask you for answer explicitly. ok?
+
+for 1 question i will be solving this problem in these all langauages
+
+1. Python — least code, highest readability, most concise
+2. JavaScript — flexible, less boilerplate
+3. Java — boilerplate-heavy (classes, main structure, typing)
+4. C# — similar to Java but slightly more streamlined
+5. C++ — still complex, but more abstractions than C
+6. C — most verbose, manual memory, least abstraction
+
+so i get mastery in overall all the programming langauges.
+the goal is how to solve the same problem in different programming language & find common factors & different factors.
+- it's not about "How to code in X"
+- it's about "How does X express the same idea differently?"

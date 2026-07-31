@@ -1,0 +1,82 @@
+Left Join = Guarantees all rows from the Left Table are returned, and brings along any matching information from the Right Table.
+- ✅left + mid common | ❌no right uncommon
+
+______________________________________________________________________________
+
+Table 1: Departments (left)
+```txt
+DeptID(PK)	DeptName
+1		IT
+2		Sales
+3		HR
+```
+______________________________________________________________________________
+
+Table 2: Employees (right)
+```txt
+EmpID(PK)	EmpName		DeptID(FK)
+101		Alice		1
+102		Bob		2
+103		Charlie		1
+104		David		NULL
+105		Eve		4
+```
+______________________________________________________________________________
+
+Left join operation:
+A. SQL support
+```sql
+SELECT 
+    D.DeptName,
+    E.EmpName
+FROM 
+    Departments D			-- D is explicitly the LEFT table here
+LEFT JOIN 
+    Employees E ON D.DeptID = E.DeptID; -- E is explicitly the RIGHT table here
+```  
+______________________________________________________________________________
+
+B. LINQ support
+B1. Method Syntax:
+```csharp
+// Method syntax for left outer join is complex. 
+// It requires GroupJoin first, then SelectMany with DefaultIfEmpty().
+var leftJoinMethod = Departments.GroupJoin(
+    Employees, 
+    dept => dept.DeptID, 
+    emp => emp.DeptID, 
+    (dept, empGroup) => new { 
+        Department = dept, 
+        Employees = empGroup 
+    })
+    .SelectMany(
+        temp => temp.Employees.DefaultIfEmpty(), 
+        (temp, emp) => new { 
+            DeptName = temp.Department.DeptName, 
+            EmpName = emp?.EmpName 
+        });
+```
+
+B2. Query Syntax:
+```csharp
+// Query syntax is the cleanest way to express a left outer join in LINQ
+var leftJoinQuery = from d in Departments
+                    join e in Employees on d.DeptID equals e.DeptID into EmployeeGroup
+                    from emp in EmployeeGroup.DefaultIfEmpty() // This line converts the inner join group into a left outer join
+                    select new {
+                        DeptName = d.DeptName,
+                        EmpName = emp?.EmpName
+                    };
+```
+______________________________________________________________________________
+
+Output:
+```txt
+DeptName	EmpName
+IT		Alice
+IT		Charlie
+Sales		Bob
+HR		NULL
+```  
+(Note: The HR department (ID 3) is included in the output, but since no employee matched its ID, the EmpName column is NULL for that row.)
+______________________________________________________________________________

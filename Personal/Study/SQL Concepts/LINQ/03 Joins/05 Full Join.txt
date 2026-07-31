@@ -1,0 +1,89 @@
+Full Join = all values from both tables.
+- ✅left | ✅ mid common | ✅right
+- basically everything
+
+______________________________________________________________________________
+
+Table 1: Departments (left)
+```txt
+DeptID(PK)	DeptName
+1		IT
+2		Sales
+3		HR
+```
+______________________________________________________________________________
+
+Table 2: Employees (right)
+```txt
+EmpID(PK)	EmpName		DeptID(FK)
+101		Alice		1
+102		Bob		2
+103		Charlie		1
+104		David		NULL
+105		Eve		4
+```
+______________________________________________________________________________
+
+Full join operation:
+A. SQL support
+```sql
+SELECT 
+    D.DeptName,
+    E.EmpName
+FROM 
+    Departments D
+FULL OUTER JOIN 
+    Employees E ON D.DeptID = E.DeptID;
+-- Note: In MySQL, FULL OUTER JOIN syntax isn't directly supported 
+-- and requires a UNION of a LEFT JOIN and a RIGHT JOIN.
+```
+______________________________________________________________________________
+
+B. LINQ support
+B1. Method Syntax:
+```csharp
+// 1. Perform a LEFT OUTER JOIN
+var leftJoin = Departments.GroupJoin(Employees, d => d.DeptID, e => e.DeptID, (d, eGroup) => new { d, eGroup })
+                          .SelectMany(temp => temp.eGroup.DefaultIfEmpty(), 
+                                      (temp, e) => new { DeptName = temp.d.DeptName, EmpName = e?.EmpName });
+
+// 2. Perform a RIGHT OUTER JOIN (by swapping collections and doing a Left Join logic)
+var rightJoin = Employees.GroupJoin(Departments, e => e.DeptID, d => d.DeptID, (e, dGroup) => new { e, dGroup })
+                         .SelectMany(temp => temp.dGroup.DefaultIfEmpty(), 
+                                     (temp, d) => new { DeptName = d?.DeptName, EmpName = temp.e.EmpName });
+
+// 3. Combine the results using Union() to remove duplicates
+var fullJoinResult = leftJoin.Union(rightJoin);
+```
+
+B2. Query Syntax:
+```csharp
+// 1. Get Left Join results (as defined in the previous example)
+var leftJoinQuery = from d in Departments
+                    join e in Employees on d.DeptID equals e.DeptID into EmployeeGroup
+                    from emp in EmployeeGroup.DefaultIfEmpty()
+                    select new { DeptName = d.DeptName, EmpName = emp?.EmpName };
+
+// 2. Get Right Join results (as defined in the previous example)
+var rightJoinQuery = from e in Employees
+                     join d in Departments on e.DeptID equals d.DeptID into DepartmentGroup
+                     from dept in DepartmentGroup.DefaultIfEmpty()
+                     select new { DeptName = dept?.DeptName, EmpName = e.EmpName };
+
+// 3. Combine the results using Union()
+var fullJoinResult = leftJoinQuery.Union(rightJoinQuery);
+```
+______________________________________________________________________________
+
+Output:
+```txt
+DeptName	EmpName
+IT		Alice
+IT		Charlie
+Sales		Bob
+HR		NULL
+NULL		David
+NULL		Eve
+```
+(Note: Every row appears! The 'HR' department is listed with a NULL employee name (it had no match on the right), and David/Eve are listed with NULL department names (they had no match on the left). All data is returned.)
+______________________________________________________________________________

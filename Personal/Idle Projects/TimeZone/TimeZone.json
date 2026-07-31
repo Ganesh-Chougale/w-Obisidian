@@ -1,0 +1,18 @@
+{
+  "India": ["Asia/Kolkata", "IN"],
+  "Vietnam": ["Asia/Ho_Chi_Minh", "VN"],
+  "United States": ["America/New_York", "America/Los_Angeles", "USA", "US", "America"],
+  "United Kingdom": ["Europe/London", "UK", "Britain", "England"],
+  "Japan": ["Asia/Tokyo", "JP"],
+  "China": ["Asia/Shanghai", "CN"],
+  "Germany": ["Europe/Berlin", "DE"],
+  "France": ["Europe/Paris", "FR"],
+  "Australia": ["Australia/Sydney", "AU"],
+  "Canada": ["America/Toronto", "CA"],
+  "Brazil": ["America/Sao_Paulo", "BR"],
+  "Russia": ["Europe/Moscow", "RU"],
+  "South Korea": ["Asia/Seoul", "KR"],
+  "Singapore": ["Asia/Singapore", "SG"],
+  "UAE": ["Asia/Dubai", "AE"],
+  "South Africa": ["Africa/Johannesburg", "ZA"]
+}

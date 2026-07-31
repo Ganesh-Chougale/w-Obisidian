@@ -1,0 +1,147 @@
+LINQ Constraints
+
+LINQ do not has any sort of Constraints at all.
+
+in dotnet core its not on the go process
+
+instead we use Data Annotations/Attributes like [Required], [Key] & methods from DbContext APIs.
+
+import statement 
+```csharp
+using System.ComponentModel.DataAnnotations; // For [Required], [Key], [Range]
+using System.ComponentModel.DataAnnotations.Schema; // For [Index], [Column], [ForeignKey]
+```  
+
+Example:
+```csharp
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+public class Product
+{
+    // ... constraints go on these properties ...
+}
+```  
+______________________________________________________________________________
+
+1. [Required] = NOT NULL
+- Ensures a property cannot be null or empty in the database.
+```csharp
+using System.ComponentModel.DataAnnotations;
+
+public class Product
+{
+    public int ProductID { get; set; }
+
+    [Required] // This translates to a NOT NULL column in SQL
+    public string ProductName { get; set; }
+    
+    public string Description { get; set; } // This implicitly allows NULL
+}
+```  
+______________________________________________________________________________
+
+2. [Key] = PRIMARY KEY
+Unique + Not Null 
+```csharp
+using System.ComponentModel.DataAnnotations;
+
+public class Product
+{
+    [Key] // This translates to PRIMARY KEY
+    public int ProductID { get; set; }
+}
+```  
+Note: EF Core often assumes properties named Id or [ClassName]Id are the primary key even without the [Key] attribute.
+______________________________________________________________________________
+
+3. [Index(IsUnique = true)] or Fluent API = UNIQUE
+
+A. Annotation
+```csharp
+using System.ComponentModel.DataAnnotations.Schema;
+
+public class Product
+{
+    [Index(IsUnique = true)] 
+    public int Contact { get; set; }
+}
+```  
+B. Fluent API (in your C#'s DbContext class)
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Product>()
+        .HasIndex(p => p.ProductName)
+        .IsUnique(); // This generates a UNIQUE constraint in the DB
+}
+```  
+______________________________________________________________________________
+
+4. [Foreign Key] = FOREIGN KEY
+This is handled by defining navigation properties between your C# classes. EF Core automatically detects the relationship and applies the foreign key constraint in the database.
+```csharp
+public class Category
+{
+    [Key]
+    public int CategoryId { get; set; }
+    [Required]
+    public string Name { get; set; }
+}
+
+public class Product
+{
+    [Key]
+    public int ProductID { get; set; }
+    
+    // This is the actual column that holds the foreign key value
+    public int CategoryId { get; set; }
+
+    // This is the 'navigation property' that tells EF about the *relationship*
+    [ForeignKey("CategoryId")]
+    public Category Category { get; set; }
+}
+```  
+______________________________________________________________________________
+
+5. [Range] or Fluent API = CHECK 
+
+A. Annotation
+```csharp
+using System.ComponentModel.DataAnnotations;
+
+public class Employee
+{
+    // This annotation validates in C#, ensuring Age is between 18 and 100
+    [Range(18, 100, ErrorMessage = "Age must be between 18 and 100.")]
+    public int Age { get; set; }
+}
+```
+B. Fluent API
+```csharp
+// You only need standard EF Core imports for the DbContext file
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic; 
+// You also need the model definition (e.g., the Employee class from above)
+
+
+public class MyDbContext : DbContext
+{
+    public DbSet<Employee> Employees { get; set; }
+
+    // Constructor/Configuration omitted for brevity...
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Define the CHECK constraint using the Fluent API
+        modelBuilder.Entity<Employee>()
+            // We give the constraint a name (e.g., CK_Employee_Age) 
+            // and the SQL expression it must satisfy.
+            .HasCheckConstraint("CK_Employee_Age", "[Age] >= 18 AND [Age] <= 100");
+            
+        // You could also simplify the SQL expression if needed:
+        // .HasCheckConstraint("CK_Employee_Age", "[Age] BETWEEN 18 AND 100");
+    }
+}
+```
+______________________________________________________________________________

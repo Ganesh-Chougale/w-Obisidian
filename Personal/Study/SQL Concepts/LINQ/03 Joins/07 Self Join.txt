@@ -1,0 +1,63 @@
+Self Join = A SELF JOIN is a concept, not a unique keyword. You use the existing INNER or LEFT JOIN syntax but apply it to the same table twice, using different temporary names (aliases) for the table instances to differentiate them.
+
+______________________________________________________________________________
+
+Table 1: Employees (The same table used twice with aliases E and M) 
+```txt
+EmpID(PK)	Name		ManagerID(FK to EmpID)
+1		Alice		NULL
+2		Bob		1
+3		Charlie		2
+4		David		2
+```  
+______________________________________________________________________________
+Self join operation (using INNER JOIN syntax with aliases):
+A. SQL support
+```sql
+SELECT 
+    E.Name AS EmployeeName, 
+    M.Name AS ManagerName
+FROM 
+    Employees E                          -- E is the "Employee" instance of the table
+INNER JOIN 
+    Employees M                          -- M is the "Manager" instance of the table
+ON 
+    E.ManagerID = M.EmpID;               -- Link where the Employee's ManagerID matches the Manager's EmpID
+
+```
+______________________________________________________________________________
+
+B. LINQ support
+B1. Method Syntax:
+```csharp
+var selfJoinMethod = employeesList.Join(
+    employeesList,                      // Join the list to itself
+    employee => employee.ManagerID,     // Outer key: The employee's manager ID
+    manager => manager.EmpID,           // Inner key: The manager's actual employee ID
+    (employee, manager) => new {        // Result selector
+        EmployeeName = employee.Name,
+        ManagerName = manager.Name
+    }
+);
+```
+
+B2. Query Syntax:
+```csharp
+var selfJoinQuery = from E in employeesList    // E is the Employee alias
+                    join M in employeesList    // M is the Manager alias
+                    on E.ManagerID equals M.EmpID
+                    select new {
+                        EmployeeName = E.Name,
+                        ManagerName = M.Name
+                    };
+```
+______________________________________________________________________________
+
+Output:
+```txt
+EmployeeName	ManagerName
+Bob		Alice
+Charlie		Bob
+David		Bob
+```
+______________________________________________________________________________

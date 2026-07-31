@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Playground</title>
+
+    <!-- Bootstrap 3 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- Font Awesome 4.7 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        .playground {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        #content {
+            /* Paste your Bootstrap HTML here */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="playground">
+        <div id="content">
+
+
+            <!-- Arrows -->
+            <div class="text-center">
+                <h3>Arrows</h3>
+
+                <!-- Increasing -->
+                <span style="font-size:30px; color:#00751B; display:inline-block; transform:scaleX(1.2);">↑</span>
+                <span style="font-weight: 700;">Increasing</span>
+                <br>
+
+                <!-- Stable -->
+                <span style="color:#3f51ff;font-size:30px;display:inline-block; transform:scaleY(1.2);">→</span>
+                <span style="font-weight: 700;">Stable</span>
+                <br>
+
+                <!-- Decreasing -->
+                <span class="text-danger" style="font-size:30px;font-weight:900;">↘</span>
+                <span style="font-weight: 700;">Decreasing</span>
+                <br>
+
+
+            </div>
+
+            <!-- Speed -->
+            <div class="text-center">
+                <h3>Speed</h3>
+
+                <!-- Fast -->
+                <span class="text-success" style="font-size:30px;font-weight:900;">🔥</span>
+                <span style="font-weight: 700;">Fast</span>
+                <br>
+
+                <!-- Slow -->
+                <span style="color:#3f51ff;font-size:30px;font-weight:900;">🐢</span>
+                <span style="font-weight: 700;">Slow</span>
+                <br>
+
+                <!-- Medium -->
+                <span class="text-danger" style="font-size:30px;font-weight:900;">⚡️</span>
+                <span style="font-weight: 700;">Medium</span>
+                <br>
+            </div>
+            
+            <!-- Dot Cards -->
+             <div class="text-center">
+                <h3>Dot Cards</h3>
+
+                <div class="btn btn-sm" style="margin:15px 0; min-width:95px; text-align:left; background: #ffffff; outline: 1px solid #000000;">
+                    <i class="fa fa-circle" style="color:#000000;"></i>
+                    <strong style="color:#000000;font-weight: 900;">Black</strong>
+                </div>
+                <br>                
+
+                <div class="btn btn-sm" style="margin:15px 0; min-width:95px; text-align:left; background: #FDF6D0; outline: 1px solid #FE9425;">
+                    <i class="fa fa-circle" style="color:#FE9425;"></i>
+                    <strong style="color:#FE9425;font-weight: 900;">Yellow</strong>
+                </div>
+                <br>
+
+                <div class="btn btn-sm" style="margin:15px 0; min-width:95px; text-align:left; background: #FCEEEE; outline: 1px solid #E4201C;">
+                    <i class="fa fa-circle" style="color:#E4201C;"></i>
+                    <strong style="color:#E4201C;font-weight: 900;">Red</strong>
+                </div>
+                <br>              
+
+                <div class="btn btn-sm" style="margin:15px 0; min-width:95px; text-align:left; background: #EDF8F1; outline: 1px solid #00A228;">
+                    <i class="fa fa-circle" style="color:#00A228;"></i>
+                    <strong style="color:#00A228;font-weight: 900;">Green</strong>
+                </div>
+                <br> 
+
+                <div class="btn btn-sm" style="margin:15px 0; min-width:95px; text-align:left; background: #FEF3E8; outline: 1px solid #FF6F1F;">
+                    <i class="fa fa-circle" style="color:#FF6F1F;"></i>
+                    <strong style="font-weight: 900;">Orange</strong>
+                </div>
+                <br> 
+
+            </div>
+
+
+            <!-- Text Cards -->
+             <div class="text-center">
+                <h3>Dot Cards</h3>            
+
+                <div class="btn btn-sm" style="margin:15px 0; min-width:95px; text-align:left; background: #EDF8F1; outline: 1px solid #00A228;">
+                    <strong style="color:#00A228; font-weight: 900;">No Action</strong>
+                </div>
+                <br> 
+
+                <div class="btn btn-sm" style="margin:15px 0; min-width:95px; text-align:left; background: #FAFBFC; outline: 1px solid #5E79E2;">
+                    <strong style="color:#5E79E2; font-weight: 900;"">Raise PR</strong>
+                </div>
+                <br> 
+
+            </div>            
+
+
+
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap 3 JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Your JS -->
+    <script src="Playground.js"></script>
+
+</body>
+</html>

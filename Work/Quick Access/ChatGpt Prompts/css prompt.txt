@@ -1,0 +1,52 @@
+here what i want.
+
+i will be giving you html. do this
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: CSS templates</title>
+
+  <style>
+    body { background: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+
+<!-- HTML -->
+
+
+</body>
+</html>
+```
+
+this is our css playground
+
+withing css:
+- body { background: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+will remain constant in all input/outputs.
+
+- below it we will wrap our custom css:
+    /* css */
+    
+    /* css */
+all custom css will be within these 2 comments line.
+
+- if css has pattern of one color using over & over then give a variable & reuse it
+- if css has shades based on single color. then write auto shade calculation & reuse it.
+- default title is "Ganesh: CSS templates". if i make changes in it then keep or else, change title based on css but keep "Ganesh: " before it.
+- sometimes it will have scss but you wiil convert it to plain css
+- remove any auther/creator name if it has
+
+Note: my end goal is to have custom css html files to use later

@@ -1,0 +1,12 @@
+Screener Menu:
+- BSE
+- NSE
+- Market Cap
+- Current Price
+- High/Low
+- Stock P/E
+- Book Value
+- Dividend Yield
+- Roce
+- ROE
+- Face Value

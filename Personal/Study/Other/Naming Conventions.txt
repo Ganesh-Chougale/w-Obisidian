@@ -1,0 +1,9 @@
+Naming Conventions:
+
+1. Stored Procedure:
+a pre-compiled collection of SQL statements (a block of code) that is stored in the database server and can be executed repeatedly by name.
+
+it is similar to when we assign variable to function & use that variable expression as a function call.
+
+- Reusability
+- Performance (Pre-compiled)

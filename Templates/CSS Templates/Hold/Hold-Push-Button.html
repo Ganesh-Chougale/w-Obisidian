@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: Hold Push Button</title>
+
+  <style>
+    body { background: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    :root {
+      --base-grey: #666666;
+      --dark-grey: #444444;
+      --light-grey: #888888;
+      --text-off-white: #eeeeee;
+      --glow-white: #ffffff;
+      
+      /* Auto shade calculation for gradients and borders */
+      --btn-grad: linear-gradient(160deg, var(--base-grey), var(--dark-grey));
+      --border-active: 3px outset #dddddd;
+    }
+
+    /* Maintain template background consistency */
+    html, body {
+      background: #999999;
+    }
+
+    a {
+      border-radius: 12px;
+      border: 3px outset var(--light-grey);
+      position: relative;
+      display: inline-block;
+      padding: 15px 30px;
+      color: var(--text-off-white);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+      font-family: verdana, sans-serif;
+      font-size: 28px;
+      font-weight: bolder;
+      text-decoration: none;
+      background: var(--btn-grad);
+      text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+      transition: 0.2s;
+    }
+
+    a:active {
+      border: var(--border-active);
+      color: var(--glow-white);
+      background: var(--btn-grad);
+      text-shadow: 0px 0px 4px #cccccc;
+      box-shadow: 0 0 10px var(--glow-white), 0 0 40px var(--glow-white), 0 0 80px var(--glow-white);
+      transition-delay: 1s;
+    }
+
+    a span {
+      position: absolute;
+      display: block;
+    }
+
+    /* Border animation directions using variables */
+    a span:nth-child(1) {
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--text-off-white));
+    }
+    a:active span:nth-child(1) {
+      left: 100%;
+      transition: 1s;
+    }
+
+    a span:nth-child(2) {
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, var(--text-off-white));
+    }
+    a:active span:nth-child(2) {
+      top: 100%;
+      transition: 1s;
+      transition-delay: 0.25s;
+    }
+
+    a span:nth-child(3) {
+      bottom: 0;
+      right: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(270deg, transparent, var(--text-off-white));
+    }
+    a:active span:nth-child(3) {
+      right: 100%;
+      transition: 1s;
+      transition-delay: 0.5s;
+    }
+
+    a span:nth-child(4) {
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(360deg, transparent, var(--text-off-white));
+    }
+    a:active span:nth-child(4) {
+      bottom: 100%;
+      transition: 1s;
+      transition-delay: 0.75s;
+    }
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+  <a href="#">push
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </a>
+<!-- HTML -->
+
+
+</body>
+</html>```

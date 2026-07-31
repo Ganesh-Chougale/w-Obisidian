@@ -1,0 +1,25 @@
+!      // general exclamation
+?      // question mark
+⚠      // warning / caution
+❗      // heavy exclamation
+❕      // white exclamation mark
+❓      // white question mark
+✖      // cross / error / fail
+✘      // heavy cross
+✔      // check mark / success
+✓      // check mark
+⚡      // high voltage / alert
+☢      // radioactive / hazard
+☣      // biohazard
+☠      // skull / danger
+☼      // sun / indicator
+☂      // umbrella / rain / alert
+✦      // star / important
+✧      // sparkle / highlight
+➤      // arrow / pointer / direction
+➔      // arrow / next
+➝      // arrow / next
+➞      // arrow / next
+⛔      // prohibited / stop
+⛏      // hazard / construction
+⛪      // building / info

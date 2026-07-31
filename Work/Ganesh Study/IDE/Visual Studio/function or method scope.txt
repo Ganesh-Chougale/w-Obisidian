@@ -1,0 +1,1 @@
+ctrl + ] at near curly braces of scope

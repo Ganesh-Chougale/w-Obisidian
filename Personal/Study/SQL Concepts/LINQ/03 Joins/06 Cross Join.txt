@@ -1,0 +1,44 @@
+Cross Join = Combination of : each left table rows x  each right table rows
+- Example: If you have a Colors table (Red, Blue) and a Sizes table (Small, Medium), a CROSS JOIN gives you:
+(Red, Small), (Red, Medium), (Blue, Small), (Blue, Medium)
+
+
+______________________________________________________________________________
+
+Table 1: Colors (left)
+```txt
+Color
+Red
+Blue
+```  
+______________________________________________________________________________
+
+Table 2: Sizes (right)
+```txt
+Size
+Small
+Medium
+```  
+______________________________________________________________________________
+
+Cross join operation:
+```sql
+SELECT 
+    * 
+FROM 
+    Colors
+CROSS JOIN 
+    Sizes;
+-- Note: You do not use an ON clause with a CROSS JOIN.
+```
+______________________________________________________________________________
+
+Output:
+```txt
+Color	Size
+Red	Small
+Red	Medium
+Blue	Small
+Blue	Medium
+```
+______________________________________________________________________________

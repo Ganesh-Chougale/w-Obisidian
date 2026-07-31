@@ -1,0 +1,104 @@
+A. Git info
+A1. check git version
+```terminal
+git --version
+```  
+-------------------------------------------------------
+
+B. Repo Life cycle
+B1. check repo status
+```terminal
+git status
+```  
+
+B2. Staging
+- adding all changes
+```terminal
+git add .
+```  
+- adding a certain file
+```terminal
+git add <file_name>
+```  
+
+B3. Un-stagging (if accidently wrong file staged)
+- adding all changes
+```terminal
+git reset .
+```  
+- adding certain file
+```terminal
+git reset HEAD  <file\_name>
+```  
+```terminal
+git restore --staged <file_name>
+```  
+
+B4. Committing
+```terminal
+git commit -m "message"
+```
+
+B5. Uploading the changes
+```terminal
+git push origin <branch_name>
+```  
+
+-------------------------------------------------------
+
+C. Repo Synchronization
+C1. download repo
+```terminal
+git clone <repo_url>
+```  
+
+C2. download last upload
+```terminal
+git pull origin <branch_name>
+```  
+
+C3. upload new changes
+```terminal
+git push origin <branch_name>
+```  
+-------------------------------------------------------
+
+D. Branching & Merging
+D1. create new branch
+```terminal
+git branch <branch-name>
+```  
+
+D2. switching branch
+```terminal
+git checkout <branch_name>
+```  
+
+D3. create new branch & switch to it in one command
+```terminal
+git checkout -b <branch_name>
+```  
+
+D4. merge branch (into currently active branch)
+```terminal
+git merge <branch_name>
+```  
+
+D5. delete branch
+```terminal
+git branch -d <branch_name>
+```  
+-------------------------------------------------------
+
+
+Short-hands
+- in case of switched into branch
+we can use
+```terminal
+git push
+```  
+```terminal
+git pull
+```  
+
+no need to use `origin <branch_name>` explicitly because git remember since we already switched into a branch.

@@ -1,0 +1,15 @@
+While talking about programming 
+1. Must follow Rules:
+- include file paths, highlight line by nearby code (below this, above that etc, line number if entire file given, etc). 
+- do not give file paths in fences. or too much area of output. can wrap it inside backticks
+- do not Brain storm
+- do not make me overwhelm or give output that is too much complex to digest 
+
+2. Must Exclude this:
+- no random assumptions
+- no ai hallucination
+
+3. Optional(follow when its mandatory):
+- if any technical jargon occurs. explain that technical jargon explicitly.
+- while doing phases & stepwise implementation of something. make sure doing current phase and steps will not ruin the previous phase, existing stuff & working features/functionalities.
+- default response should be "final answer first, explanation after"

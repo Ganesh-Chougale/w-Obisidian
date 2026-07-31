@@ -1,0 +1,9 @@
+- Open snippet bar
+CTRL + K 	=>	CTRL + S
+
+1. try		: try catch block
+2. tryf		: try finally block
+3. for		: for loop
+3. foreach	: for each loop
+4. if		: if statement
+5. else		: else statement

@@ -1,0 +1,64 @@
+we are building a future proof format for cv. i will give you the essentials.
+- essentials are as followed
+```txt
+GANESH CHOUGALE 
+Full Stack Developer 
+ Kolhapur, Maharashtra, India
++91 8459481200 | gchougale32@gmail.com 
+GitHub: https://github.com/Ganesh-Chougale 
+LinkedIn: https://www.linkedin.com/in/ganesh-chougale512449215/ 
+
+PROFESSIONAL SUMMARY
+Mid-level Full Stack Developer experienced in delivering scalable applications within the Microsoft ecosystem, primarily using C# and .NET. Skilled in writing clean, maintainable code across the full development lifecycle, from requirement analysis to deployment. Comfortable operating in fast-paced, autonomous remote environments, leveraging AI-assisted development tools to accelerate problem-solving and feature delivery.
+
+
+CORE COMPETENCIES & SKILL
+- Core Stack: C#, .NET, JavaScript
+- Frontend: HTML, CSS, Bootstrap, RazorView
+- Databases & Backend: SQL Server, DotNet MVC, REST API Design
+- Tools & Methodologies: Git, GitHub, Clean Architecture, System Design
+
+
+PROFESSIONAL EXPERIENCE:
+
+Zanvar Group | C# Full Stack Developer | Nov 2025 – Present
+- Built and delivered full-stack features end-to-end within a C# MVC architecture, taking ownership of solution design and technical delivery.
+- Wrote clean, well-structured, and maintainable code for business applications, actively participating in technical discussions to refine project scope.
+- Leveraged AI development tools to accelerate coding workflows and validate outputs to production-quality standards.
+
+Kristam Infotech | DotNet + Angular Full Stack Developer Trainee | 2025 (2-month contract)
+- Developed scalable full-stack applications within a fast-paced team environment, requiring high autonomy and minimal process overhead.
+- Modernized legacy frontend code to a standalone paradigm, demonstrating strong engineering fundamentals and a commitment to long-term software quality.
+- Executed structured testing protocols alongside the engineering team to ensure reliability before deployment.
+
+Arkonet | Full Stack Developer Intern | 2023 (6 months)
+- Developed backend services, contributing to project scoping, estimation, and the reliable shipping of features.
+- Managed version control via Git and GitHub, collaborating effectively within structured project environments.
+
+EDUCATION
+MCA - Masters in Computer Applications | Chh. Shivaji University, Kolhapur : 70%
+BCA - Bachelor of Computer Applications | Shree Gopal Krishna Gokhale College, Kolhapur : 68%
+
+
+KEY PROJECTS
+- Virtual Keyboard: Built a camera-based application using hand gesture detection to translate movements into real-time keystrokes, demonstrating continuous learning and an innovative problem-solving mindset.
+- AppNetSwitch: Developed a Windows desktop utility with a graphical interface to toggle application-level internet access, showcasing strong engineering fundamentals and system-level control.
+
+PERSONAL SKILLS : Rapport Building | Team Player | Intrinsic Motivation | Excellent verbal & written communication skills  | Hard Worker | Goal-Oriented.
+HOBBIES: Trekking | Writing | Documenting.
+
+Portfolio website:
+https://ganesh-chougale.github.io/
+
+```
+now i will give you the advertisement then study it.
+increase the resume sorting chance. 
+
+but doing this take care of this.
+- allow to only add achievable thing like it can be achieved by study
+- do not add any certifications name that i can't aquire quickly
+- same with other stuff that seems difficult to get done, do not add that or atleast ask me about it first.
+now give me the entire cv in simple text fence which i can paste in doc or google doc (so give in doc file markup).
+after that do this
+1. what is my hiring chance
+2. text fence tell me what topic to study.

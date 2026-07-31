@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: Minimal Loaders</title>
+
+  <style>
+    body { background: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    :root {
+      --bg-dark: #1a1a1a;
+      --block-size: 120px;
+      --accent-white: #ffffff;
+      /* Auto shade calculation: rgba(255, 255, 255, 0.3) */
+      --light-color: color-mix(in srgb, var(--accent-white), transparent 70%);
+    }
+
+    body {
+      background: var(--bg-dark);
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .loader {
+      --loader-size: calc(var(--block-size) / 2);
+      --loader-size-half: calc(var(--loader-size) / 2);
+      --loader-size-half-neg: calc(var(--loader-size-half) * -1);
+      --dot-size: 5px;
+      --dot-size-half: calc(var(--dot-size) / 2);
+      --dot-size-half-neg: calc(var(--dot-size-half) * -1);
+      
+      display: grid;
+      place-items: center;
+      position: relative;
+      width: var(--loader-size);
+      color: var(--accent-white);
+    }
+
+    .loader::before,
+    .loader::after {
+      content: '';
+      position: absolute;
+    }
+
+    /* loader--1 */
+    .loader--1 {
+      --loader-size: calc(var(--block-size) / 3);
+      --anim-duration: 1s;
+      --loader-1-dist: calc(var(--loader-size) - var(--dot-size-half) + 1px);
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--light-color);
+    }
+
+    .loader--1::before,
+    .loader--1::after {
+      width: var(--dot-size);
+      aspect-ratio: 1 / 1;
+      background: currentColor;
+      border-radius: 50%;
+      top: var(--dot-size-half-neg);
+      left: var(--dot-size-half-neg);
+      animation: loader-1 var(--anim-duration) cubic-bezier(0.27, 0.08, 0.26, 0.7) infinite;
+    }
+
+    .loader--1::after { animation-delay: calc(var(--anim-duration) / 4 * -1); }
+
+    @keyframes loader-1 {
+      0%, 100% { transform: none; }
+      25% { transform: translateX(var(--loader-1-dist)); }
+      50% { transform: translateX(var(--loader-1-dist)) translateY(var(--loader-1-dist)); }
+      75% { transform: translateX(0) translateY(var(--loader-1-dist)); }
+    }
+
+    /* loader--2 */
+    .loader--2 {
+      --loader-size: calc(var(--block-size) / 3);
+      --anim-duration: 1s;
+      height: 1px;
+      background-color: var(--light-color);
+    }
+
+    .loader--2::before,
+    .loader--2::after {
+      width: var(--dot-size);
+      aspect-ratio: 1 / 1;
+      background: currentColor;
+      border-radius: 50%;
+      top: calc(var(--dot-size-half-neg) + 1px);
+      left: var(--dot-size-half-neg);
+      animation: loader-2 var(--anim-duration) cubic-bezier(0.27, 0.08, 0.26, 0.7) infinite;
+    }
+
+    .loader--2::after { animation-delay: calc(var(--anim-duration) / 3 * -1); }
+
+    @keyframes loader-2 {
+      0%, 100% { transform: none; }
+      44% { transform: translateX(calc(var(--loader-size) + var(--dot-size-half))); }
+    }
+
+    /* loader--3 */
+    .loader--3 {
+      --loader-size: calc(var(--block-size) / 3);
+      --anim-duration: 1.2s;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--light-color);
+      border-radius: 50%;
+      animation: loader-3 calc(var(--anim-duration) * 3) linear infinite;
+    }
+
+    .loader--3::before,
+    .loader--3::after {
+      width: var(--dot-size);
+      aspect-ratio: 1 / 1;
+      background: currentColor;
+      border-radius: 50%;
+      top: var(--dot-size-half-neg);
+      left: calc(50% - var(--dot-size-half));
+      animation: loader-3 var(--anim-duration) cubic-bezier(0.27, 0.08, 0.26, 0.7) infinite;
+      transform-origin: center calc(var(--loader-size-half) + var(--dot-size-half) - 1px);
+    }
+
+    .loader--3::after { animation-delay: calc(var(--anim-duration) / 3 * -1); }
+
+    @keyframes loader-3 { 100% { transform: rotate(1turn); } }
+
+    /* loader--4 */
+    .loader--4 {
+      --anim-duration: 0.5s;
+      aspect-ratio: 1 / 1;
+      perspective: 50vmin;
+      transform-style: preserve-3d;
+      transform: rotateX(55deg);
+    }
+
+    .loader--4::before,
+    .loader--4::after {
+      width: 50%;
+      aspect-ratio: 1 / 1;
+      border: 1px solid currentColor;
+      top: 25%;
+      left: 25%;
+      border-radius: 50%;
+      animation: loader-4 var(--anim-duration) cubic-bezier(0.07, 0.59, 0.56, 0.88) infinite;
+    }
+
+    .loader--4::after { animation-delay: calc(var(--anim-duration) / 2 * -1); }
+
+    @keyframes loader-4 {
+      0%, 100% { opacity: 0; }
+      0% { transform: scale(0.2) translateZ(-8vmin); }
+      66% { opacity: 0.8; transform: scale(1.2) translateZ(6vmin); }
+      100% { transform: scale(1.8) translateZ(2vmin); }
+    }
+
+    /* loader--7 */
+    .loader--7 {
+      --loader-size: calc(var(--block-size) / 3);
+      --anim-duration: 0.8s;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--light-color);
+      border-radius: 50%;
+      animation: loader-7 calc(var(--anim-duration) * 2) linear infinite;
+    }
+
+    .loader--7::before,
+    .loader--7::after {
+      width: var(--dot-size);
+      aspect-ratio: 1 / 1;
+      background: currentColor;
+      border-radius: 50%;
+      top: calc(50% - var(--dot-size-half));
+      left: calc(50% - var(--dot-size-half));
+      animation: loader-7-1 var(--anim-duration) cubic-bezier(0.32, 0.41, 0.3, 1.87) infinite;
+    }
+
+    .loader--7::after {
+      animation-name: loader-7-2;
+      animation-delay: calc(var(--anim-duration) / 3 * -1);
+    }
+
+    @keyframes loader-7 { 100% { transform: rotate(1turn); } }
+    @keyframes loader-7-1 { 0%, 100% { transform: translateX(var(--loader-size-half-neg)); } 55% { transform: translateX(var(--loader-size-half)); } }
+    @keyframes loader-7-2 { 0%, 100% { transform: translateY(var(--loader-size-half-neg)); } 55% { transform: translateY(var(--loader-size-half)); } }
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+<div class="loader loader--1"></div>
+<div class="loader loader--2"></div>
+<div class="loader loader--3"></div>
+<div class="loader loader--4"></div>
+<div class="loader loader--7"></div>
+<!-- HTML -->
+
+
+</body>
+</html>

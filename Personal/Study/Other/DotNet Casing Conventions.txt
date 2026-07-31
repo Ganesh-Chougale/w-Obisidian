@@ -1,0 +1,19 @@
+DotNet Casing Conventions
+
+Pascal Case:
+1. Classes		: public class **UserService**
+2. Types		: 
+3. Enums		: public enum **LogLevel** { Info, Warn, Error }
+4. Struct		: public struct **Coordinate**
+5. Interface		: public interface **IUserRepository**
+6. Public Properties	: public string **UserName** { get; set; }
+7. Public Methods	: public void **SaveUser**()
+8. Public Events	: public event EventHandler **OnUserSaved**;
+
+camel Case:
+1. Local Variables	: int **itemCount** = 0;
+2. Method Parameters	: public void SaveUser(string **userName**)
+3. Private Fields	: private readonly ILogger **_logger**; (Often prefixed with _)
+
+Suffix Async:
+1. Async Methods	: public async Task<User> **GetUserAsync**()

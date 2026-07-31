@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Firefox Debugger Playground</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    .box {
+      width: 120px;
+      height: 120px;
+      background: orange;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    .active {
+      background: green;
+      transform: rotate(20deg) scale(1.2);
+    }
+
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      min-height: 60px;
+      background: #f7f7f7;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Firefox Debugger Learning Playground</h1>
+
+  <button id="btn1">Run Basic Function</button>
+
+  <button id="btn2">Async / Await Demo</button>
+
+  <button id="btn3">Loop Demo</button>
+
+  <button id="btn4">DOM Manipulation</button>
+
+  <button id="btn5">Throw Error</button>
+
+  <button id="btn6">Recursive Function</button>
+
+  <div class="box" id="box"></div>
+
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // =========================================
+    // BASIC FUNCTION
+    // =========================================
+
+    function calculateTotal(price, tax) {
+      debugger;
+
+      const taxAmount = price * tax;
+
+      const finalPrice = price + taxAmount;
+
+      return finalPrice;
+    }
+
+    function runBasicFunction() {
+      debugger;
+
+      const result = calculateTotal(100, 0.18);
+
+      output.innerHTML = `
+        Final Price: ${result}
+      `;
+    }
+
+    // =========================================
+    // ASYNC / AWAIT
+    // =========================================
+
+    function fakeApiCall() {
+      debugger;
+
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+            id: 1,
+            name: "Laptop",
+            price: 50000
+          });
+        }, 1500);
+      });
+    }
+
+    async function runAsyncDemo() {
+      debugger;
+
+      output.innerHTML = "Loading...";
+
+      const data = await fakeApiCall();
+
+      debugger;
+
+      output.innerHTML = `
+        Product:
+        ${data.name}
+        - ₹${data.price}
+      `;
+    }
+
+    // =========================================
+    // LOOPS
+    // =========================================
+
+    function loopDemo() {
+      debugger;
+
+      let total = 0;
+
+      for (let i = 1; i <= 5; i++) {
+
+        debugger;
+
+        total += i;
+      }
+
+      output.innerHTML = `
+        Loop Total: ${total}
+      `;
+    }
+
+    // =========================================
+    // DOM MANIPULATION
+    // =========================================
+
+    function domManipulation() {
+      debugger;
+
+      const box = document.getElementById("box");
+
+      box.classList.toggle("active");
+
+      output.innerHTML = `
+        DOM updated
+      `;
+    }
+
+    // =========================================
+    // ERROR HANDLING
+    // =========================================
+
+    function throwError() {
+      debugger;
+
+      try {
+
+        const user = null;
+
+        console.log(user.name);
+
+      } catch (ex) {
+
+        debugger;
+
+        console.error(ex);
+
+        output.innerHTML = `
+          Error caught:
+          ${ex.message}
+        `;
+
+        throw ex;
+      }
+    }
+
+    // =========================================
+    // RECURSION
+    // =========================================
+
+    function factorial(n) {
+
+      debugger;
+
+      if (n === 1) {
+        return 1;
+      }
+
+      return n * factorial(n - 1);
+    }
+
+    function runRecursion() {
+
+      debugger;
+
+      const result = factorial(5);
+
+      output.innerHTML = `
+        Factorial: ${result}
+      `;
+    }
+
+    // =========================================
+    // EVENT LISTENERS
+    // =========================================
+
+    document
+      .getElementById("btn1")
+      .addEventListener("click", runBasicFunction);
+
+    document
+      .getElementById("btn2")
+      .addEventListener("click", runAsyncDemo);
+
+    document
+      .getElementById("btn3")
+      .addEventListener("click", loopDemo);
+
+    document
+      .getElementById("btn4")
+      .addEventListener("click", domManipulation);
+
+    document
+      .getElementById("btn5")
+      .addEventListener("click", throwError);
+
+    document
+      .getElementById("btn6")
+      .addEventListener("click", runRecursion);
+
+  </script>
+
+</body>
+</html>

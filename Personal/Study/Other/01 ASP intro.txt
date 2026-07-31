@@ -1,0 +1,70 @@
+ASP.NET
+Backend: 
+- ASP.NET core
+Frontend:
+- Razor pages/MVC: Dynamic HTML pages using C# & Razor Syntax
+- Blazor: remove JS dependency encourages only C# eco-system
+
+
+
+Plain HTML Vs. Razor
+- HTML
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Static Page</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <p>The time is currently: 10:48 AM on Thursday.</p>
+    
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+</body>
+</html>
+```  
+- Razor
+```cshtml/razor
+@{
+    // This is a C# code block (server-side)
+    var currentTime = DateTime.Now;
+    var items = new List<string> { "Item 1", "Item 2", "Item 3" };
+    var pageTitle = "Dynamic Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Displaying a C# variable inline using @ -->
+    <title>@pageTitle</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    
+    <!-- Dynamically displaying the current server time -->
+    <p>The time is currently: @currentTime.ToString("hh:mm tt on dddd").</p>
+
+    <ul>
+        <!-- Using a C# loop to generate HTML list items dynamically -->
+        @foreach (var item in items)
+        {
+            <li>@item</li>
+        }
+    </ul>
+</body>
+</html>
+```  
+
+here @ is server code marker & {...} this is it's code block
+```
+// declaration
+@{
+  int age = 26;
+}
+// using into markup
+<p>hello! my age is @age</p>
+```

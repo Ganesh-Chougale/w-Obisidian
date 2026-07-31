@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wavy Progress Indicator — Time Controlled</title>
+
+<style>
+body{
+    background:#121212;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+}
+
+.progress-container{
+    position:relative;
+    width:160px;
+    height:160px;
+}
+
+/* Placeholder kept but invisible */
+.placeholder{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:80px;
+    height:80px;
+    background:#2c2c2c;
+    border-radius:22px;
+    opacity:0;
+    pointer-events:none;
+}
+
+svg{
+    transform:rotate(-90deg);
+    width:160px;
+    height:160px;
+}
+
+/* Track */
+.ring-track{
+    fill:none;
+    stroke:#333333;
+    stroke-width:4;
+}
+
+/* Progress */
+.ring-progress{
+    fill:none;
+    stroke:#8ab4f8;
+    stroke-width:6;
+    stroke-linecap:round;
+
+    stroke-dasharray:440;
+    stroke-dashoffset:440;
+
+    filter:url(#m3-wavy-filter);
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-container">
+
+<div class="placeholder"></div>
+
+<svg>
+    <circle class="ring-track" cx="80" cy="80" r="70"></circle>
+    <circle class="ring-progress" cx="80" cy="80" r="70"></circle>
+    
+    <defs>
+        <!-- Curvier Wave Filter -->
+        <filter id="m3-wavy-filter"
+                x="-25%" y="-25%"
+                width="150%" height="150%">
+
+            <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.02"
+                numOctaves="2"
+                seed="3"
+                result="wave">
+
+                <animate attributeName="baseFrequency"
+                         values="0.02;0.025;0.02"
+                         dur="3s"
+                         repeatCount="indefinite"/>
+            </feTurbulence>
+
+            <feDisplacementMap
+                in="SourceGraphic"
+                in2="wave"
+                scale="14"/>
+        </filter>
+    </defs>
+</svg>
+
+</div>
+
+<script>
+const ring = document.querySelector('.ring-progress');
+const ringtrack = document.querySelector('.ring-track');
+
+
+const radius = 70;
+const circumference = 2 * Math.PI * radius;
+
+ring.style.strokeDasharray = circumference;
+ring.style.strokeDashoffset = circumference;
+
+/* ===== YOU CONTROL COMPLETION TIME HERE ===== */
+const completionTime = 4000; // milliseconds
+/* ============================================ */
+
+let startTime = null;
+
+function animateProgress(timestamp){
+
+    if(!startTime) startTime = timestamp;
+
+    const elapsed = timestamp - startTime;
+
+    const progress = Math.min(elapsed / completionTime, 1);
+
+    const offset = circumference - (progress * circumference);
+
+    ring.style.strokeDashoffset = offset;
+
+    if(progress < 1){
+        requestAnimationFrame(animateProgress);
+    }else{
+        /* Fade out after completion */
+        ring.style.transition = "opacity 600ms ease";
+        ring.style.opacity = "0";
+        ringtrack.style.display = "none";
+    }
+}
+
+/* Start when needed */
+setTimeout(()=>{
+    requestAnimationFrame(animateProgress);
+}, 500);
+</script>
+
+</body>
+</html>

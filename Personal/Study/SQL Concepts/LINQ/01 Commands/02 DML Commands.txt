@@ -1,0 +1,48 @@
+DML
+Data Manipulation Language = Insert, Update, Delete
+
+______________________________________________________________________________
+
+table we gonna use for further DML commands
+```sql
+CREATE TABLE Staff (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50)
+);
+```  
+______________________________________________________________________________
+
+1. Insert Command: add new row(record) in table
+```sql
+INSERT INTO Staff (EmployeeID, FirstName, LastName)
+VALUES (101, 'Johnt', 'Depp');
+```  
+______________________________________________________________________________
+
+2. Update Command: update existing row(record) or column
+- single record
+```sql
+UPDATE Staff
+SET LastName = 'Lever'
+WHERE EmployeeID = 101;
+```  
+- columns
+```sql
+UPDATE Staff
+SET Department = 'IT'
+WHERE Department = 'Sales';
+``` 
+______________________________________________________________________________
+
+3. Delete Command: removes row(record) or table(record)
+- single row(record)
+```sql
+DELETE FROM Staff
+WHERE EmployeeID = 102;
+``` 
+- entire table(record)
+```sql
+DELETE FROM Staff;
+``` 
+______________________________________________________________________________

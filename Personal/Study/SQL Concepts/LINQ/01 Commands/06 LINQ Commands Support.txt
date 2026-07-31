@@ -1,0 +1,33 @@
+LINQ:
+C#'s universal query language that removes different data storage factors like
+- SQL = database
+- Xpath/XQuery  = XML
+- loops = collections
+
+Features
+- SQL like standard query language which convert query based on source of data storage(SQL, Entity, XML).
+- provides Type safety means it need be writen in strongly type.
+- Deferred Execution = Queries are defined but do not run immediately. Execution is delayed until the results are actually needed or enumerated (e.g., when you use a foreach loop, .ToList(), or .ToArray()).
+
+Within regular SQL it has all Commands
+1. DDL	= Defination 	= Create, Alter, Drop, Truncate
+2. DML	= Manipulation	= Insert, Update, Delete
+3. DCL	= Data control	= Grant, Revoke (basically permission commands) 
+4. DQL	= Query		= Select
+5. TCL 	= Transaction control	= Commit, Rollback, Savepoint
+
+But in LINQ it do not have❌
+1. DDL	= Defination 	= Create, Alter, Drop, Truncate
+2. DCL	= Data control	= Grant, Revoke (basically permission commands) 
+
+what it support✅
+1. DML	= Manipulation	= Insert, Update, Delete
+(partial support, to save we need dbContext.Add(), dbContext.Remove()).
+2. DQL	= Query		= Select
+(Full support, This is the core strength of LINQ (from...where...select, .Where(), .Select(), etc.) )
+3. TCL 	= Transaction control	= Commit, Rollback, Savepoint
+(partial & Automatic support, Automatic transaction management for simple saves. Manual transaction control (BEGIN, COMMIT, ROLLBACK) is handled via specific provider APIs in C#, not the LINQ query syntax itself.)
+
+so we heavily use 
+1. DML	= Manipulation	= Insert, Update, Delete
+2. DQL	= Query		= Select

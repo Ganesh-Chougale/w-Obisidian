@@ -1,0 +1,14 @@
+### EmployeeName SQL query  
+refence: `DALMstEmployee`   
+```sql
+DECLARE @EmpID int = '';
+
+SELECT
+	(EMPLOYEE_FIRST_NAME ) + ' ' + (EMPLOYEE_MIDDLE_NAME ) + ' ' + (EMPLOYEE_LAST_NAME) AS FULL_NAME,
+	EMPLOYEE_SHORT_NAME
+	-- , *
+FROM
+	ERP_MASTERS..MST_EMPLOYEE
+WHERE
+	EMPLOYEE_ID = @EmpID;
+```   

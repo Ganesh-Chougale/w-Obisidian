@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: Slick Outline Travel</title>
+
+  <style>
+    body { background: #000000; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    :root {
+      --primary-blue: #91C9FF;
+      --hover-blue: #4F95DA;
+      --text-white: #ffffff;
+      
+      /* Auto shade calculation for borders */
+      --stroke-color: var(--text-white);
+      --border-opacity: rgba(145, 201, 255, 0.5);
+    }
+
+    .container {
+      width: 400px;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      /* Background override for visibility of white text as per original design intent */
+      background: #000; 
+    }
+
+    .center {
+      width: 180px;
+      height: 60px;
+      position: relative;
+    }
+
+    .btn {
+      width: 180px;
+      height: 60px;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid var(--primary-blue);
+      outline: none;
+      transition: 1s ease-in-out;
+      position: relative;
+      padding: 0;
+    }
+
+    svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      fill: none;
+      stroke: var(--stroke-color);
+      stroke-dasharray: 150 480;
+      stroke-dashoffset: 150;
+      transition: 1s ease-in-out;
+      pointer-events: none;
+    }
+
+    .btn:hover {
+      transition: 1s ease-in-out;
+      background: var(--hover-blue);
+    }
+
+    .btn:hover svg {
+      stroke-dashoffset: -480;
+    }
+
+    .btn span {
+      color: var(--text-white);
+      font-size: 18px;
+      font-weight: 100;
+      letter-spacing: 1px;
+    }
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+  <div class="container">
+    <div class="center">
+      <button class="btn">
+        <svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
+          <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
+          <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
+        </svg>
+        <span>HOVER ME</span>
+      </button>
+    </div>
+  </div>
+<!-- HTML -->
+
+
+</body>
+</html>

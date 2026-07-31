@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: Stamped Bevel</title>
+
+  <style>
+    body { background: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    :root {
+      --primary-red: #ff3333;
+      /* Auto shade calculation: desaturate(darken(#ff3333, 15%), 18%) */
+      --dark-red: #ac3939; 
+      --text-white: #ffffff;
+      --shadow-color: rgba(0, 0, 0, 0.5);
+      --button-height: 54px;
+      --triangle-width: 27px; /* height / 2 */
+    }
+
+    input {
+      display: none;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    .bevel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0 calc(var(--triangle-width) + 5px);
+      height: var(--button-height);
+      background: var(--primary-red) linear-gradient(to bottom, var(--primary-red) 50%, var(--dark-red) 50%);
+      border-radius: 0px;
+      box-shadow: 0px 15px 25px -10px var(--shadow-color),
+                  inset 0px 0px 0px 0px rgba(255, 51, 51, 0),
+                  inset 0px -27px 0px 0px var(--dark-red);
+      font-size: 20px;
+      text-align: center;
+      text-shadow: 0px 3px 5px var(--dark-red),
+                   0px 5px 10px var(--dark-red),
+                   0px 5px 10px var(--dark-red),
+                   0px 5px 10px var(--dark-red),
+                   0px 5px 10px var(--dark-red);
+      color: var(--text-white);
+      letter-spacing: 0.4px;
+      overflow: hidden;
+      outline: 0 !important;
+      transform: scale(1.01);
+      transition: all 0.2s ease-in-out;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .bevel:before, 
+    .bevel:after {
+      content: " ";
+      width: var(--triangle-width);
+      max-width: 50%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      transition: all 0.135s cubic-bezier(0.74, 0.16, 0.24, 0.92);
+      transition-delay: 0.15s;
+    }
+
+    .bevel:before {
+      left: 0;
+      background: linear-gradient(45deg, transparent 66.66%, var(--primary-red) 66.66%),
+                  linear-gradient(-45deg, var(--dark-red) 33.33%, transparent 33.33%),
+                  linear-gradient(to right, var(--primary-red), var(--dark-red));
+    }
+
+    .bevel:after {
+      right: 0;
+      background: linear-gradient(-45deg, transparent 66.66%, var(--primary-red) 66.66%),
+                  linear-gradient(45deg, var(--dark-red) 33.33%, transparent 33.33%),
+                  linear-gradient(to left, var(--primary-red), var(--dark-red));
+    }
+
+    .bevel:hover {
+      transform: scale(1.07);
+      box-shadow: 0px 25px 40px -5px rgba(0, 0, 0, 0.3),
+                  inset 0px 0px 0px 0px rgba(255, 51, 51, 0),
+                  inset 0px -27px 0px 0px var(--dark-red);
+    }
+
+    input:checked ~ .bevel {
+      padding: 0 calc(var(--triangle-width) / 2 + 5px);
+      background: rgba(255, 51, 51, 0);
+      box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.3),
+                  inset 0px 0px 0px 4px var(--primary-red),
+                  inset 0px 0px 0px 0px var(--dark-red);
+      border-radius: 10px;
+      font-size: 24px;
+      font-weight: 700;
+      text-shadow: 0px 3px 5px rgba(172, 57, 57, 0),
+                   0px 5px 10px rgba(172, 57, 57, 0);
+      color: var(--primary-red);
+      transform: scale(0.7) rotate(-6deg);
+      transition: all 0.45s cubic-bezier(0.6, -0.9, 0.39, 1.65);
+      transition-delay: 0.135s;
+    }
+
+    input:checked ~ .bevel:before {
+      transform: translateX(-100%);
+      transition-delay: 0s;
+    }
+
+    input:checked ~ .bevel:after {
+      transform: translateX(100%);
+      transition-delay: 0s;
+    }
+
+    span {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 32px;
+      font-weight: 700;
+      color: #222;
+      z-index: -1;
+      transition: all 0.45s cubic-bezier(0.74, 0.16, 0.24, 0.92);
+      transition-delay: 0.135s;
+    }
+
+    input:checked ~ span {
+      color: rgba(255, 51, 51, 0.1875);
+      transform: translateY(56px);
+    }
+
+    @media (max-width: 320px) { .bevel, span { transform: scale(0.9); } }
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+<div style="display: flex; flex-direction: column-reverse; align-items: center;">
+  <input type="checkbox" name="button" id="button">
+  <label class="bevel" for="button">Stamp</label>
+  <span>Ganesh</span>
+</div>
+<!-- HTML -->
+
+
+</body>
+</html>

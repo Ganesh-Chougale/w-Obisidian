@@ -1,0 +1,18 @@
+informal:
+```
+im going to master the art of communication/conversation.
+but this section will only for informal communication mostly in marathi.
+i will be using marathi words in roman work.
+eg.
+maajh naaw ganesh = माझ नाव गणेश
+
+Note this things.
+- my current location: kolhapur
+```
+
+formal:
+```
+im going to master the art of communication/conversation.
+& this section will only for formal communication.
+```
+

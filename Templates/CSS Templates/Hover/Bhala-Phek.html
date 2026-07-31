@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: Bhala Phek</title>
+
+  <style>
+    body { background: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    @import url('https://fonts.googleapis.com/css?family=Fjalla+One'); 
+
+    :root {
+      --primary-bg: #ff8a80;
+      --accent-white: #ffffff;
+      /* Auto shade/transparency calculation */
+      --btn-border: var(--accent-white);
+      --transition-main: all 1000ms cubic-bezier(0.890, -0.170, 0.140, 1.225);
+      --transition-slice: all 300ms cubic-bezier(1.000, -0.055, 0.025, 1.040);
+    }
+
+    /* Override body to maintain template theme */
+    body {
+      background-color: var(--primary-bg);
+      font-family: 'Fjalla One', sans-serif;
+      text-transform: uppercase;
+    }
+
+    .btn-slice {
+      padding: 1.2rem 2.5rem;
+      border: 2px solid var(--btn-border);
+      border-radius: 0;
+      color: var(--accent-white);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.3rem;
+      position: relative;
+      text-decoration: none;
+      display: inline-block;
+      transition: var(--transition-main);
+    }
+
+    .btn-slice .top, 
+    .btn-slice .bottom {
+      position: relative;
+      height: 6px;
+      overflow: hidden;
+      transition: var(--transition-slice);
+      transition-delay: 0.35s;
+    }
+
+    .btn-slice .top {
+      top: 0;
+    }
+
+    .btn-slice .bottom {
+      bottom: 0;
+    }
+
+    .btn-slice .bottom span {
+      top: -6px;
+      position: absolute;
+      left: 0;
+    }
+
+    .btn-slice:hover .top {
+      top: -5px;
+    }
+
+    .btn-slice:hover .bottom {
+      bottom: -5px;
+    }
+
+    .btn-slice:hover, 
+    .btn-slice:focus, 
+    .btn-slice:active {
+      margin-left: 10px;
+      outline: none;
+    }
+
+    .btn-slice:before {
+      content: '';
+      height: 1px;
+      width: 60px;
+      background-color: var(--accent-white);
+      position: absolute;
+      margin-top: 6px;
+      right: -35px;
+      transition: var(--transition-main);
+    }
+
+    .btn-slice:hover:before {
+      width: 130%;
+    }
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+<a class="btn-slice" href="#">
+  <div class="top"><span>Sliced Button</span></div>
+  <div class="bottom"><span>Sliced Button</span></div>
+</a>
+<!-- HTML -->
+
+
+</body>
+</html>

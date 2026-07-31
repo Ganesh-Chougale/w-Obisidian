@@ -1,0 +1,8 @@
+Rule Name, Rule, Description, Example
+Class names, PascalCase, always use noun, BankAccount | Employee
+Method/Function names, camelCase, always use verb, findUser | printResult
+Variable names, camelCase, meaingful nouns, userName | isLoggedIn
+Constants names, UPPER_SNAKE_CASE, Constants should screaming, PI_VALUE | DEFAULT_TIMEOUT
+Boolean names, camelCase, should sound like yes/no tru/false, isActive | hasPermission
+File name, PascalCase, same as class name, UserService.java |  StudentManager.cs
+Private fields, _initialCase, it's immediate to know, _model | _key

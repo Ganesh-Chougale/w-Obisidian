@@ -1,0 +1,2 @@
+# Debugger  
+The ultimate code-diagnostic tool. Instead of littered logs, you can pause execution at specific lines of JavaScript (breakpoints), step through the code line-by-line, and watch variables change value over time.  

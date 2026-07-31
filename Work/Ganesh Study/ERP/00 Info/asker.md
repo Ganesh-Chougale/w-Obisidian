@@ -1,0 +1,1 @@
+where is cross-platform & CORS handled?

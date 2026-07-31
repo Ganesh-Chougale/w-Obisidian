@@ -1,0 +1,2 @@
+# Accessibility  
+Inspects the page's accessibility tree, which is what screen readers use. It helps you check color contrast ratios, text alternatives, and ARIA roles to ensure the site is usable for everyone.

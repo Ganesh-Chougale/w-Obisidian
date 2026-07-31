@@ -1,0 +1,2 @@
+give me tags button, each button will had 2 scetion. all area of button which will add its into states list, the cancel or cross or just type x to make code smaller. when i click on it it will remove the selected entry from states list
+and give one button with name "Default" which will add all expected like idle, walk, run, jump

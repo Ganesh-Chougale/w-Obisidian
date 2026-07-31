@@ -1,0 +1,137 @@
+## ✅ **1. Your Public IP Address (assigned by your ISP)**
+
+This is the *closest thing* to an “internet ID.”
+When you browse the internet, websites see the **public IP address** from your router.
+
+* It is assigned by your **Internet Service Provider (ISP)**
+* It may be **dynamic** (changing) or **static** (fixed)
+* It identifies your *connection*, not your individual computer
+
+Your PC doesn’t decide this; your ISP does.
+
+---
+
+## ✅ **2. Local Identifiers Inside Your Network**
+
+These exist on your home or office network, not the internet:
+
+### **• Local IP address (e.g., 192.168.1.24)**
+
+Given to your computer by your router via DHCP.
+
+### **• MAC address**
+
+A hardware identifier unique to your network adapter.
+
+* Only visible *inside* your LAN
+* Routers do **not** forward your MAC address to the internet
+* Websites **never** see your MAC address
+
+---
+
+## ✅ **3. Browser / Software Identifiers**
+
+Apps and browsers build identifiers like:
+
+* Cookies
+* Tracking tokens
+* Client fingerprints (screen size, fonts, OS, etc.)
+
+These aren’t “Windows-specific,” but they can uniquely identify a device over time.
+
+---
+
+# ✅ 4. Hardware-Level Identifiers (Not Normally Sent to Websites)
+
+Your PC has unique hardware serials, but Windows and browsers **do not expose them to the internet**:
+
+### • **Motherboard serial**
+
+### • **CPU ID** (modern CPUs often mask this)
+
+### • **TPM chip unique ID**
+
+### • **Storage device serial numbers**
+
+These are generally accessible only to:
+
+* Windows internally
+* Enterprise management systems (Intune, domain networks)
+* Specific drivers
+* Security software
+
+They are **not shared through normal internet traffic**.
+
+---
+
+# ✅ 5. Windows Telemetry Identifiers
+
+Windows 11 uses several internal IDs for diagnostic purposes:
+
+### • **Hardware Hash (HWID)**
+
+Used for activation and device registration.
+
+### • **Device GUID**
+
+Every Windows installation has a device-wide GUID for telemetry.
+
+### • **App Installation IDs**
+
+Each app may generate its own ID for crash reports and updates.
+
+None of these are shared with random websites — only Microsoft services and some applications use them.
+
+---
+
+# ✅ 6. Network Stack Identifiers (Low-Level)
+
+These exist at a technical level:
+
+### • **DHCP Client Identifier**
+
+Sent to your router, not to the internet.
+
+### • **Hostname**
+
+Sometimes sent to local networks (e.g., “DESKTOP-123ABC”), but websites don’t normally see it.
+
+### • **TLS Fingerprints**
+
+Your PC’s TLS stack (the thing that handles HTTPS) creates a unique-ish fingerprint based on:
+
+* Supported ciphers
+* TLS version
+* Extensions
+* Order of parameters
+
+Websites *can* see this, and it often uniquely identifies your device type.
+
+---
+
+# ✅ 7. Application-Level IDs
+
+Many apps create their own identifiers and transmit them to their own servers:
+
+* Steam hardware survey ID
+* Discord device session ID
+* Google Chrome sync ID
+* Spotify device ID
+
+These are service-specific and never sent broadly across the internet.
+
+---
+
+# ✅ 8. ISP / Carrier Metadata (Rare but Possible)
+
+Sometimes your ISP may insert identifiers:
+
+### • Carrier-grade NAT tagging
+
+### • ISP connection session tokens
+
+### • Mobile carrier “supercookies” (for phones, not Windows)
+
+Most broadband and fiber providers *do not* use these, but technically it's possible.
+
+---

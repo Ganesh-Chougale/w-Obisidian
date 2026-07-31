@@ -1,0 +1,2 @@
+# Network  
+Shows every single HTTP request and response made by the page (images, scripts, API calls). It is critical for debugging API integrations, checking response payloads, and analyzing page load speeds.

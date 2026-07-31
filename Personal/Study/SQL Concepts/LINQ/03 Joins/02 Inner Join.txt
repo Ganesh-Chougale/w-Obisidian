@@ -1,0 +1,71 @@
+Inner Join = Returns only the rows that perfectly match in both tables.
+- ❌no left | ✅only mid common | ❌no right
+
+______________________________________________________________________________
+
+Table 1: Departments (left)
+```txt
+DeptID(pk)	DeptName
+1		IT
+2		Sales
+3		HR
+```
+______________________________________________________________________________
+
+Table 2: Employees (right)
+```txt
+EmpID(PK)	EmpName		DeptID(FK)
+101		Alice		1
+102		Bob		2
+103		Charlie		1
+104		David		NULL
+105		Eve		4
+```
+______________________________________________________________________________
+
+Inner join operation:
+A. SQL support
+```sql
+SELECT 
+    E.EmpName, 
+    D.DeptName
+FROM 
+    Employees E
+INNER JOIN 
+    Departments D ON E.DeptID = D.DeptID;
+```
+______________________________________________________________________________
+
+B. LINQ support
+B1. Method Syntax using .Join()
+```csharp
+var innerJoinResult = Departments.Join(
+    Employees,                         // The second source to join
+    dept => dept.DeptID,               // The key selector for the first (outer) sequence
+    emp => emp.DeptID,                 // The key selector for the second (inner) sequence
+    (dept, emp) => new {               // The result selector
+        DeptName = dept.DeptName,
+        EmpName = emp.EmpName
+    }
+);
+```
+
+B2. Query Syntax: using 'join...in...on...equals'
+```csharp
+var innerJoinQuery = from d in Departments
+                     join e in Employees on d.DeptID equals e.DeptID
+                     select new {
+                         DeptName = d.DeptName,
+                         EmpName = e.EmpName
+                     };
+```
+______________________________________________________________________________
+
+Output:
+```txt
+EmpName		DeptName
+Alice		It
+Bob		Sales
+Charlie		It
+```  
+______________________________________________________________________________

@@ -1,0 +1,7 @@
+SQL Commads:
+SQL has these types of commands
+1. DDL	= Defination 	= Create, Alter, Drop, Truncate
+2. DML	= Manipulation	= Insert, Update, Delete
+3. DCL	= Data control	= Grant, Revoke (basically permission commands) 
+4. DQL	= Query		= Select
+5. TCL 	= Transaction control	= Commit, Rollback, Savepoint

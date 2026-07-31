@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: 3D Flip Anchor</title>
+
+  <style>
+    body { background: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    :root {
+      --speed: 0.5s;
+      --bg-dark: #1e1e24;
+      --btn-front-bg: #323237;
+      --btn-back-bg: #adadaf;
+      
+      /* Auto shade calculation for text colors */
+      --text-light: #adadaf;
+      --text-dark: #323237;
+      --text-white: #ffffff;
+    }
+
+    /* Standard body override to match theme */
+    html, body {
+      background-color: var(--bg-dark);
+    }
+
+    .btn-flip {
+      opacity: 1;
+      outline: 0;
+      color: var(--text-white);
+      line-height: 40px;
+      position: relative;
+      text-align: center;
+      letter-spacing: 1px;
+      display: inline-block;
+      text-decoration: none;
+      text-transform: uppercase;
+      perspective: 1000px;
+    }
+
+    .btn-flip:hover:after {
+      opacity: 1;
+      transform: translateY(0) rotateX(0);
+    }
+
+    .btn-flip:hover:before {
+      opacity: 0;
+      transform: translateY(50%) rotateX(90deg);
+    }
+
+    .btn-flip:after {
+      top: 0;
+      left: 0;
+      opacity: 0;
+      width: 100%;
+      color: var(--text-dark);
+      display: block;
+      transition: var(--speed);
+      position: absolute;
+      background: var(--btn-back-bg);
+      content: attr(data-back);
+      transform: translateY(-50%) rotateX(90deg);
+    }
+
+    .btn-flip:before {
+      top: 0;
+      left: 0;
+      opacity: 1;
+      color: var(--text-light);
+      display: block;
+      padding: 0 30px;
+      line-height: 40px;
+      transition: var(--speed);
+      position: relative;
+      background: var(--btn-front-bg);
+      content: attr(data-front);
+      transform: translateY(0) rotateX(0);
+    }
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+<a href="#" class="btn-flip" data-back="Back Side" data-front="Front Side"></a>
+<!-- HTML -->
+
+
+</body>
+</html>

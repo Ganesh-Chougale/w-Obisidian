@@ -1,0 +1,12 @@
+sm	Small				≥ 576px		Phones (Landscape), Tablets (Portrait)
+md	Medium				≥ 768px		Tablets (Landscape), Desktops
+lg	Large				≥ 992px		Desktops, Laptops
+xl	Extra large			≥ 1200px	Large Desktops
+xxl	Extra extra large	≥ 1400px	Very large displays
+
+
+Default (xs / Extra Small): For extra-small screens, you don't use a prefix. You simply use col-6 to span half the width on the smallest screens and up.
+
+Small (sm): col-sm-6 means columns stack vertically on extra-small screens, but become horizontal (50% width) on small screens (576px) and larger.
+
+Medium (md): col-md-4 means columns become 33.3% width only on medium screens (768px) and larger.

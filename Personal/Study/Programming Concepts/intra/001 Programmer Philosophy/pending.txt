@@ -1,0 +1,11 @@
+001 Programming Philosophy
+04 what is IDE
+05 learning langauge
+06 Program vs Software vs Application
+07 What is Source Code vs Executable
+08 What is Runtime
+09 What is Framework vs Library
+10 What is API
+11 What is SDK
+12 What is Operating System Role
+13 What is Memory (Stack vs Heap intro)

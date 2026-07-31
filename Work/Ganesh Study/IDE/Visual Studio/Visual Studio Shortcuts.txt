@@ -1,0 +1,2 @@
+Toggle text wrap 	: CTRL + E + W
+Snippet wrapper		: CTRL + K, CTRL + S

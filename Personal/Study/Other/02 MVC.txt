@@ -1,0 +1,34 @@
+Model: a database entity declaration
+Controller: handles a use request like read, write, update, delete via HTTP or HTTPS requests
+View: UI/UX
+
+```
+src/TodoApp/
+├── Controllers/
+│   ├── HomeController.cs
+│   └── TaskController.cs
+├── Models/
+│   ├── Task.cs
+│   └── ErrorViewModel.cs
+├── Views/
+│   ├── Home/
+│   │   ├── Index.cshtml          {{-- Home Controller's main view --}}
+│   │   └── Privacy.cshtml
+│   ├── Task/
+│   │   ├── Index.cshtml          {{-- Task Controller's main view --}}
+│   │   ├── Details.cshtml
+│   │   └── Create.cshtml
+│   ├── Shared/
+│   │   ├── _Layout.cshtml        {{-- The main HTML template/shell of the site --}}
+│   │   ├── _ValidationScriptsPartial.cshtml
+│   │   └── Error.cshtml
+├── wwwroot/                      {{-- Public static assets (accessible by the browser) --}}
+│   ├── css/
+│   │   └── site.css
+│   ├── js/
+│   │   └── site.js
+│   └── lib/                      {{-- Client-side libraries (e.g., Bootstrap, jQuery) --}}
+├── appsettings.json              {{-- Configuration settings (e.g., database connection strings) --}}
+├── Program.cs                    {{-- The application entry point (configures the app) --}}
+└── TodoApp.csproj                {{-- The project file (defines dependencies, SDK version) --}}
+```

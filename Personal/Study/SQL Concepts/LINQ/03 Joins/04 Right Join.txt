@@ -1,0 +1,83 @@
+Right Join = Guarantees all rows from the Right Table are returned, and brings along any matching information from the Left Table.
+- ❌no left uncommon | ✅mid common + right
+
+
+______________________________________________________________________________
+
+Table 1: Departments (left)
+```txt
+DeptID(PK)	DeptName
+1		IT
+2		Sales
+3		HR
+```
+______________________________________________________________________________
+
+Table 2: Employees (right)
+```txt
+EmpID(PK)	EmpName		DeptID(FK)
+101		Alice		1
+102		Bob		2
+103		Charlie		1
+104		David		NULL
+105		Eve		4
+```
+______________________________________________________________________________
+
+Right join operation:
+A. SQL support
+```sql
+SELECT 
+    D.DeptName,
+    E.EmpName
+FROM 
+    Departments D                      -- D is explicitly the LEFT table here
+RIGHT JOIN 
+    Employees E ON D.DeptID = E.DeptID; -- E is explicitly the RIGHT table here
+```  
+______________________________________________________________________________
+
+B. LINQ support
+B1. Method Syntax:
+```csharp
+// To achieve a RIGHT JOIN, we perform a LEFT JOIN but swap Employees to the 'left' side
+var rightJoinMethod = Employees.GroupJoin( // Start with the collection you want ALL records from (Employees)
+    Departments, 
+    emp => emp.DeptID, 
+    dept => dept.DeptID, 
+    (emp, deptGroup) => new { 
+        Employee = emp, 
+        Departments = deptGroup 
+    })
+    .SelectMany(
+        temp => temp.Departments.DefaultIfEmpty(), 
+        (temp, dept) => new { 
+            DeptName = dept?.DeptName, 
+            EmpName = temp.Employee.EmpName 
+        });
+```
+
+B2. Query Syntax:
+```csharp
+// The clearest way in LINQ is to reverse the logic of the Left Join example
+var rightJoinQuery = from e in Employees // Start with the collection you want ALL records from (Employees)
+                     join d in Departments on e.DeptID equals d.DeptID into DepartmentGroup
+                     from dept in DepartmentGroup.DefaultIfEmpty() 
+                     select new {
+                         DeptName = dept?.DeptName,
+                         EmpName = e.EmpName
+                     };
+```
+______________________________________________________________________________
+
+Output:
+```txt
+DeptName	EmpName
+IT		Alice
+Sales		Bob
+IT		Charlie
+NULL		David
+NULL		Eve
+```
+(Note: David (NULL DeptID) and Eve (DeptID 4) appear in the output because they are in the Right Table. Since they had no matching DeptName in the Left table, the DeptName column is NULL for their rows. The 'HR' department is omitted as it has no matching employee records.)
+______________________________________________________________________________

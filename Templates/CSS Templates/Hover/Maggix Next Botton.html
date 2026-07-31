@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: Maggix Next Button</title>
+
+  <style>
+    body { background: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    @import url('https://fonts.googleapis.com/css?family=Poppins:900i');
+
+    :root {
+      --primary-purple: #6225E6;
+      --accent-yellow: #FBC638;
+      --white: #ffffff;
+      --black: #000000;
+      
+      /* Auto shade/transform calculation */
+      --skew-amount: -15deg;
+      --skew-reverse: 15deg;
+      --transition-speed: 0.5s;
+    }
+
+    .wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .cta {
+      display: flex;
+      padding: 10px 45px;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 40px;
+      color: var(--white);
+      background: var(--primary-purple);
+      transition: 1s;
+      box-shadow: 6px 6px 0 var(--black);
+      transform: skewX(var(--skew-amount));
+    }
+
+    .cta:focus {
+      outline: none; 
+    }
+
+    .cta:hover {
+      transition: var(--transition-speed);
+      box-shadow: 10px 10px 0 var(--accent-yellow);
+    }
+
+    .cta span {
+      transform: skewX(var(--skew-reverse));
+      display: inline-block;
+    }
+
+    .cta span:nth-child(2) {
+      width: 20px;
+      margin-left: 30px;
+      position: relative;
+      top: 12%;
+      transition: var(--transition-speed);
+      margin-right: 0px;
+    }
+
+    .cta:hover span:nth-child(2) {
+      margin-right: 45px;
+    }
+
+    /* SVG Path Transitions */
+    path.one {
+      transition: 0.4s;
+      transform: translateX(-60%);
+    }
+
+    path.two {
+      transition: 0.5s;
+      transform: translateX(-30%);
+    }
+
+    .cta:hover path.one,
+    .cta:hover path.two {
+      transform: translateX(0%);
+    }
+
+    /* SVG Animations */
+    .cta:hover path.three {
+      animation: color_anim 1s infinite 0.2s;
+    }
+
+    .cta:hover path.one {
+      animation: color_anim 1s infinite 0.6s;
+    }
+
+    .cta:hover path.two {
+      animation: color_anim 1s infinite 0.4s;
+    }
+
+    @keyframes color_anim {
+      0% { fill: var(--white); }
+      50% { fill: var(--accent-yellow); }
+      100% { fill: var(--white); }
+    }
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+<div class="wrapper">
+  <a class="cta" href="#">
+    <span>NEXT</span>
+    <span>
+      <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path class="one" d="M40.154,3.894 L43.976,0.139 C44.17,-0.051 44.482,-0.051 44.677,0.139 L65.691,20.784 C66.085,21.171 66.091,21.805 65.704,22.198 C65.7,22.203 65.695,22.207 65.691,22.211 L44.677,42.86 C44.482,43.051 44.17,43.051 43.976,42.86 L40.154,39.106 C39.957,38.913 39.954,38.596 40.148,38.399 C40.15,38.397 40.152,38.395 40.154,38.393 L56.993,21.856 C57.19,21.663 57.193,21.346 57,21.149 C56.998,21.147 56.995,21.145 56.993,21.143 L40.154,4.608 C39.957,4.414 39.954,4.098 40.148,3.901 C40.15,3.899 40.152,3.896 40.154,3.894 Z" fill="#FFFFFF"></path>
+          <path class="two" d="M20.154,3.894 L23.976,0.139 C24.17,-0.051 24.482,-0.051 24.677,0.139 L45.691,20.784 C46.085,21.171 46.091,21.805 45.704,22.198 C45.7,22.203 45.695,22.207 45.691,22.211 L24.677,42.86 C24.482,43.051 24.17,43.051 23.976,42.86 L20.154,39.106 C19.957,38.913 19.954,38.596 20.148,38.399 C20.15,38.397 20.152,38.395 20.154,38.393 L36.993,21.856 C37.19,21.663 37.193,21.346 37,21.149 C36.998,21.147 36.995,21.145 36.993,21.143 L20.154,4.608 C19.957,4.414 19.954,4.098 20.148,3.901 C20.15,3.899 20.152,3.896 20.154,3.894 Z" fill="#FFFFFF"></path>
+          <path class="three" d="M0.154,3.894 L3.976,0.139 C4.17,-0.051 4.482,-0.051 4.677,0.139 L25.691,20.784 C26.085,21.171 26.091,21.805 25.704,22.198 C25.7,22.203 25.695,22.207 25.691,22.211 L4.677,42.86 C4.482,43.051 4.17,43.051 3.976,42.86 L0.154,39.106 C-0.042,38.913 -0.045,38.596 0.148,38.399 C0.15,38.397 0.152,38.395 0.154,38.393 L16.993,21.856 C17.19,21.663 17.193,21.346 17,21.149 C16.998,21.147 16.995,21.145 16.993,21.143 L0.154,4.608 C-0.042,4.414 -0.045,4.098 0.148,3.901 C0.15,3.899 0.152,3.896 0.154,3.894 Z" fill="#FFFFFF"></path>
+        </g>
+      </svg>
+    </span> 
+  </a>
+</div>
+<!-- HTML -->
+
+
+</body>
+</html>

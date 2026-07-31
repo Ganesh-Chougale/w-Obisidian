@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh: Inward-X-Outward</title>
+
+  <style>
+    body { background: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh;  font-family: system-ui, sans-serif; margin: 0;}
+    
+    /* css */
+    :root {
+      --bg-red: #FF6766;
+      --bg-dark: #3C3C3C;
+      --bg-green: #66A182;
+      --white-text: #FFFFFF;
+      /* Auto shade calculation for glass effects */
+      --glass-light: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --glass-thick: rgba(255, 255, 255, 0.5);
+    }
+
+    div[class*=box] {
+      height: 33.33%;
+      width: 100%; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box-1 { background-color: var(--bg-red); }
+    .box-2 { background-color: var(--bg-dark); }
+    .box-3 { background-color: var(--bg-green); }
+
+    .btn {
+      line-height: 50px;
+      height: 50px;
+      text-align: center;
+      width: 250px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* BUTTON ONE: Inward */
+    .btn-one {
+      color: var(--white-text);
+      transition: all 0.3s;
+    }
+    .btn-one span {
+      transition: all 0.3s;
+      display: block;
+    }
+    .btn-one::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0;
+      transition: all 0.3s;
+      border-top: 1px solid var(--glass-thick);
+      border-bottom: 1px solid var(--glass-thick);
+      transform: scale(0.1, 1);
+    }
+    .btn-one:hover span {
+      letter-spacing: 2px;
+    }
+    .btn-one:hover::before {
+      opacity: 1; 
+      transform: scale(1, 1); 
+    }
+    .btn-one::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      transition: all 0.3s;
+      background-color: var(--glass-light);
+    }
+    .btn-one:hover::after {
+      opacity: 0; 
+      transform: scale(0.1, 1);
+    }
+
+    /* BUTTON TWO: X-Rotate */
+    .btn-two {
+      color: var(--white-text);
+      transition: all 0.5s;
+    }
+    .btn-two span {
+      z-index: 2; 
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%; 
+      left: 0;
+      top: 0;
+    }
+    .btn-two::before,
+    .btn-two::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      transition: all 0.5s;
+      border: 1px solid var(--glass-border);
+      background-color: var(--glass-light);
+    }
+    .btn-two:hover::before {
+      transform: rotate(-45deg);
+      background-color: transparent;
+    }
+    .btn-two:hover::after {
+      transform: rotate(45deg);
+      background-color: transparent;
+    }
+
+    /* BUTTON THREE: Outward */
+    .btn-three {
+      color: var(--white-text);
+      transition: all 0.5s;
+    }
+    .btn-three::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: var(--glass-light);
+      transition: all 0.3s;
+    }
+    .btn-three:hover::before {
+      opacity: 0 ;
+      transform: scale(0.5, 0.5);
+    }
+    .btn-three::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0;
+      transition: all 0.3s;
+      border: 1px solid var(--glass-thick);
+      transform: scale(1.2, 1.2);
+    }
+    .btn-three:hover::after {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+    /* css */
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- HTML -->
+<div style="width: 100%; height: 100%;">
+  <!-- Hover #1 -->
+  <div class="box-1">
+    <div class="btn btn-one">
+      <span>Inward</span>
+    </div>
+  </div>
+   
+  <!-- Hover #2 -->
+  <div class="box-2">
+    <div class="btn btn-two">
+      <span>X</span>
+    </div>
+  </div>
+
+  <!-- Hover #3 -->
+  <div class="box-3">
+    <div class="btn btn-three">
+      <span>Outward</span>
+    </div>
+  </div>
+</div>
+<!-- HTML -->
+
+
+</body>
+</html>

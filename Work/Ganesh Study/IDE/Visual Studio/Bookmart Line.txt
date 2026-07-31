@@ -1,0 +1,2 @@
+(CTRL + K) + (CTRL + K) = Bookmark the current line  
+(CTRL + K) + (CTRL + W) = View all the bookmarks  

@@ -1,0 +1,15 @@
+1. ERP local: 
+snkhade
+Ztcs@1234
+or
+Ztcs@123
+
+2. Company Login:
+Ganeshc
+Welome@123
+
+
+3. SQL: smss
+Server Name: DESKTOP-J57A6GE
+Login: sa
+Password: sa1234#

@@ -1,0 +1,58 @@
+{
+  "backgroundColors": [
+    {
+      "id": "classic_light",
+      "name": "Classic Light",
+      "type": "solid",
+      "value": "#F5F5F5"
+    },
+    {
+      "id": "deep_dark",
+      "name": "Deep Dark",
+      "type": "solid",
+      "value": "#121212"
+    },
+    {
+      "id": "midnight_blue",
+      "name": "Midnight Blue",
+      "type": "solid",
+      "value": "#0F2027"
+    },
+    {
+      "id": "forest_green",
+      "name": "Forest Green",
+      "type": "solid",
+      "value": "#1B5E20"
+    },
+    {
+      "id": "royal_purple",
+      "name": "Royal Purple",
+      "type": "solid",
+      "value": "#4A148C"
+    },
+    {
+      "id": "sunset_gradient",
+      "name": "Sunset Gradient",
+      "type": "gradient",
+      "value": "linear-gradient(135deg, #FF512F, #DD2476)"
+    },
+    {
+      "id": "ocean_gradient",
+      "name": "Ocean Gradient",
+      "type": "gradient",
+      "value": "linear-gradient(135deg, #2193b0, #6dd5ed)"
+    },
+    {
+      "id": "emerald_gradient",
+      "name": "Emerald Gradient",
+      "type": "gradient",
+      "value": "linear-gradient(135deg, #11998e, #38ef7d)"
+    },
+    {
+      "id": "dark_space",
+      "name": "Dark Space",
+      "type": "gradient",
+      "value": "linear-gradient(135deg, #232526, #414345)"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "coinColorCombos": [
+    {
+      "id": "black_white",
+      "name": "Black & White",
+      "head": "#000000",
+      "tail": "#FFFFFF"
+    },
+    {
+      "id": "gold_silver",
+      "name": "Gold & Silver",
+      "head": "#D4AF37",
+      "tail": "#C0C0C0"
+    },
+    {
+      "id": "red_blue",
+      "name": "Red & Blue",
+      "head": "#D32F2F",
+      "tail": "#1976D2"
+    },
+    {
+      "id": "green_purple",
+      "name": "Green & Purple",
+      "head": "#2E7D32",
+      "tail": "#6A1B9A"
+    },
+    {
+      "id": "orange_teal",
+      "name": "Orange & Teal",
+      "head": "#EF6C00",
+      "tail": "#00695C"
+    },
+    {
+      "id": "yellow_black",
+      "name": "Yellow & Black",
+      "head": "#FBC02D",
+      "tail": "#000000"
+    },
+    {
+      "id": "white_crimson",
+      "name": "White & Crimson",
+      "head": "#FFFFFF",
+      "tail": "#8E0000"
+    },
+    {
+      "id": "cyan_magenta",
+      "name": "Cyan & Magenta",
+      "head": "#00BCD4",
+      "tail": "#E91E63"
+    }
+  ]
+}
