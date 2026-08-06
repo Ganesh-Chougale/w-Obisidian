@@ -4,17 +4,23 @@
 @{
     List<Branch> branch = ViewData["branchList"] as List<Branch>;
 
-
+    int? ActiveType = ViewData["AciveType"] as Nullable<int>;
     int? StockListGroupCode = ViewData["StockListGroupCode"] as Nullable<int>;
     int? BranchCode = ViewData["BranchCode"] as Nullable<int>;
+    int? MaterialCode = ViewData["MaterialCode"] as Nullable<int>;
+    string MaterialName = ViewData["MaterialName"] as string;
+
 
 }
 
 <div id="content">
     <article class="col-sm-12 col-md-12 col-lg-12">
 
+        <input type="hidden" id="hfIncomingActiveType" value="@ActiveType" />
         <input type="hidden" id="hfIncomingSlgCode" value="@StockListGroupCode" />
         <input type="hidden" id="hfIncomingBranchCode" value="@BranchCode" />
+        <input type="hidden" id="hfIncomingMaterialCode" value="@MaterialCode" />
+        <input type="hidden" id="hfIncomingMaterialName" value="@MaterialName" />
 
         <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-colorbutton="false"
              data-widget-editbutton="false" data-widget-custombutton="false">
@@ -55,16 +61,7 @@
                                     <div class="col-md-3">
                                         <label class="label">Branch</label>
                                     </div>
-                                    @*<div class="col-md-5">
-                                        <label class="select">
-                                            <select name="ddlUnit" id="ddlUnit" style="width:100%">
-                                                @foreach (Branch _branch in branch)
-                                                {
-                                                    <option value="@_branch.BranchCode">@_branch.LongName</option>
-                                                }
-                                            </select>
-                                        </label>
-                                    </div>*@
+
                                     <div class="col-md-5">
                                         <label class="select">
                                             <select name="ddlUnit" id="ddlUnit" style="width:100%">
@@ -109,6 +106,7 @@
 </div>
 
 <!-- stock list group Popup -->
+<!--
 <div id="SlgPopUpUI" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:999;">
     <div style="width:95%; margin:1% auto; background:#fff; border-radius:6px; height:100%; overflow:hidden; padding:0px;">
 
@@ -148,10 +146,6 @@
                     <div class="col-md-4">
                         <label style="color:#000000 !important;" class="label label-info" id="lblBranch" value=""><b>  </b></label>
                     </div>
-
-                    @*<div class="col-md-1">
-                            <button class="pull-right" onclick="closeSLGPopup()" style="background:none;border:none;color:#092347;font-size:18px;cursor:pointer;">✖</button>
-                        </div>*@
 
                 </div>
             </section>
@@ -194,7 +188,8 @@
             </table>
         </div>
     </div>
-</div>
+</div> 
+-->
 <!--./ stock list group Popup -->
 
 <style>
@@ -203,19 +198,11 @@
         background-color: #092347 !important;
     }
 
-        #slg_table thead th {
-            text-align: center;
-        }
-
-    #item_table thead th {
+    #slg_table thead th {
         text-align: center;
     }
 
     #slg_table tbody td {
-        font-weight: 900 !important;
-    }
-
-    #item_table tbody td {
         font-weight: 900 !important;
     }
 
@@ -224,10 +211,32 @@
         background-color: #092347 !important;
     }
 
-    #item_table thead,
-    #item_table thead th {
+    #item_MM_table thead,
+    #item_MM_table thead th {
         background-color: #092347 !important;
     }
+
+    #item_MM_table tbody td {
+        font-weight: 900 !important;
+    }
+
+    #item_MM_table thead th {
+        text-align: center;
+    }
+
+    #item_Whole_table thead,
+    #item_Whole_table thead th {
+        background-color: #092347 !important;
+    }
+
+    #item_Whole_table tbody td {
+        font-weight: 900 !important;
+    }
+
+    #item_Whole_table thead th {
+        text-align: center;
+    }
+
 </style>
 
 
@@ -245,7 +254,8 @@
                 if (selectedSlg == 0 || selectedSlg == null || selectedSlg == "") {
                     customWarning("#ddlStockListGroup", "Stock List Group", "Stock list group is not selected", "#C46A69", 3000)
                     return;
-                } else {
+                }
+                else {
                     StockListDataShow();
                 }
             } else if (activeType == 1) {
@@ -254,24 +264,22 @@
                 if (selectedMaterialCode != 0 || selectedMaterialCode != null) {
                     ItemSelect();
                 } else {
-                    customWarning("#MatName", "Material Item", "Item is not selected", "#C46A69", 3000)
+                    customWarning("#inpMatName", "Material Item", "Item is not selected", "#C46A69", 3000)
                 }
             }
 
         });
 
-        //debugger; 
-
-        function tableAfterSave(slgCode, branchCode) {
-            //debugger;
-            $("input[name='activeType'][value='0']").prop('checked', true).trigger("change");
-        }
-
-        var incomingSlgCode = $("#hfIncomingSlgCode").val();
+        var incomingActiveType = $("#hfIncomingActiveType").val();
         var incomingBranchCode = $("#hfIncomingBranchCode").val();
 
-        if (incomingSlgCode && incomingBranchCode) {
-            tableAfterSave(incomingSlgCode, incomingBranchCode);
+
+        if (incomingBranchCode && incomingActiveType == 0) {
+            $("input[name='activeType'][value='0']").prop('checked', true).trigger("change");
+        } else if (incomingBranchCode && incomingActiveType == 1) {
+            $("input[name='activeType'][value='1']").prop('checked', true).trigger("change");
+            var incomingMaterialCode = $("#hfIncomingMaterialCode").val();
+            $("#hfMatCode").val(incomingMaterialCode);
         }
 
         $(document).on('change', '#ddlStockListGroup', function () {
@@ -296,7 +304,7 @@
     }
 
 
-    $(document).off("change", "input[name='activeType']").on("change", "input[name='activeType']", function () { 
+    $(document).off("change", "input[name='activeType']").on("change", "input[name='activeType']", function () {
 
         var activeType = $("input[name='activeType']:checked").val();
 
@@ -333,7 +341,7 @@
                     </div>
                     <div class ="col-md-9">
                         <label class ="input">
-                            <input type="text" id="MatName" name="MatName" class ="form-control input-xs" placeholder="Material Name" />
+                            <input type="text" id="inpMatName" name="inpMatName" class ="form-control input-xs" placeholder="Material Name" />
                             <input type="hidden" id="hfMatCode" name="hfMatCode" />
                             <b class ="tooltip tooltip-top-right">
                                 <i class ="fa fa-warning txt-color-teal"></i>
@@ -347,6 +355,13 @@
                 `;
 
             $("#radioOutput").html(materialInput);
+
+            var incomingMaterialCode = $("#hfIncomingMaterialCode").val();
+            var incomingMaterialName = $("#hfIncomingMaterialName").val();
+            if (incomingMaterialCode && incomingMaterialName) {
+                //$("#inpMatName").val(incomingMaterialCode);
+                $("#inpMatName").val(incomingMaterialName);
+            }
             ItemMaterialAutocomplete();
         }
 
@@ -376,7 +391,7 @@
                                             <thead >
                                                 <tr>
                                                     <th rowspan="2">Item Code</th>
-                                                    <th rowspan="2">Item Description</th>
+                                                    <th rowspan="2" style="width:15%;" >Item Description</th>
                                                     <th rowspan="2">Material Category</th>
                                                     <th rowspan="2">Avg Consump.<br />(Last 6 Mths) </th>
                                                     <th rowspan="2">Avg Daily<br />Consumption</th>
@@ -384,6 +399,7 @@
                                                     <th rowspan="2">Min<br />Stock</th>
                                                     <th rowspan="2">Max<br />Stock</th>
                                                     <th rowspan="2">Days of<br />Stock Left</th>
+                                                    <th rowspan="2">Mate Pur<br />Lead Time</th>
                                                     <th rowspan="2">Consumption<br />Trend</th>
                                                     <th rowspan="2">Stock<br />Movement</th>
                                                     <th colspan="2">Pipeline Qty</th>
@@ -408,24 +424,27 @@
 
                     var colorFlag = "";
 
-                    if (((item.CurrentStock / item.AvgConsumption) * 100) <= 10) {
-                        colorFlag = "black";
-                    } else if (((item.CurrentStock / item.AvgConsumption) * 100) > 10 && ((item.CurrentStock / item.AvgConsumption) * 100) <= 30) {
-                        colorFlag = "red";
-                    } else if (((item.CurrentStock / item.AvgConsumption) * 100) > 30 && ((item.CurrentStock / item.AvgConsumption) * 100) <= 60) {
-                        colorFlag = "yellow";
-                    } else if (((item.CurrentStock / item.AvgConsumption) * 100) > 60) {
-                        colorFlag = "green";
+                    if (item.AvgConsumption > 0) {
+                        if (((item.CurrentStock / item.AvgConsumption) * 100) <= 10) {
+                            colorFlag = "black";
+                        } else if (((item.CurrentStock / item.AvgConsumption) * 100) > 10 && ((item.CurrentStock / item.AvgConsumption) * 100) <= 30) {
+                            colorFlag = "red";
+                        } else if (((item.CurrentStock / item.AvgConsumption) * 100) > 30 && ((item.CurrentStock / item.AvgConsumption) * 100) <= 60) {
+                            colorFlag = "yellow";
+                        } else if (((item.CurrentStock / item.AvgConsumption) * 100) > 60) {
+                            colorFlag = "green";
+                        }
                     }
 
                     rows += `
-                                    <tr>
+                           <tr class ="${(item.StatusCode == 1 ? 'deleted' : (item.StatusCode == 101 ? 'approvalpend' : (item.StatusCode == 2 ? 'unapproved' : (item.StatusCode == 11 ? 'amend' : ''))))}">
 
-                                        <td class ="materialCode" data-materialcodeval="${item.MaterialCode}"> ${item.MaterialCode}</td>
-                                        <td> ${item.MaterialName} </td>
-                                        <td> Material Category </td>
-                                        <td style="text-align:right;"> ${item.AvgConsumption} </td>
-                                        <td style="text-align:right;"> ${item.AvgDailyConsupmtion} </td>`
+
+                                <td class ="materialCode" data-materialcodeval="${item.MaterialCode}"> ${item.MaterialCode}</td>
+                                <td> ${item.MaterialName} </td>
+                                <td ${item.CovType === 'Runner' ? "style='color:#5E79E2;'" : ""} > ${item.CovType} </td>
+                                <td style="text-align:right;"> ${item.AvgConsumption} </td>
+                                <td style="text-align:right;"> ${item.AvgDailyConsupmtion} </td>`
 
                         if (item.AvgConsumption > 0) {
                             if (colorFlag == "black") {
@@ -442,15 +461,15 @@
                         }
 
                             rows += `
-                                        <td style="text-align:right;"> ${item.SumOfMinQty} </td>
-                                        <td style="text-align:right;"> ${item.SumOfMaxQty} </td>`
+                                    <td style="text-align:right;"> ${item.SumOfMinQty} </td>
+                                    <td style="text-align:right;"> ${item.SumOfMaxQty} </td>`
 
                             if (item.CurrentStock > 0) {
                                 rows += `<td style="text-align:right;"> ${item.DaysOfStockLeft} </td>`
                             } else {
                                 rows += `<td> </td>`
                             }
-
+                            rows += `<td>${item.LeadTime}</td>`
                             if (item.AvgDailyConsupmtion < item.CurrentMonthDailyConsuption) {
                                 rows += `<td style="text-align:center;">
                                             <span style="font-size:20px; color:#00751B; display:inline-block; transform:scaleX(1.5);">↑</span>
@@ -484,14 +503,27 @@
                                          <td> </td>`
                             }
 
+                            if (item.AvailableMdn > 0) {
                                 rows += `
-                                        <td style="text-align:right;"> ${item.AvailableMdn} </td>
+                            <td style="text-align:right;">
+                                        <a title="View" href="BranchDeptMinMax/OrderList" data-ajax-update="#mainContent" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true">
+                                            ${item.AvailableMdn}
+                                        </a>
+                            </td>`
+                            } else {
+                                rows += `
+                            <td style="text-align:right;">
+                                ${item.AvailableMdn}
+                            </td>`
+                            }
+
+                                rows += `
                                         <td style="text-align:right;"> ${item.AvailablePo} </td>
                                         <td style="text-align:right;"> ${item.CurrentStock +item.AvailableMdn +item.AvailablePo} </td>`
 
                                 if (item.AvgConsumption > 0) {
                                     if (colorFlag == "black") {
-                                        rows += `<td>
+                                        rows += `<td style="text-align:center;">
                                                     <div class="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #ffffff; outline: 1px solid #000000; pointer-events: none;">
                                                         <i class="fa fa-circle" style="color:#000000;"></i>
                                                         <strong style="color:#000000;font-weight: 900;">Black</strong>
@@ -500,36 +532,27 @@
 
                                                 <td style="color:#000000;font-weight: 900; text-align:center;">Purchase today</td>
 
-                                                <td>
-                                                    <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FAFBFC; outline: 1px solid #5E79E2;" onclick="goCreateMdn(this)">
-                                                        <strong style="color:#5E79E2; font-weight: 900;"">Raise MDN</strong>
-                                                    </div>
-                                                </td>
-                                                 `
+                                                `
                                     } else if (colorFlag == "red") {
-                                        rows += `<td>
+                                        rows += `<td style="text-align:center;">
                                                     <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FCEEEE; outline: 1px solid #E4201C; pointer-events: none;">
                                                         <i class ="fa fa-circle" style="color:#E4201C;"></i>
                                                         <strong style="color:#E4201C;font-weight: 900;">Red</strong>
                                                     </div>
                                                  </td>
 
-                                                 <td style="color:#E4201C;font-weight: 900; text-align:center;">Purchase this week</td>
-
-                                                 <td> </td>`
+                                                 <td style="color:#E4201C;font-weight: 900; text-align:center;">Purchase this week</td>`
                                     } else if (colorFlag == "yellow") {
-                                        rows += `<td>
+                                        rows += `<td style="text-align:center;">
                                                     <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FDF6D0; outline: 1px solid #FE9425; pointer-events: none;">
                                                         <i class ="fa fa-circle" style="color:#FE9425;"></i>
                                                         <strong style="color:#FE9425;font-weight: 900; text-align:center;">Yellow</strong>
                                                     </div>
                                                  </td>
 
-                                                 <td style="color:#FE9425;font-weight: 900; text-align:center;">Purchase next week</td>
-
-                                                 <td> </td>`
+                                                 <td style="color:#FE9425;font-weight: 900; text-align:center;">Purchase next week</td>`
                                     } else if (colorFlag == "green") {
-                                        rows += `<td>
+                                        rows += `<td style="text-align:center;">
                                                     <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #EDF8F1; outline: 1px solid #00A228; pointer-events: none;">
                                                         <i class ="fa fa-circle" style="color:#00A228;"></i>
                                                         <strong style="color:#00A228;font-weight: 900;">Green</strong>
@@ -537,13 +560,23 @@
                                                  </td>
 
                                                  <td style="color:#00A228;font-weight: 900;">No action</td>
-
-                                                 <td> </td>`
+                                                 `
                                     }
                                 } else {
                                     rows += `<td> </td>
-                                             <td> </td>
                                              <td> </td>`
+                                }
+                                if (item.StatusCode == 101) {
+                                    rows += `<td style="text-align:center;">Approval Pending</td>`
+                                }else if ((item.CovType != "Stranger") && (item.DaysOfStockLeft <= item.LeadTime)) {
+
+                                    rows += `<td>
+                                                <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FAFBFC; outline: 1px solid #5E79E2;" onclick="goCreateMdn(this)">
+                                                    <strong style="color:#5E79E2; font-weight: 900;"">Raise MDN</strong>
+                                                </div>
+                                            </td>`
+                                } else {
+                                    rows += `<td></td>`
                                 }
                             rows += `</tr>`;
                 });
@@ -551,7 +584,8 @@
                 $("#slg_table tbody").html(rows);
             },
             error: function (xhr) {
-                alert("Error: " + xhr.status + " - " + xhr.statusText);
+                var message = "Error: " + xhr.status + " - " + xhr.statusText;
+                customWarning("", "Error in flow", message, "#C46A69", 1000);
             }
         });
     }
@@ -594,14 +628,23 @@
     }
 
     function ItemMaterialAutocomplete() {
+        debugger;
+        var incomingMaterialCode = $("#hfIncomingMaterialCode").val();
+        var incomingMaterialName = $("#hfIncomingMaterialName").val();
+        $("#hfMatCode").val(incomingMaterialCode);
 
-        $("#MatName").keyup(function () {
-            if ($("#MatName").val().trim().length >= 3) {
+        if (incomingMaterialCode && incomingMaterialName) {
+            ItemSelect();
+            return
+        }
+
+        $("#inpMatName").keyup(function () {
+            if ($("#inpMatName").val().trim().length >= 3) {
                 dontBlock = true;
             }
         });
 
-        $("#MatName").autocomplete({
+        $("#inpMatName").autocomplete({
 
             minLength: 3,
             source: function (request, response) {
@@ -643,7 +686,7 @@
                 $("#hfMatCode").val(
                     window.materialMap[ui.item.value].id
                 );
-                $("#MatName").val(
+                $("#inpMatName").val(
                     window.materialMap[ui.item.value].name
                 );
                 ItemSelect();
@@ -652,6 +695,8 @@
     }
 
     function ItemSelect() {
+
+        debugger;
 
         var selectedBranchCode = $("#ddlUnit").val();
         var selectedMaterialCode = $("#hfMatCode").val();
@@ -674,100 +719,211 @@
             success: function (data) {
                 if (data.length > 0) {
 
+                    var item_Whole_table = `
+                                    <div class ="widget-body no-padding" style="margin-top:25px;">
+                                        <table id="item_Whole_table" class ="table table-striped table-bordered" width="100%">
+                                            <thead >
+                                                <tr>
+                                                    <th rowspan="2">Item Code</th>
+                                                    <th rowspan="2" style="width:15%;" >Item Description</th>
+                                                    <th rowspan="2">Material Category</th>
+                                                    <th rowspan="2">Avg Consump.<br />(Last 6 Mths) </th>
+                                                    <th rowspan="2">Avg Daily<br />Consumption</th>
+                                                    <th rowspan="2">Current<br />Stock</th>
+                                                    <th rowspan="2">Min<br />Stock</th>
+                                                    <th rowspan="2">Max<br />Stock</th>
+                                                    <th rowspan="2">Days of<br />Stock Left</th>
+                                                    <th rowspan="2">Mate Pur<br />Lead Time</th>
+                                                    <th rowspan="2">Consumption<br />Trend</th>
+                                                    <th rowspan="2">Stock<br />Movement</th>
+                                                    <th colspan="2">Pipeline Qty</th>
+                                                    <th rowspan="2">Net Available<br />(Current +Pipeline) </th>
+                                                    <th rowspan="2">Stock<br />Signal</th>
+                                                    <th rowspan="2">Procurement<br />Priority</th>
+                                                    <th rowspan="2">Action</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Available MDN</th>
+                                                    <th>Available Po</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                <hr style="background-color:#092347; height: 1px;" />
+                                `;
+
+                    itemRectangle.html(item_Whole_table);
+
+                    var rows = "";
+                    $.each(data, function (i, item) {
+
+                        var colorFlag = "";
+
+                        if (((item.CurrentStock / item.AvgConsumption) * 100) <= 10) {
+                            colorFlag = "black";
+                        } else if (((item.CurrentStock / item.AvgConsumption) * 100) > 10 && ((item.CurrentStock / item.AvgConsumption) * 100) <= 30) {
+                            colorFlag = "red";
+                        } else if (((item.CurrentStock / item.AvgConsumption) * 100) > 30 && ((item.CurrentStock / item.AvgConsumption) * 100) <= 60) {
+                            colorFlag = "yellow";
+                        } else if (((item.CurrentStock / item.AvgConsumption) * 100) > 60) {
+                            colorFlag = "green";
+                        }
+
+                        rows += `
+                                <tr class ="${(item.StatusCode == 1 ? 'deleted' : (item.StatusCode == 101 ? 'approvalpend' : (item.StatusCode == 2 ? 'unapproved' : (item.StatusCode == 11 ? 'amend' : ''))))}">
 
 
-                    var ItemHeaderData = `
-                                        <div class ="col-md-11" id="ItemHeaderRectangle" style="margin-top:25px; padding: 10px; border:1px solid #092347;">
+                                    <td class ="materialCode" data-materialcodeval="${item.MaterialCode}"> ${item.MaterialCode}</td>
+                                    <td> ${item.MaterialName} </td>
+                                    <td ${item.CovType === 'Runner' ? "style='color:#5E79E2;'": ""} > ${item.CovType} </td>
+                                    <td style="text-align:right;"> ${item.AvgConsumption} </td>
+                                    <td style="text-align:right;"> ${item.AvgDailyConsupmtion} </td>
+                                `
 
-                                            <section class ="col-md-12" style="margin-top:5px; font-size:15px; ">
-                                                <div class ="col-md-11">
+                        if (item.AvgConsumption > 0) {
+                            if (colorFlag == "black") {
+                                rows += `<td class ="currentStock" style="text-align:right;"> ${item.CurrentStock} </td>`
+                            } else if (colorFlag == "red") {
+                                rows += `<td class ="currentStock" style="text-align:right;; color:#E4201C;"> ${item.CurrentStock} </td>`
+                            } else if (colorFlag == "yellow") {
+                                rows += `<td class ="currentStock" style="text-align:right; color:#FE9425;"> ${item.CurrentStock} </td>`
+                            } else if (colorFlag == "green") {
+                                rows += `<td class ="currentStock" style="text-align:right; color:#00A228;"> ${item.CurrentStock} </td>`
+                            }
+                        } else {
+                            rows += `<td class ="currentStock" style="text-align:right;"> ${item.CurrentStock} </td>`
+                        }
 
-                                                    <div class ="col-md-1" style="margin-left:50px;">
-                                                        <label class ="label" style="color:#000000 !important;">Item Name</label>
+                        rows += `
+                                        <td style="text-align:right;"> ${item.SumOfMinQty} </td>
+                                        <td style="text-align:right;"> ${item.SumOfMaxQty} </td>`
+
+                        if (item.CurrentStock > 0) {
+                            rows += `<td style="text-align:right;"> ${item.DaysOfStockLeft} </td>`
+                        } else {
+                            rows += `<td> </td>`
+                        }
+                        rows += `<td>${item.LeadTime}</td>`
+                        if (item.AvgDailyConsupmtion < item.CurrentMonthDailyConsuption) {
+                            rows += `<td style="text-align:center;">
+                                            <span style="font-size:20px; color:#00751B; display:inline-block; transform:scaleX(1.5);">↑</span>
+                                            <span style="font-weight: 700;">&nbsp; Increasing</span>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <span class ="text-success" style="font-size:20px;font-weight:900;">🔥</span>
+                                            <span style="font-weight: 700;">Fast</span>
+                                        </td>
+                                        `
+                        } else if (item.AvgDailyConsupmtion = item.CurrentMonthDailyConsuption) {
+                            rows += `<td style="text-align:center;">
+                                            <span style="color:#3f51ff;font-size:20px;display:inline-block; transform:scaleY(1.5);">→</span>
+                                            <span style="font-weight: 700;">&nbsp; Stable</span>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <span class ="text-danger" style="font-size:20px;font-weight:900;">⚡️</span>
+                                            <span style="font-weight: 700;">&nbsp; Medium</span>
+                                        </td>`
+                        } else if (item.AvgDailyConsupmtion > item.CurrentMonthDailyConsuption) {
+                            rows += `<td style="text-align:center;">
+                                            <span class ="text-danger" style="font-size:20px;font-weight:900;">↘</span>
+                                            <span style="font-weight: 700;">&nbsp; Decreasing</span>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <span style="color:#3f51ff;font-size:20px;font-weight:900;">🐢</span>
+                                            <span style="font-weight: 700;">&nbsp; Slow</span>
+                                        </td>`
+                        } else {
+                            rows += `<td> </td>
+                                         <td> </td>`
+                        }
+
+                        if (item.AvailableMdn > 0) {
+                        rows += `
+                            <td style="text-align:right;">
+                                        <a title="View" href="BranchDeptMinMax/OrderList" data-ajax-update="#mainContent" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true">
+                                            ${item.AvailableMdn}
+                                        </a>
+                            </td>`
+                        } else {
+                            rows += `
+                            <td style="text-align:right;">
+                                ${item.AvailableMdn}
+                            </td>`
+                        }
+
+                        rows += `
+                                    <td style="text-align:right;"> ${item.AvailablePo} </td>
+                                    <td style="text-align:right;"> ${item.CurrentStock + item.AvailableMdn + item.AvailablePo} </td>`
+
+                                if (item.AvgConsumption > 0) {
+                                    if (colorFlag == "black") {
+                                        rows += `<td style="text-align:center;">
+                                                    <div class="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #ffffff; outline: 1px solid #000000; pointer-events: none;">
+                                                        <i class="fa fa-circle" style="color:#000000;"></i>
+                                                        <strong style="color:#000000;font-weight: 900;">Black</strong>
                                                     </div>
-                                                    <div class ="col-md-3">
-                                                        <label style="color:#000000 !important; font-size:12px; font-weight:400;" class ="label-info" id="lable_1_Id" > ${data[0].MaterialName} </label>
+                                                 </td>
+
+                                                <td style="color:#000000;font-weight: 900; text-align:center;">Purchase today</td>`
+                                    } else if (colorFlag == "red") {
+                                        rows += `<td style="text-align:center;">
+                                                    <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FCEEEE; outline: 1px solid #E4201C; pointer-events: none;">
+                                                        <i class ="fa fa-circle" style="color:#E4201C;"></i>
+                                                        <strong style="color:#E4201C;font-weight: 900;">Red</strong>
                                                     </div>
+                                                 </td>
 
-                                                    <div class ="col-md-3"></div>
-
-                                                    <div class ="col-md-1">
-                                                        <label class ="label" style="color:#000000 !important;">Item Code</label>
+                                                 <td style="color:#E4201C;font-weight: 900; text-align:center;">Purchase this week</td>`
+                                    } else if (colorFlag == "yellow") {
+                                        rows += `<td style="text-align:center;">
+                                                    <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FDF6D0; outline: 1px solid #FE9425; pointer-events: none;">
+                                                        <i class ="fa fa-circle" style="color:#FE9425;"></i>
+                                                        <strong style="color:#FE9425;font-weight: 900; text-align:center;">Yellow</strong>
                                                     </div>
-                                                    <div class ="col-md-3">
-                                                        <label style="color:#000000 !important; font-size:12px; font-weight:400;" class ="label-info" id="lable_1_Id" > ${data[0].MaterialCode} </label>
+                                                 </td>
+
+                                                 <td style="color:#FE9425;font-weight: 900; text-align:center;">Purchase next week</td>`
+                                    } else if (colorFlag == "green") {
+                                        rows += `<td style="text-align:center;">
+                                                    <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #EDF8F1; outline: 1px solid #00A228; pointer-events: none;">
+                                                        <i class ="fa fa-circle" style="color:#00A228;"></i>
+                                                        <strong style="color:#00A228;font-weight: 900;">Green</strong>
                                                     </div>
+                                                 </td>
 
-                                                </div>
-                                            </section>
+                                                 <td style="color:#00A228;font-weight: 900;">No action</td>
+`
+                                    }
+                                } else {
+                                    rows += `<td> </td>
+                                             <td> </td>`
+                                }
+                                if (item.StatusCode == 101) {
+                                    rows += `<td style="text-align:center;">Approval Pending</td>`
+                                } else if ((item.CovType != "Stranger") && (item.DaysOfStockLeft <= item.LeadTime)) {
 
-                                            <section class ="col-md-12" style="margin-top:5px; font-size:15px; ">
-                                                <div class ="col-md-11">
+                                    rows += `<td>
+                                                        <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FAFBFC; outline: 1px solid #5E79E2;" onclick="goCreateMdn(this)">
+                                                            <strong style="color:#5E79E2; font-weight: 900;"">Raise MDN</strong>
+                                                        </div>
+                                                 </td>`
+                                } else {
+                                    rows += `<td></td>`
+                                }
+                            rows += `</tr>`;
+                    });
+                    $("#item_Whole_table tbody").empty();
+                    $("#item_Whole_table tbody").html(rows);
 
-                                                    <div class ="col-md-1" style="margin-left:50px;">
-                                                        <label class ="label" style="color:#000000 !important;">Material Category</label>
-                                                    </div>
-                                                    <div class ="col-md-3">
-                                                        <label style="color:#000000 !important; font-size:12px; font-weight:400;" class ="label-info" id="lable_1_Id" value="">  </label>
-                                                    </div>
-
-                                                    <div class ="col-md-3"></div>
-
-                                                    <div class ="col-md-1">
-                                                        <label class ="label" style="color:#000000 !important;">Current Stock</label>
-                                                    </div>
-                                                    <div class ="col-md-3">
-                                                        <label style="color:#000000 !important; font-size:12px; font-weight:400;" class ="label-info" id="lable_1_Id" value=""> ${data[0].CurrentStock} </label>
-                                                    </div>
-
-                                                </div>
-                                            </section>
-
-                                            <section class ="col-md-12" style="margin-top:5px; font-size:15px; ">
-                                                <div class ="col-md-11">
-
-                                                    <div class ="col-md-1" style="margin-left:50px;">
-                                                        <label class ="label" style="color:#000000 !important;">Available MDN</label>
-                                                    </div>
-                                                    <div class ="col-md-3">
-                                                        <label style="color:#000000 !important; font-size:12px; font-weight:400;" class ="label-info" id="lable_1_Id" value=""> ${data[0].AvailableMdn} </label>
-                                                    </div>
-
-                                                    <div class ="col-md-3"></div>
-
-                                                    <div class ="col-md-1">
-                                                        <label class ="label" style="color:#000000 !important;">Available PO</label>
-                                                    </div>
-                                                    <div class ="col-md-3">
-                                                        <label style="color:#000000 !important; font-size:12px; font-weight:400;" class ="label-info" id="lable_1_Id" value=""> ${data[0].AvailablePo} </label>
-                                                    </div>
-
-                                                </div>
-                                            </section>
-
-                                            <section class ="col-md-12" style="margin-top:5px; font-size:15px; ">
-                                                <div class ="col-md-11">
-
-                                                    <div class ="col-md-1" style="margin-left:50px;">
-                                                        <label class ="label" style="color:#000000 !important;">Net Available</label>
-                                                    </div>
-                                                    <div class ="col-md-3">
-                                                        <label style="color:#000000 !important; font-size:12px; font-weight:400;" class ="label-info" id="lable_1_Id" value=""> ${data[0].CurrentStock +data[0].AvailableMdn +data[0].AvailablePo} </label>
-                                                    </div>
-
-                                                </div>
-                                            </section>
-
-                                        </div> `;
-                    itemRectangle.html(ItemHeaderData);
-
-                    var item_table = `
+                    var item_MM_table = `
                                 <div class ="widget-body no-padding">
-                                    <table id="item_table" class ="table table-striped table-bordered" width="100%">
+                                    <table id="item_MM_table" class ="table table-striped table-bordered" width="100%">
                                         <thead >
                                             <tr>
                                                 <th style="text-align:center;">Dept Name</th>
                                                 <th style="text-align:center;">Days of Stock Left</th>
+                                                <th style="text-align:center;">Mate Pur<br />Lead Time</th>
                                                 <th style="text-align:center;">Consumption Trend</th>
                                                 <th style="text-align:center;">Min Max</th>
                                                 <th style="text-align:center;">Max Max</th>
@@ -781,7 +937,7 @@
                                     </table>
                                 </div>
                                 `;
-                    tableArea.html(item_table);
+                    tableArea.html(item_MM_table);
 
                     var rows = "";
                     $.each(data, function (i, item) {
@@ -804,12 +960,13 @@
                                 <td style="text-align:left" class ="deptCode" data-deptcodeval="${item.DeptCode}">
                                     ${item.DeptName}
                                </td>
-                                <td style="text-align:right;">${item.DaysOfStockLeft}</td>`
+                                <td style="text-align:right;">${item.DaysOfStockLeft}</td>
+                                <td style="text-align:right;">${item.LeadTime}</td>`
 
                     if (item.AvgDailyConsupmtion < item.CurrentMonthDailyConsuption) {
                         rows += `<td style="text-align:center;">
                                         <span style="font-size:20px; color:#00751B; display:inline-block; transform:scaleX(1.5);">↑</span>
-                                        <span style="font-weight: 700;">Increasing</span>
+                                        <span style="font-weight: 700;">&nbsp; Increasing</span>
                                     </td>
                                     <td>
                                         <input style="width:100%; text-align:right;" oninput="validateDecimalInput(this)" type="text" class ="minQty" value="${item.SumOfMinQty}" onblur="validateMin(this)">
@@ -819,7 +976,7 @@
                                     </td>
                                     <td style="text-align:center;">
                                         <span class ="text-success" style="font-size:20px;font-weight:900;">🔥</span>
-                                        <span style="font-weight: 700;">Fast</span>
+                                        <span style="font-weight: 700;">&nbsp; Fast</span>
                                     </td>
                                     `
                     } else if (item.AvgDailyConsupmtion = item.CurrentMonthDailyConsuption) {
@@ -835,7 +992,7 @@
                                     </td>
                                     <td style="text-align:center;">
                                         <span class ="text-danger" style="font-size:20px;font-weight:900;">⚡️</span>
-                                        <span style="font-weight: 700;">Medium</span>
+                                        <span style="font-weight: 700;">&nbsp; Medium</span>
                                     </td>`
                     } else if (item.AvgDailyConsupmtion > item.CurrentMonthDailyConsuption) {
                         rows += `<td style="text-align:center;">
@@ -850,7 +1007,7 @@
                                     </td>
                                     <td style="text-align:center;">
                                         <span style="color:#3f51ff;font-size:20px;font-weight:900;">🐢</span>
-                                        <span style="font-weight: 700;">Slow</span>
+                                        <span style="font-weight: 700;">&nbsp; Slow</span>
                                     </td>`
                     } else {
                         rows += `<td> </td>
@@ -859,69 +1016,65 @@
                                         <td> </td>`
                     }
 
-                   if (item.AvgConsumption > 0) {
+                    if (item.AvgConsumption > 0) {
+                        if (colorFlag == "black") {
+                            rows += `<td style="text-align:center;">
+                                        <div class="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #ffffff; outline: 1px solid #000000; pointer-events: none;">
+                                            <i class="fa fa-circle" style="color:#000000;"></i>
+                                            <strong style="color:#000000;font-weight: 900;">Black</strong>
+                                        </div>
+                                        </td>
 
-                       if (colorFlag == "black") {
-                        rows += `<td style="text-align:center;">
-                                    <div class="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #ffffff; outline: 1px solid #000000; pointer-events: none;">
-                                        <i class="fa fa-circle" style="color:#000000;"></i>
-                                        <strong style="color:#000000;font-weight: 900;">Black</strong>
-                                    </div>
-                                </td>
+                                    <td style="color:#000000;font-weight: 900; text-align:center;">Purchase today</td>`
+                        } else if (colorFlag == "red") {
+                            rows += `<td style="text-align:center;">
+                                        <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FCEEEE; outline: 1px solid #E4201C; pointer-events: none;">
+                                            <i class ="fa fa-circle" style="color:#E4201C;"></i>
+                                            <strong style="color:#E4201C;font-weight: 900;">Red</strong>
+                                        </div>
+                                        </td>
 
-                                <td style="color:#000000;font-weight: 900; text-align:center;">Purchase today</td>
+                                        <td style="color:#E4201C;font-weight: 900; text-align:center;">Purchase this week</td>`
+                        } else if (colorFlag == "yellow") {
+                            rows += `<td style="text-align:center;">
+                                        <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FDF6D0; outline: 1px solid #FE9425; pointer-events: none;">
+                                            <i class ="fa fa-circle" style="color:#FE9425;"></i>
+                                            <strong style="color:#FE9425;font-weight: 900; text-align:center;">Yellow</strong>
+                                        </div>
+                                        </td>
 
-                                <td style="text-align:center" class ="updateBtn" data-matcodeval="${item.MaterialCode}" data-branchcodeval="${item.BranchCode}">
+                                        <td style="color:#FE9425;font-weight: 900; text-align:center;">Purchase next week</td>`
+                        } else if (colorFlag == "green") {
+                            rows += `<td style="text-align:center;">
+                                        <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #EDF8F1; outline: 1px solid #00A228; pointer-events: none;">
+                                            <i class ="fa fa-circle" style="color:#00A228;"></i>
+                                            <strong style="color:#00A228;font-weight: 900;">Green</strong>
+                                        </div>
+                                        </td>
+
+                                        <td style="color:#00A228;font-weight: 900;">No action</td>`
+                        }
+                    } else {
+                        rows += `<td> </td>
+                                 <td> </td>`
+                    }
+                    if ((item.CovType != "Stranger") && (item.DaysOfStockLeft <= item.LeadTime)) {
+
+                        rows += `<td style="text-align:center" class ="updateBtn" data-matcodeval="${item.MaterialCode}" data-branchcodeval="${item.BranchCode}">
                                     <div class ="btn btn-sm" style="min-width:75px; text-align:left; background: #FAFBFC; outline: 1px solid #5E79E2;" onclick="updateItemRow(this)">
                                         <strong style="color:#5E79E2; font-weight: 900;"">Update</strong>
                                     </div>
                                 </td>`
-                       } else if (colorFlag == "red") {
-                        rows += `<td style="text-align:center;">
-                                    <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FCEEEE; outline: 1px solid #E4201C; pointer-events: none;">
-                                        <i class ="fa fa-circle" style="color:#E4201C;"></i>
-                                        <strong style="color:#E4201C;font-weight: 900;">Red</strong>
-                                    </div>
-                                </td>
 
-                                <td style="color:#E4201C;font-weight: 900; text-align:center;">Purchase this week</td>
 
-                                <td> </td>`
-                       } else if (colorFlag == "yellow") {
-                        rows += `<td style="text-align:center;">
-                                    <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #FDF6D0; outline: 1px solid #FE9425; pointer-events: none;">
-                                        <i class ="fa fa-circle" style="color:#FE9425;"></i>
-                                        <strong style="color:#FE9425;font-weight: 900;">Yellow</strong>
-                                    </div>
-                                </td>
-
-                                <td style="color:#FE9425;font-weight: 900; text-align:center;">Purchase next week</td>
-
-                                <td> </td>`
-                       } else if (colorFlag == "green") {
-                        rows += `<td style="text-align:center;">
-                                    <div class ="btn btn-sm" style="margin:15px 0; min-width:75px; text-align:left; background: #EDF8F1; outline: 1px solid #00A228; pointer-events: none;">
-                                        <i class ="fa fa-circle" style="color:#00A228;"></i>
-                                        <strong style="color:#00A228;font-weight: 900;">Green</strong>
-                                    </div>
-                                </td>
-
-                                <td style="color:#00A228;font-weight: 900; text-align:center;">No action</td>
-
-                                <td> </td>`
+                    } else {
+                        rows += `<td></td>`
                     }
-
-                   } else {
-                       rows += `<td> </td>
-                                <td> </td>
-                                <td> </td>`
-                   }
-
                         rows += `</tr>`;
                     });
 
-                    $("#item_table tbody").empty();
-                    $("#item_table tbody").html(rows);
+                    $("#item_MM_table tbody").empty();
+                    $("#item_MM_table tbody").html(rows);
                 }
 
               },
@@ -933,11 +1086,19 @@
 
     function goCreateMdn(obj) {
         debugger;
+        var activeType = $("input[name='activeType']:checked").val();
+
         var branchCode = $("#ddlUnit").val();
         var materialCode = $(obj).closest("tr").find(".materialCode").data("materialcodeval");
-        var stockListGroupCode = $("#ddlStockListGroup").val();
 
-        var urlString = `/BranchDeptMinMax/CreateMdn?intBranchCode=${branchCode}&intMaterialCode=${materialCode}&intSlgCode=${stockListGroupCode}`;
+        if (activeType == 0) {
+            var stockListGroupCode = $("#ddlStockListGroup").val();
+        } else if (activeType == 1) {
+            var stockListGroupCode = 0;
+        }
+
+
+        var urlString = `/BranchDeptMinMax/CreateMdn?intActiveType=${activeType}&intBranchCode=${branchCode}&intMaterialCode=${materialCode}&intSlgCode=${stockListGroupCode}`;
 
         $.ajax({
             url: urlString,
@@ -954,67 +1115,67 @@
 
     }
 
-    function showSLGDataPopup(obj) {
+    //function showSLGDataPopup(obj) {
 
-        var branchCode = $("#ddlUnit").val();
-        var materialCode = $(obj).closest("tr").find(".materialCode").data("materialcodeval");
+    //    var branchCode = $("#ddlUnit").val();
+    //    var materialCode = $(obj).closest("tr").find(".materialCode").data("materialcodeval");
 
-        // popup modal label assigning.
-        var stockListGroupTxt = $("#ddlStockListGroup option:selected").text();
-        $("#lblStockListGroup").text(stockListGroupTxt);
+    //    // popup modal label assigning.
+    //    var stockListGroupTxt = $("#ddlStockListGroup option:selected").text();
+    //    $("#lblStockListGroup").text(stockListGroupTxt);
 
-        var currentStockTxt = $(obj).closest("tr").find(".currentStock").text();
-        $("#lblCurrentStock").text(currentStockTxt);
+    //    var currentStockTxt = $(obj).closest("tr").find(".currentStock").text();
+    //    $("#lblCurrentStock").text(currentStockTxt);
 
 
-        var urlString = `/BranchDeptMinMax/StockListGroupWisePopupData?intBranchCode=${branchCode}&intMaterialCode=${materialCode}`;
+    //    var urlString = `/BranchDeptMinMax/StockListGroupWisePopupData?intBranchCode=${branchCode}&intMaterialCode=${materialCode}`;
 
-        $.ajax({
-            url: urlString,
-            type: 'POST',
-            dataType: 'json',
-            success: function (data) {
-                if (data && data.length > 0) {
+    //    $.ajax({
+    //        url: urlString,
+    //        type: 'POST',
+    //        dataType: 'json',
+    //        success: function (data) {
+    //            if (data && data.length > 0) {
 
-                    $('#lblBranch').html(data[0].BranchName);
-                    $('#lblMaterial').html(data[0].MaterialName);
+    //                $('#lblBranch').html(data[0].BranchName);
+    //                $('#lblMaterial').html(data[0].MaterialName);
 
-                    $('#SLGDataTable tbody').empty();
+    //                $('#SLGDataTable tbody').empty();
 
-                    $.each(data, function (index, item) {
-                        var row = `<tr>
+    //                $.each(data, function (index, item) {
+    //                    var row = `<tr>
 
-                                    <td style="text-align:left" class ="deptCode" data-deptcodeval="${item.DeptCode}">
-                                        ${item.DeptName}
-                                    </td>
+    //                                <td style="text-align:left" class ="deptCode" data-deptcodeval="${item.DeptCode}">
+    //                                    ${item.DeptName}
+    //                                </td>
 
-                                    <td style="text-align:center">
-                                        <input style="width:100%; text-align:right;" oninput="validateDecimalInput(this)" type="text" class ="minQty" value="${item.MinQty}" onblur="validateMin(this)">
-                                    </td>
+    //                                <td style="text-align:center">
+    //                                    <input style="width:100%; text-align:right;" oninput="validateDecimalInput(this)" type="text" class ="minQty" value="${item.MinQty}" onblur="validateMin(this)">
+    //                                </td>
 
-                                    <td style="text-align:center">
-                                        <input style="width:100%; text-align:right;" oninput="validateDecimalInput(this)" type="text" class ="maxQty" value="${item.MaxQty}" onblur="validateMax(this)">
-                                    </td>
+    //                                <td style="text-align:center">
+    //                                    <input style="width:100%; text-align:right;" oninput="validateDecimalInput(this)" type="text" class ="maxQty" value="${item.MaxQty}" onblur="validateMax(this)">
+    //                                </td>
 
-                                    <td style="text-align:center" class ="updateBtn" data-matcodeval="${item.MaterialCode}" data-branchcodeval="${item.BranchCode}">
-                                        <div class ="btn btn-sm" style="min-width:75px; text-align:left; background: #FAFBFC; outline: 1px solid #5E79E2;" onclick="updateSlgRow(this)">
-                                            <strong style="color:#5E79E2; font-weight: 900;"">Update</strong>
-                                        </div>
-                                    </td>
+    //                                <td style="text-align:center" class ="updateBtn" data-matcodeval="${item.MaterialCode}" data-branchcodeval="${item.BranchCode}">
+    //                                    <div class ="btn btn-sm" style="min-width:75px; text-align:left; background: #FAFBFC; outline: 1px solid #5E79E2;" onclick="updateSlgRow(this)">
+    //                                        <strong style="color:#5E79E2; font-weight: 900;"">Update</strong>
+    //                                    </div>
+    //                                </td>
 
-                                    </tr>`;
-                        $('#SLGDataTable tbody').append(row);
-                    });
+    //                                </tr>`;
+    //                    $('#SLGDataTable tbody').append(row);
+    //                });
 
-                    $('body').append($('#SlgPopUpUI'));
-                    $('#SlgPopUpUI').css('display', 'block');
-                }
-            },
-            error: function (xhr, status, error) {
-                alert('Error loading employee material data:', error);
-            }
-        });
-    }
+    //                $('body').append($('#SlgPopUpUI'));
+    //                $('#SlgPopUpUI').css('display', 'block');
+    //            }
+    //        },
+    //        error: function (xhr, status, error) {
+    //            alert('Error loading employee material data:', error);
+    //        }
+    //    });
+    //}
 
     function updateSlgRow(obj) {
         var materialCode, branchCode, deptCode, minQty, maxQty;
@@ -1029,7 +1190,7 @@
 
         if (updateRow.length != 0) {
             $.ajax({
-                url: 'BranchDeptMinMax/Create',
+                url: 'BranchDeptMinMax/UpdateRow',
                 type: "POST",
                 async: false,
                 contentType: "application/json",
@@ -1044,11 +1205,11 @@
                         timeout: 3000,
                         zindex: 9999
                     });
-
+                    ItemMaterialAutocomplete();
 
                 },
-                error: function (error) {
-                    alert("Error : " + error.toSource());
+                error: function (xhr) {
+                    alert("Error: " + xhr.status + ": " + xhr.statusText);
                 }
             });
         } else {
@@ -1062,10 +1223,10 @@
             return false;
         }
 
-
     }
 
     function updateItemRow(obj) {
+        debugger;
         var materialCode, branchCode, deptCode, minQty, maxQty;
 
         var updateRow = {
@@ -1078,7 +1239,7 @@
 
         if (updateRow.length != 0) {
             $.ajax({
-                url: 'BranchDeptMinMax/Create',
+                url: 'BranchDeptMinMax/UpdateRow',
                 type: "POST",
                 async: false,
                 contentType: "application/json",
@@ -1093,11 +1254,10 @@
                         timeout: 3000,
                         zindex: 9999
                     });
-
-
+                    ItemMaterialAutocomplete();
                 },
-                error: function (error) {
-                    alert("Error : " + error.toSource());
+                error: function (xhr) {
+                    alert("Error: " + xhr.status + ": " + xhr.statusText);
                 }
             });
         } else {
@@ -1110,7 +1270,6 @@
             });
             return false;
         }
-
 
     }
 

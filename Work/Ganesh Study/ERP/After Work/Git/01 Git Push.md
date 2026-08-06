@@ -10,11 +10,12 @@
 
 2. Sync
     Sync:
-        Incoming Commits: (Pull: no need to fetch)
+        Incoming Commits: (Pull: no need to fetch => Reload All)
                         Resolve Conflicts: if any occures (start bottom to up)
                             - Accept & Merge
-                            - Keep Local for PC setting file like SUO or any dll
-                            - keep files from HRM\bin
+                            - Keep Local for PC setting file like SUO, dll files
+                            - keep files from SSL.  
+                            - keep files from HRM\bin.  
 
 3. Merg In Progress
         to complete merg in precess we need to do commit again. (`Module Name Push`)

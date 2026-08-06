@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cryptor</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./Cryptor.css" />
+</head>
+
+<body>
+    <div class="container py-3">
+        <!-- Encrypt / Decrypt -->
+        <div class="d-flex justify-content-center mb-3">
+            <div class="radio-input">
+
+                <label class="label">
+                    <div class="back-side"></div>
+                    <input type="radio" name="mode" id="encryptMode" checked />
+                    <span class="text"> Encrypt </span>
+                    <span class="bottom-line"></span>
+                </label>
+
+                <label class="label">
+                    <div class="back-side"></div>
+                    <input type="radio" name="mode" id="decryptMode" />
+                    <span class="text"> Decrypt </span>
+                    <span class="bottom-line"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Live / Submit -->
+        <div class="d-flex justify-content-center mb-4">
+            <div class="radio-input">
+
+                <label class="label">
+                    <div class="back-side"></div>
+                    <input type="radio" name="conversionMode" id="liveMode" checked />
+                    <span class="text"> Live </span>
+                    <span class="bottom-line"></span>
+                </label>
+
+                <label class="label">
+                    <div class="back-side"></div>
+                    <input type="radio" name="conversionMode" id="submitMode" />
+                    <span class="text"> On Submit </span>
+                    <span class="bottom-line"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Input / Output -->
+        <div class="row g-3">
+            <!-- Input -->
+            <div class="col-12 col-md-6">
+                <div class="editor-card">
+                    <div class="editor-header">
+                        <span id="inputTitle"> Enter Text </span>
+                    </div>
+
+                    <textarea id="inputText" class="form-control editor-textarea" placeholder="Type here..." rows="12"></textarea>
+                </div>
+            </div>
+
+            <!-- Output -->
+            <div class="col-12 col-md-6">
+                <div class="editor-card">
+
+                    <div class="editor-header">
+                        <span id="outputTitle"> Encrypted Text </span>
+
+                        <button id="copyButton" class="copy-btn" type="button" title="Copy"> 📋 </button>
+                    </div>
+
+                    <textarea id="outputText" class="form-control editor-textarea" rows="12" readonly placeholder="Output will appear here"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Convert -->
+        <div class="text-center mt-4">
+            <button id="convertButton" class="btn btn-primary px-5 d-none">
+                Convert
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="appToast" class="toast" role="alert">
+            <div class="toast-header">
+                <strong class="me-auto" id="toastTitle"> Notification </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+
+            <div class="toast-body" id="toastMessage"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./Main.js"></script>
+</body>
+
+</html>
