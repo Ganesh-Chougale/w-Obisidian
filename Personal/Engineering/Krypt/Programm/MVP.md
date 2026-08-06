@@ -1,30 +1,9 @@
-now on Encrypt button click.
-we will show 2 text box. 
-1. enter text 
+ok I want this.
 
-2. generate encpted text copy copy clipboard icon at top right 
+1.  give button "create your custom file" : this will give the use a prompt. which it will give to user & save it as csv file & then upload.
 
-when user click on Decyrpt it will do vice versa. user will paste encypted value & it will convert into english text conversion & reconversio will happen on basis of those arrays.
+2. upload own csv file button. it will check if all letter are mapped. if not then error toast with concise specific info, if all mapped then good to work
 
-1. What should happen if the user enters something like:
-- give me them small box toster & show them non-english & non-ascii character
-- and do not convert them keep them as it is
+3. live & on submit buttons are similar to encrypt & decrypt button I don't want that. make them different with minimalistic efforts
 
-2. Output control:
-- yes, keep Should the Encrypted textbox be readonly
-
-3. Copy button
-- show a small message like "Copied!"
-
-4. Live conversion or button?
-- give toggle button to ask user [Live Conversion || On Submit]
-- if live conversion the hide convert button
-- if on sumbit then show convert button
-
-5. Unknown encrypted symbols:
-- give me them small box toster & show them those specific character & warn about it
-- & Leave them unchanged.
-
-6. 
-- for mobile keep stack preview
-- for non handheld device keep side by side
+4. clear button at enter text area same like copy button at encrypted text

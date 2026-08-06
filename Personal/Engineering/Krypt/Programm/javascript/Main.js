@@ -13,22 +13,20 @@ const scripts = [
   "./sub_scripts/Events.js",
 ];
 
-function loadScripts() {
-  return Promise.all(
-    scripts.map((src) => {
-      return new Promise((resolve, reject) => {
-        const script = document.createElement("script");
+async function loadScripts() {
+  for (const src of scripts) {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement("script");
 
-        script.src = src;
+      script.src = src;
 
-        script.onload = resolve;
+      script.onload = resolve;
 
-        script.onerror = reject;
+      script.onerror = reject;
 
-        document.head.appendChild(script);
-      });
-    }),
-  );
+      document.head.appendChild(script);
+    });
+  }
 }
 
 loadScripts()

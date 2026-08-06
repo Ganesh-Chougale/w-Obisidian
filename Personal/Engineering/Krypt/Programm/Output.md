@@ -286,177 +286,139 @@ body {
 
 Engineering\Krypt\Programm\javascript\Cryptor.html:
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cryptor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./Cryptor.css">
 </head>
 <body>
-<div class="container py-3">
-    <!-- Encrypt / Decrypt -->
-    <div class="d-flex justify-content-center mb-3">
-        <div class="radio-input">
-            <label class="label">
-                <div class="back-side"></div>
-                <input
-                    type="radio"
-                    name="mode"
-                    id="encryptMode"
-                    checked>
-                <span class="text">
-                    Encrypt
-                </span>
-                <span class="bottom-line"></span>
-            </label>
-            <label class="label">
-                <div class="back-side"></div>
-                <input
-                    type="radio"
-                    name="mode"
-                    id="decryptMode">
-                <span class="text">
-                    Decrypt
-                </span>
-                <span class="bottom-line"></span>
-            </label>
-        </div>
-    </div>
-    <!-- Live / Submit -->
-    <div class="d-flex justify-content-center mb-4">
-        <div class="radio-input">
-            <label class="label">
-                <div class="back-side"></div>
-                <input
-                    type="radio"
-                    name="conversionMode"
-                    id="liveMode"
-                    checked>
-                <span class="text">
-                    Live
-                </span>
-                <span class="bottom-line"></span>
-            </label>
-            <label class="label">
-                <div class="back-side"></div>
-                <input
-                    type="radio"
-                    name="conversionMode"
-                    id="submitMode">
-                <span class="text">
-                    On Submit
-                </span>
-                <span class="bottom-line"></span>
-            </label>
-        </div>
-    </div>
-    <!-- Input / Output -->
-    <div class="row g-3">
-        <!-- Input -->
-        <div class="col-12 col-md-6">
-            <div class="editor-card">
-                <div class="editor-header">
-                    <span id="inputTitle">
-                        Enter Text
-                    </span>
-                </div>
-                <textarea
-                    id="inputText"
-                    class="form-control editor-textarea"
-                    placeholder="Type here..."
-                    rows="12"></textarea>
+    <div class="container py-3">
+        <!-- Encrypt / Decrypt -->
+        <div class="d-flex justify-content-center mb-3">
+            <div class="radio-input">
+                <label class="label">
+                    <div class="back-side"></div>
+                    <input type="radio" name="mode" id="encryptMode" checked />
+                    <span class="text"> Encrypt </span>
+                    <span class="bottom-line"></span>
+                </label>
+                <label class="label">
+                    <div class="back-side"></div>
+                    <input type="radio" name="mode" id="decryptMode" />
+                    <span class="text"> Decrypt </span>
+                    <span class="bottom-line"></span>
+                </label>
             </div>
         </div>
-        <!-- Output -->
-        <div class="col-12 col-md-6">
-            <div class="editor-card">
-                <div class="editor-header">
-                    <span id="outputTitle">
-                        Encrypted Text
-                    </span>
-                    <button
-                        id="copyButton"
-                        class="copy-btn"
-                        type="button"
-                        title="Copy">
-                        📋
-                    </button>
-                </div>
-                <textarea
-                    id="outputText"
-                    class="form-control editor-textarea"
-                    rows="12"
-                    readonly
-                    placeholder="Output will appear here"></textarea>
+        <!-- Live / Submit -->
+        <div class="d-flex justify-content-center mb-4">
+            <div class="radio-input">
+                <label class="label">
+                    <div class="back-side"></div>
+                    <input type="radio" name="conversionMode" id="liveMode" checked />
+                    <span class="text"> Live </span>
+                    <span class="bottom-line"></span>
+                </label>
+                <label class="label">
+                    <div class="back-side"></div>
+                    <input type="radio" name="conversionMode" id="submitMode" />
+                    <span class="text"> On Submit </span>
+                    <span class="bottom-line"></span>
+                </label>
             </div>
         </div>
-    </div>
-    <!-- Convert -->
-    <div class="text-center mt-4">
-        <button
-            id="convertButton"
-            class="btn btn-primary px-5 d-none">
-            Convert
-        </button>
-    </div>
-</div>
-<!-- Toast -->
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div
-        id="appToast"
-        class="toast"
-        role="alert">
-        <div class="toast-header">
-            <strong
-                class="me-auto"
-                id="toastTitle">
-                Notification
-            </strong>
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="toast">
+        <!-- Input / Output -->
+        <div class="row g-3">
+            <!-- Input -->
+            <div class="col-12 col-md-6">
+                <div class="editor-card">
+                    <div class="editor-header">
+                        <span id="inputTitle"> Enter Text </span>
+                    </div>
+                    <textarea id="inputText" class="form-control editor-textarea" placeholder="Type here..." rows="12"></textarea>
+                </div>
+            </div>
+            <!-- Output -->
+            <div class="col-12 col-md-6">
+                <div class="editor-card">
+                    <div class="editor-header">
+                        <span id="outputTitle"> Encrypted Text </span>
+                        <button id="copyButton" class="copy-btn" type="button" title="Copy"> <i class="bi bi-clipboard-fill"></i> </button>
+                    </div>
+                    <textarea id="outputText" class="form-control editor-textarea" rows="12" readonly placeholder="Output will appear here"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- Convert -->
+        <div class="text-center mt-4">
+            <button id="convertButton" class="btn btn-primary px-5 d-none">
+                Convert
             </button>
         </div>
-        <div
-            class="toast-body"
-            id="toastMessage">
+    </div>
+    <!-- Toast -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="appToast" class="toast" role="alert">
+            <div class="toast-header">
+                <strong class="me-auto" id="toastTitle"> Notification </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toastMessage"></div>
         </div>
     </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="./assets/AsciiCharacters.js"></script>
-<script src="./assets/Vismur.js"></script>
-<script src="./Main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./Main.js"></script>
 </body>
 </html>
 ```
 
 Engineering\Krypt\Programm\javascript\Main.js:
 ```js
-document.addEventListener(
-    "DOMContentLoaded",
-    ()=>{
-        mapper.initialize();
-        registerEvents();
-        updateUI();
-    }
-);
+const scripts = [
+  "./assets/AsciiCharacters.js",
+  "./assets/Vismur.js",
+  "./sub_scripts/Constants.js",
+  "./sub_scripts/Elements.js",
+  "./sub_scripts/Mapper.js",
+  "./sub_scripts/Encrypt.js",
+  "./sub_scripts/Decrypt.js",
+  "./sub_scripts/Toast.js",
+  "./sub_scripts/Clipboard.js",
+  "./sub_scripts/UI.js",
+  "./sub_scripts/Events.js",
+];
+async function loadScripts() {
+  for (const src of scripts) {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+}
+loadScripts()
+  .then(() => {
+    mapper.initialize();
+    registerEvents();
+    updateUI();
+  })
+  .catch((error) => {
+    console.error("Script loading failed", error);
+  });
 ```
 
 Engineering\Krypt\Programm\javascript\sub_scripts\Clipboard.js:
 ```js
-function copyOutput(){
-    navigator.clipboard.writeText(
-        elements.outputText.value
-    );
-    showToast(
-        "Copied!",
-        "Text copied to clipboard"
-    );
+function copyOutput() {
+  navigator.clipboard.writeText(elements.outputText.value);
+  showToast("Copied!", "Text copied to clipboard");
 }
 ```
 
@@ -474,17 +436,12 @@ const CONVERSION_MODE = {
 
 Engineering\Krypt\Programm\javascript\sub_scripts\Decrypt.js:
 ```js
-function decryptText(){
-    const response = mapper.decrypt(
-        elements.inputText.value
-    );
-    elements.outputText.value = response.result;
-    if(response.unknown.length){
-        showToast(
-            "Unknown Encrypted Symbols",
-            response.unknown.join(" ")
-        );
-    }
+function decryptText() {
+  const response = mapper.decrypt(elements.inputText.value);
+  elements.outputText.value = response.result;
+  if (response.unknown.length) {
+    showToast("Unknown Encrypted Symbols", response.unknown.join(" "));
+  }
 }
 ```
 
@@ -506,157 +463,110 @@ const elements = {
 
 Engineering\Krypt\Programm\javascript\sub_scripts\Encrypt.js:
 ```js
-function encryptText(){
-    const response = mapper.encrypt(
-        elements.inputText.value
-    );
-    elements.outputText.value = response.result;
-    if(response.unknown.length){
-        showToast(
-            "Unsupported Characters",
-            response.unknown.join(" ")
-        );
-    }
+function encryptText() {
+  const response = mapper.encrypt(elements.inputText.value);
+  elements.outputText.value = response.result;
+  if (response.unknown.length) {
+    showToast("Unsupported Characters", response.unknown.join(" "));
+  }
 }
 ```
 
 Engineering\Krypt\Programm\javascript\sub_scripts\Events.js:
 ```js
-function convert(){
-    if(elements.encryptMode.checked){
-        encryptText();
-    }
-    else{
-        decryptText();
-    }
+function convert() {
+  if (elements.encryptMode.checked) {
+    encryptText();
+  } else {
+    decryptText();
+  }
 }
-function registerEvents(){
-    elements.copyButton
-        .addEventListener(
-            "click",
-            copyOutput
-        );
-    elements.encryptMode
-        .addEventListener(
-            "change",
-            updateUI
-        );
-    elements.decryptMode
-        .addEventListener(
-            "change",
-            updateUI
-        );
-    elements.liveMode
-        .addEventListener(
-            "change",
-            updateUI
-        );
-    elements.submitMode
-        .addEventListener(
-            "change",
-            updateUI
-        );
-    elements.convertButton
-        .addEventListener(
-            "click",
-            convert
-        );
-    elements.inputText
-        .addEventListener(
-            "input",
-            ()=>{
-                if(elements.liveMode.checked){
-                    convert();
-                }
-            }
-        );
+function registerEvents() {
+  elements.copyButton.addEventListener("click", copyOutput);
+  elements.encryptMode.addEventListener("change", updateUI);
+  elements.decryptMode.addEventListener("change", updateUI);
+  elements.liveMode.addEventListener("change", updateUI);
+  elements.submitMode.addEventListener("change", updateUI);
+  elements.convertButton.addEventListener("click", convert);
+  elements.inputText.addEventListener("input", () => {
+    if (elements.liveMode.checked) {
+      convert();
+    }
+  });
 }
 ```
 
 Engineering\Krypt\Programm\javascript\sub_scripts\Mapper.js:
 ```js
 const mapper = {
-    asciiToVismur: {},
-    vismurToAscii: {},
-    initialize(){
-        for(let i = 0; i < 128; i++){
-            this.asciiToVismur[harcodedAsciiChars[i]] = vismur[i];
-            this.vismurToAscii[vismur[i]] = harcodedAsciiChars[i];
-        }
-    },
-    encrypt(text){
-        let result = "";
-        let unknown = [];
-        for(const char of text){
-            if(this.asciiToVismur[char]){
-                result += this.asciiToVismur[char];
-            }
-            else{
-                result += char;
-                unknown.push(char);
-            }
-        }
-        return {
-            result,
-            unknown
-        };
-    },
-    decrypt(text){
-        let result = "";
-        let unknown = [];
-        for(const char of text){
-            if(this.vismurToAscii[char]){
-                result += this.vismurToAscii[char];
-            }
-            else{
-                result += char;
-                unknown.push(char);
-            }
-        }
-        return {
-            result,
-            unknown
-        };
+  asciiToVismur: {},
+  vismurToAscii: {},
+  initialize() {
+    for (let i = 0; i < 128; i++) {
+      this.asciiToVismur[harcodedAsciiChars[i]] = vismur[i];
+      this.vismurToAscii[vismur[i]] = harcodedAsciiChars[i];
     }
+  },
+  encrypt(text) {
+    let result = "";
+    let unknown = [];
+    for (const char of text) {
+      if (this.asciiToVismur[char]) {
+        result += this.asciiToVismur[char];
+      } else {
+        result += char;
+        unknown.push(char);
+      }
+    }
+    return {
+      result,
+      unknown,
+    };
+  },
+  decrypt(text) {
+    let result = "";
+    let unknown = [];
+    for (const char of text) {
+      if (this.vismurToAscii[char]) {
+        result += this.vismurToAscii[char];
+      } else {
+        result += char;
+        unknown.push(char);
+      }
+    }
+    return {
+      result,
+      unknown,
+    };
+  },
 };
 ```
 
 Engineering\Krypt\Programm\javascript\sub_scripts\Toast.js:
 ```js
-function showToast(title,message){
-    document.getElementById("toastTitle")
-        .innerText = title;
-    document.getElementById("toastMessage")
-        .innerText = message;
-    const toast =
-        new bootstrap.Toast(
-            document.getElementById("appToast")
-        );
-    toast.show();
+function showToast(title, message) {
+  document.getElementById("toastTitle").innerText = title;
+  document.getElementById("toastMessage").innerText = message;
+  const toast = new bootstrap.Toast(document.getElementById("appToast"));
+  toast.show();
 }
 ```
 
 Engineering\Krypt\Programm\javascript\sub_scripts\UI.js:
 ```js
-function updateUI(){
-    if(elements.encryptMode.checked){
-        elements.inputTitle.innerText =
-            "Enter Text";
-        elements.outputTitle.innerText =
-            "Encrypted Text";
-    }
-    else{
-        elements.inputTitle.innerText =
-            "Enter Encrypted Text";
-        elements.outputTitle.innerText =
-            "Decrypted Text";
-    }
-    if(elements.liveMode.checked){
-        elements.convertButton.classList.add("d-none");
-    }
-    else{
-        elements.convertButton.classList.remove("d-none");
-    }
+function updateUI() {
+  if (elements.encryptMode.checked) {
+    elements.inputTitle.innerText = "Enter Text";
+    elements.outputTitle.innerText = "Encrypted Text";
+  } else {
+    elements.inputTitle.innerText = "Enter Encrypted Text";
+    elements.outputTitle.innerText = "Decrypted Text";
+  }
+  if (elements.liveMode.checked) {
+    elements.convertButton.classList.add("d-none");
+  } else {
+    elements.convertButton.classList.remove("d-none");
+  }
 }
 ```
 
