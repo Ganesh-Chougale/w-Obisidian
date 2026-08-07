@@ -261,3 +261,37 @@ body {
         height: 360px;
     }
 }
+
+
+/*----------------------------------------------------------
+    Conversion Mode
+----------------------------------------------------------*/
+.conversion-mode {
+    display: flex;
+    gap: 4px;
+    padding: 3px;
+    background: #111;
+    border: 1px solid #383838;
+    border-radius: 7px;
+}
+
+.mode-option {
+    border: none;
+    background: transparent;
+    color: #777;
+    padding: 5px 14px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.mode-option:hover {
+    color: #bbb;
+}
+
+.mode-option.active {
+    background: #2a2a2a;
+    color: #258ac3;
+}

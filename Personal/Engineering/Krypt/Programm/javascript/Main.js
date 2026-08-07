@@ -1,16 +1,25 @@
 const scripts = [
+
   "./assets/AsciiCharacters.js",
+  "./assets/Prompt.js",
   "./assets/Vismur.js",
 
   "./sub_scripts/Constants.js",
   "./sub_scripts/Elements.js",
+
+  "./sub_scripts/Collection.js",
+  "./sub_scripts/FileManager.js",
+
   "./sub_scripts/Mapper.js",
+
   "./sub_scripts/Encrypt.js",
   "./sub_scripts/Decrypt.js",
+
   "./sub_scripts/Toast.js",
   "./sub_scripts/Clipboard.js",
   "./sub_scripts/UI.js",
   "./sub_scripts/Events.js",
+
 ];
 
 async function loadScripts() {

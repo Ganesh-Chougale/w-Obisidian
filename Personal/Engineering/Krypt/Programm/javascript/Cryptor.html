@@ -1,109 +1,143 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cryptor</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./Cryptor.css">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./Cryptor.css" />
+  </head>
 
-<body>
+  <body>
     <div class="container py-3">
-        <!-- Encrypt / Decrypt -->
-        <div class="d-flex justify-content-center mb-3">
-            <div class="radio-input">
+      <!-- Encrypt / Decrypt -->
+      <section class="d-flex justify-content-center mb-3">
+        <div class="radio-input">
+          <label class="label">
+            <div class="back-side"></div>
+            <input type="radio" name="mode" id="encryptMode" checked />
+            <span class="text"> Encrypt </span>
+            <span class="bottom-line"></span>
+          </label>
 
-                <label class="label">
-                    <div class="back-side"></div>
-                    <input type="radio" name="mode" id="encryptMode" checked />
-                    <span class="text"> Encrypt </span>
-                    <span class="bottom-line"></span>
-                </label>
+          <label class="label">
+            <div class="back-side"></div>
+            <input type="radio" name="mode" id="decryptMode" />
+            <span class="text"> Decrypt </span>
+            <span class="bottom-line"></span>
+          </label>
+        </div>
+      </section>
 
-                <label class="label">
-                    <div class="back-side"></div>
-                    <input type="radio" name="mode" id="decryptMode" />
-                    <span class="text"> Decrypt </span>
-                    <span class="bottom-line"></span>
-                </label>
+      <!-- Live / Submit -->
+      <section class="d-flex justify-content-center mb-4">
+        <div class="conversion-mode">
+          <button type="button" id="submitMode" class="mode-option active">
+            On Submit
+          </button>
+          <button type="button" id="liveMode" class="mode-option">Live</button>
+        </div>
+      </section>
+
+      <section class="d-flex justify-content-center gap-3 mb-4">
+        <button id="createCollectionButton" class="btn btn-outline-info">
+          Prompt To Generate Own Cryptography
+        </button>
+
+        <button id="uploadCollectionButton" class="btn btn-outline-success">
+          Upload own crypt CSV
+        </button>
+
+        <input type="file" id="collectionFile" accept=".csv" hidden />
+      </section>
+
+      <!-- Input / Output -->
+      <section class="row g-3">
+        <!-- Input -->
+        <div class="col-12 col-md-6">
+          <div class="editor-card">
+            <div class="editor-header">
+              <span id="inputTitle"> Enter Text </span>
+              <button
+                id="clearButton"
+                class="copy-btn"
+                type="button"
+                title="Clear"
+              >
+                <i class="bi bi-x-lg"></i>
+              </button>
             </div>
+
+            <textarea
+              id="inputText"
+              class="form-control editor-textarea"
+              placeholder="Type here..."
+              rows="12"
+            ></textarea>
+          </div>
         </div>
 
-        <!-- Live / Submit -->
-        <div class="d-flex justify-content-center mb-4">
-            <div class="radio-input">
+        <!-- Output -->
+        <div class="col-12 col-md-6">
+          <div class="editor-card">
+            <div class="editor-header">
+              <span id="outputTitle"> Encrypted Text </span>
 
-                <label class="label">
-                    <div class="back-side"></div>
-                    <input type="radio" name="conversionMode" id="liveMode" checked />
-                    <span class="text"> Live </span>
-                    <span class="bottom-line"></span>
-                </label>
-
-                <label class="label">
-                    <div class="back-side"></div>
-                    <input type="radio" name="conversionMode" id="submitMode" />
-                    <span class="text"> On Submit </span>
-                    <span class="bottom-line"></span>
-                </label>
-            </div>
-        </div>
-
-        <!-- Input / Output -->
-        <div class="row g-3">
-            <!-- Input -->
-            <div class="col-12 col-md-6">
-                <div class="editor-card">
-                    <div class="editor-header">
-                        <span id="inputTitle"> Enter Text </span>
-                    </div>
-
-                    <textarea id="inputText" class="form-control editor-textarea" placeholder="Type here..." rows="12"></textarea>
-                </div>
+              <button
+                id="copyButton"
+                class="copy-btn"
+                type="button"
+                title="Copy"
+              >
+                <i class="bi bi-clipboard-fill"></i>
+              </button>
             </div>
 
-            <!-- Output -->
-            <div class="col-12 col-md-6">
-                <div class="editor-card">
-
-                    <div class="editor-header">
-                        <span id="outputTitle"> Encrypted Text </span>
-
-                        <button id="copyButton" class="copy-btn" type="button" title="Copy"> <i class="bi bi-clipboard-fill"></i> </button>
-                    </div>
-
-                    <textarea id="outputText" class="form-control editor-textarea" rows="12" readonly placeholder="Output will appear here"></textarea>
-                </div>
-            </div>
+            <textarea
+              id="outputText"
+              class="form-control editor-textarea"
+              rows="12"
+              readonly
+              placeholder="Output will appear here"
+            ></textarea>
+          </div>
         </div>
+      </section>
 
-        <!-- Convert -->
-        <div class="text-center mt-4">
-            <button id="convertButton" class="btn btn-primary px-5 d-none">
-                Convert
-            </button>
-        </div>
+      <!-- Convert -->
+      <section class="text-center mt-4">
+        <button id="convertButton" class="btn btn-primary px-5 d-none">
+          Convert
+        </button>
+      </section>
     </div>
 
     <!-- Toast -->
 
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="appToast" class="toast" role="alert">
-            <div class="toast-header">
-                <strong class="me-auto" id="toastTitle"> Notification </strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-            </div>
-
-            <div class="toast-body" id="toastMessage"></div>
+    <section class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="appToast" class="toast" role="alert">
+        <div class="toast-header">
+          <strong class="me-auto" id="toastTitle"> Notification </strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+          ></button>
         </div>
-    </div>
+
+        <div class="toast-body" id="toastMessage"></div>
+      </div>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.5.3/papaparse.min.js"></script>
     <script src="./Main.js"></script>
-</body>
-
+  </body>
 </html>

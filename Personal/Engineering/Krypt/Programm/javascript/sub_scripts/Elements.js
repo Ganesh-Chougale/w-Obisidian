@@ -1,17 +1,29 @@
 const elements = {
+  encryptMode: document.getElementById("encryptMode"),
 
-    encryptMode: document.getElementById("encryptMode"),
-    decryptMode: document.getElementById("decryptMode"),
+  decryptMode: document.getElementById("decryptMode"),
 
-    liveMode: document.getElementById("liveMode"),
-    submitMode: document.getElementById("submitMode"),
+  liveMode: document.getElementById("liveMode"),
 
-    inputText: document.getElementById("inputText"),
-    outputText: document.getElementById("outputText"),
+  submitMode: document.getElementById("submitMode"),
 
-    inputTitle: document.getElementById("inputTitle"),
-    outputTitle: document.getElementById("outputTitle"),
+  inputText: document.getElementById("inputText"),
 
-    copyButton: document.getElementById("copyButton"),
-    convertButton: document.getElementById("convertButton")
+  outputText: document.getElementById("outputText"),
+
+  inputTitle: document.getElementById("inputTitle"),
+
+  outputTitle: document.getElementById("outputTitle"),
+
+  copyButton: document.getElementById("copyButton"),
+
+  clearButton: document.getElementById("clearButton"),
+
+  convertButton: document.getElementById("convertButton"),
+
+  createCollectionButton: document.getElementById("createCollectionButton"),
+
+  uploadCollectionButton: document.getElementById("uploadCollectionButton"),
+
+  collectionFile: document.getElementById("collectionFile"),
 };

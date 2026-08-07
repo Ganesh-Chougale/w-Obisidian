@@ -9,7 +9,7 @@ function updateUI() {
     elements.outputTitle.innerText = "Decrypted Text";
   }
 
-  if (elements.liveMode.checked) {
+  if (elements.liveMode.classList.contains("active")) {
     elements.convertButton.classList.add("d-none");
   } else {
     elements.convertButton.classList.remove("d-none");
