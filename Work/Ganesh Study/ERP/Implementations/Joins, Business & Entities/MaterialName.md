@@ -1,3 +1,11 @@
+# 1. Single Object
+```csharp
+MaterialsEntity mat = await MaterialsService.GetExistingAsync(obj.MATERIAL_CODE);
+```  
+# 2. List  
+1. increase `MaterialName` property at the declaration are.  
+2. Grab the material name from `MaterialsEntity` => `MaterialsService` => `GetExistingAsync(obj.MATERIAL_CODE)`
+3. Inject `MaterialName = mat.MaterialName` in value assign area.     
 ```csharp
 // ...
 using ZanvarGroup.Erp.Business.Entities.Masters;
@@ -23,11 +31,12 @@ namespace //....................................
                 interfaceObj = new DALName();
                 List<DTOName> dtoList = interfaceObj.GetDistinctMaterialList();
 
-                List<MaterialsEntity> matList = await MaterialsService.GetAllAsync();
+                List<MaterialsEntity> matList = await MaterialsService.GetMaterialFillList(dtoList.Select(x=> x.MATERIAL_CODE).toList());
 
 
                 List<BusinessName> lst = (
                                             from x in dtoList
+                                            
                                             join mat in matList
                                             on x.MATERIAL_CODE equals mat.MaterialCode
 

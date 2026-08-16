@@ -1,3 +1,4 @@
+# 2. List
 ```csharp
         public static async Task<List<BranchDeptMinMax>> StockListGroupWisePopUpData(int intBranchCode, int intMaterialCode)
         {

@@ -24,6 +24,7 @@ namespace ZanvarGroup.Erp.Business.Transactions.Material
         public static ICnfTranTypes _dalCnfTranTypes;
         public static ITrnMatPost _dalTrnMatPost;
 
+
         public static int TranType = 405;
         public static int TranSubType = 20;
         public static int MenuDocNo = 40520;
@@ -42,7 +43,8 @@ namespace ZanvarGroup.Erp.Business.Transactions.Material
         public string ChnBy { get; set; }
         public int StatusCode { get; set; }
         public string DeleteReason { get; set; }
-        //
+
+        // I
         public Int64 GrnNo { get; set; }
         public string StrGrnNo { get; set; }
         public string ShortGrnNo { get; set; }
@@ -66,9 +68,16 @@ namespace ZanvarGroup.Erp.Business.Transactions.Material
         public int ScarpMaterialCode { get; set; }
         public string ScarpMaterialName { get; set; }
 
+        // I List
         public IList<ToolStockConversionI> LstTStockCI { get; set; }
 
-        public static ITrnAcctMatH _dalTrnAcctMatH;
+
+        static ToolStockConversion(){
+            _dalTscH = new DalTrnToolStockConversionH();
+            _dalTscI = new DalTrnToolStockConversionI();
+            _dalCnfTranTypes = new DALCnfTranTypes();
+            _dalTrnMatPost = new DALTrnMatPost();
+        }
 
 
         // 1. index page
@@ -76,7 +85,6 @@ namespace ZanvarGroup.Erp.Business.Transactions.Material
         {
             try
             {
-                _dalTscH = new DalTrnToolStockConversionH();
                 List<DtoTrnToolStockConversionH> objTscH = await Task.Run(() => { return _dalTscH.GetDateWiseAll(strStartDate, strEndDate, TranType, TranSubType); });
 
                 return fillList(objTscH);
@@ -121,7 +129,6 @@ namespace ZanvarGroup.Erp.Business.Transactions.Material
         {
             try
             {
-                _dalTscH = new DalTrnToolStockConversionH();
                 DtoTrnToolStockConversionH dtoObj = await Task.Run(() => { return _dalTscH.GetExisting(TrnNo); });
                 return new ToolStockConversion()
                 {
@@ -149,8 +156,6 @@ namespace ZanvarGroup.Erp.Business.Transactions.Material
         {
             try
             {
-                _dalTscH = new DalTrnToolStockConversionH();
-
                 var dtoList = await Task.Run(() => { return _dalTscH.GetCreateList(intMatCode); });
 
                 List<MaterialsEntity> matList = await MaterialsService.GetMaterialFillList(dtoList.Select(x => x.MATERIAL_CODE).ToList());
@@ -203,8 +208,6 @@ namespace ZanvarGroup.Erp.Business.Transactions.Material
             try
             {
                 MstMenu _objMstMenu = MstMenu.getMenuById(MenuId);
-                _dalCnfTranTypes = new DALCnfTranTypes();
-                _dalTscH = new DalTrnToolStockConversionH();
 
                 DTOCnfTranTypes _dtoCnfTranTypes = _dalCnfTranTypes.GetExisting(TranType, TranSubType);
                 Int64 intTrnNo = 0;
@@ -255,9 +258,6 @@ namespace ZanvarGroup.Erp.Business.Transactions.Material
 
         static long insert(ToolStockConversion bObj, int flag)
         {
-            _dalTscH = new DalTrnToolStockConversionH();
-            _dalTscI = new DalTrnToolStockConversionI();
-            _dalTrnMatPost = new DALTrnMatPost();
 
             using (var scope = new TransactionScope())
             {
@@ -390,10 +390,6 @@ namespace ZanvarGroup.Erp.Business.Transactions.Material
             try
             {
                 long retStatus = 0;
-
-                _dalTscH = new DalTrnToolStockConversionH();
-                _dalTscI = new DalTrnToolStockConversionI();
-                _dalTrnMatPost = new DALTrnMatPost();
 
                 return retStatus = await Task.Run(() =>
                 {

@@ -181,7 +181,14 @@ namespace ZanvarGroup.Erp.DALDapper.Implementation.Transactions
         {
             try
             {
-                string query = "SELECT ISNULL(MAX(TRN_NO),0) + 1  FROM TRN_TOOL_STOCK_CONVERSION_H WHERE LEFT(TRN_DATE,6)=@YearMonth AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),13,2) = @Month AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),8,3) = @TrnType AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),11,2) = @TrnSeries";
+                string query = @"SELECT 
+                                    ISNULL(MAX(TRN_NO),0) + 1  
+                                FROM TRN_TOOL_STOCK_CONVERSION_H 
+                                WHERE 
+                                    LEFT(TRN_DATE,6)=@YearMonth 
+                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),13,2) = @Month 
+                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),8,3) = @TrnType 
+                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),11,2) = @TrnSeries";
                 Int64 returningTrn;
                 using (ConManager con = new ConManager())
                 {
@@ -199,7 +206,14 @@ namespace ZanvarGroup.Erp.DALDapper.Implementation.Transactions
         {
             try
             {
-                string query = "SELECT ISNULL(MAX(TRN_NO),0) + 1  FROM TRN_TOOL_STOCK_CONVERSION_H WHERE SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),8,3) = @TrnType AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),11,2) = @TrnSeries and SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),4,4) = @Year";
+                string query = @"SELECT 
+                                    ISNULL(MAX(TRN_NO),0) + 1  
+                                FROM 
+                                    TRN_TOOL_STOCK_CONVERSION_H 
+                                WHERE
+                                    SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),8,3) = @TrnType 
+                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),11,2) = @TrnSeries 
+                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),4,4) = @Year";
                 Int64 returningTrn;
                 using (ConManager con = new ConManager())
                 {
@@ -275,7 +289,17 @@ namespace ZanvarGroup.Erp.DALDapper.Implementation.Transactions
         {
             try
             {
-                string query = "SELECT * FROM TRN_TOOL_STOCK_CONVERSION_H WHERE SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),8,3) = @TrnType AND TRN_SUB_TYPE = @TrnSubType AND TRN_DATE >= @StartDate AND TRN_DATE <= @EndDate ORDER BY TRN_DATE DESC,TRN_NO DESC";
+                string query = @"SELECT 
+                                    *
+                                FROM 
+                                    TRN_TOOL_STOCK_CONVERSION_H 
+                                WHERE 
+                                    SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),8,3) = @TrnType 
+                                    AND TRN_SUB_TYPE = @TrnSubType 
+                                    AND TRN_DATE >= @StartDate 
+                                    AND TRN_DATE <= @EndDate 
+                                ORDER BY 
+                                    TRN_DATE DESC,TRN_NO DESC";
                 List<DtoTrnToolStockConversionH> dalObj;
                 using (ConManager con = new ConManager())
                 {

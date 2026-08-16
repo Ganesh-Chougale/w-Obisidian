@@ -1,3 +1,4 @@
+# 2. List
 ```csharp
 public static async Task<List<MaterialMdnStatus>> GetMaterialMdnData(int companyId, int dbType, int materialCode)
 {
