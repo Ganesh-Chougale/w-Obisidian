@@ -1,5 +1,5 @@
 ```run
-gcmd
+gmd
 ```
 ```cmd
 cd "C:\Users\Administrator\Documents\Ganesh Notes\Docs"

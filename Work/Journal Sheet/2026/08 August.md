@@ -33,12 +33,13 @@ Push Date   :
 ```yml
 Description : 
 Flow        : Production => Production Plan => New Menu (Packing Details)
-WFC         : TRN_PACKING_DETAILS_H, DTOTrnPackingDetailsH, ITrnPackingDetailsH, DALTrnPackingDetailsH, PackingDetails, TRN_PACKING_DETAILS_I, DTOTrnPackingDetailsI, ITrnPackingDetailsI, DALTrnPackingDetailsI, PackingDetailsI, TRN_PACKING_DETAILS_I_BOM, DTOTrnPackingDetailsIBom, ITrnPackingDetailsIBom, DALTrnPackingDetailsIBom, PackingDetailsIBom
+Menus       : Packing Details, Packing Details Amend
+WFC         : TRN_PACKING_DETAILS_H, DTOTrnPackingDetailsH, ITrnPackingDetailsH, DALTrnPackingDetailsH, PackingDetails, TRN_PACKING_DETAILS_I, DTOTrnPackingDetailsI, ITrnPackingDetailsI, DALTrnPackingDetailsI, PackingDetailsI, TRN_PACKING_DETAILS_I_BOM, DTOTrnPackingDetailsIBom, ITrnPackingDetailsIBom, DALTrnPackingDetailsIBom, PackingDetailsIBom, PackingDetailsController  
 Ticket      : 
 ```  
 ### Database
 ```yml
-Tables     : TRN_PACKING_DETAILS_H, TRN_PACKAGING_DETAILS_I, TRN_PACKAGING_DETAILS_I_BOM
+Tables     : TRN_PACKING_DETAILS_H, TRN_PACKING_DETAILS_I, TRN_PACKING_DETAILS_I_BOM
 SPs        : 
 ```  
 ##### New column in old tables 

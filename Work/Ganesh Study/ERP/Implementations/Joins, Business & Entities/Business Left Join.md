@@ -1,9 +1,13 @@
 ### Normal Join
 ```sql
-join rpObj in ReportPersonList on obj.PARENT_CODE equals rpObj.ParentCode
+from dtoObj in dtoList
+join objSupplier in LstSupplierAccount
+on dtoObj.SELLER_COMPANY_CODE equals objSupplier.SubGlAcNo
 ```  
 ### Left Join
 ```sql
-join rpObj in ReportPersonList on obj.PARENT_CODE equals rpObj.ParentCode
-into item from rpObj in item.DefaultIfEmpty()
+from dtoObj in dtoList
+join objSupplier in LstSupplierAccount
+on dtoObj.SELLER_COMPANY_CODE equals objSupplier.SubGlAcNo
+into item from objSupplier in item.DefaultIfEmpty()
 ```   
