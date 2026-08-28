@@ -28,33 +28,28 @@ Push Date   :
 ```  
 ----------------------------------------------------------------------------------------------------    
 
-## Date: `11-08-2026 (Tuesday | मंगलवार)` to 
+## Date: `11-08-2026 (Tuesday | मंगलवार)` to `27-08-2026 (Thursday | गुरुवार)`  
 ### Work
 ```yml
-Description : 
+Description : Production Plan Menu
 Flow        : Production => Production Plan => New Menu (Packing Details)
 Menus       : Packing Details, Packing Details Amend
-WFC         : TRN_PACKING_DETAILS_H, DTOTrnPackingDetailsH, ITrnPackingDetailsH, DALTrnPackingDetailsH, PackingDetails, TRN_PACKING_DETAILS_I, DTOTrnPackingDetailsI, ITrnPackingDetailsI, DALTrnPackingDetailsI, PackingDetailsI, TRN_PACKING_DETAILS_I_BOM, DTOTrnPackingDetailsIBom, ITrnPackingDetailsIBom, DALTrnPackingDetailsIBom, PackingDetailsIBom, PackingDetailsController  
+WFC         : 28
 Ticket      : 
 ```  
 ### Database
 ```yml
 Tables     : TRN_PACKING_DETAILS_H, TRN_PACKING_DETAILS_I, TRN_PACKING_DETAILS_I_BOM
-SPs        : 
 ```  
-##### New column in old tables 
-```yml
-
-```
 ### Programming
 ```yml
-D to D      : 
-BO          : 
-Controller  : 
-View        : 
+D to D      : DTOTrnPackingDetailsH, ITrnPackingDetailsH, DALTrnPackingDetailsH, DTOTrnPackingDetailsI, ITrnPackingDetailsI, DALTrnPackingDetailsI, DTOTrnPackingDetailsIBom, ITrnPackingDetailsIBom, DALTrnPackingDetailsIBom 
+BO          : PackingDetails, PackingDetailsI, PackingDetailsIBom
+Controller  : PackingDetailsController
+View        : (Index, GoCreate, Create, Edit, Delete, Details) x 2
 ```  
 ### Git
 ```yml
-Push Date   : 
+Push Date   : 28-08-2026
 ```  
 ----------------------------------------------------------------------------------------------------    
