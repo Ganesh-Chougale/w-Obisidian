@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Calibration Tool</title>
+    <link rel="stylesheet" href="calibration.css">
+</head>
+
+<body>
+    <main class="calibration">
+        <header class="calibration__header">
+            <h1>Machine Calibration</h1>
+            <p>Mathematical workload performance tester</p>
+        </header>
+
+        <!-- Line 1 -->
+        <section class="control-row control-row--operation">
+            <div class="field">
+                <label for="originalNumber">
+                    Original Number
+                </label>
+                <input id="originalNumber" type="number" value="2" step="any">
+            </div>
+
+            <div class="field">
+                <label for="operation">
+                    Operation
+                </label>
+                <select id="operation">
+                    <option value="addition">Addition</option>
+                    <option value="multiplication">Multiplication</option>
+                    <option value="power">Raised To</option>
+                    <option value="exponential">Exponential</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="againstNumber">
+                    Against Number
+                </label>
+                <input id="againstNumber" type="number" value="2" step="any">
+            </div>
+        </section>
+
+        <!-- Line 2 -->
+        <section class="control-row control-row--execution">
+            <div class="field">
+                <label for="iterationLimit">
+                    Iteration Limit
+                    <span class="optional">(optional)</span>
+                </label>
+                <input id="iterationLimit" type="number" min="1" placeholder="Unlimited">
+            </div>
+
+            <button id="triggerButton" class="trigger-button" type="button">
+                Start
+            </button>
+
+            <div class="field field--time">
+                <label for="time">
+                    Time
+                </label>
+                <output id="time">
+                    00:00:00.000
+                </output>
+            </div>
+        </section>
+
+        <!-- Detailed Logs -->
+        <section class="log-section log-section--detailed">
+            <div class="log-header">
+                <h2>Detailed Logs</h2>
+
+                <div class="log-actions">
+                    <button id="clearDetailedLog" class="clear-button" type="button">
+                        Clear Log
+                    </button>
+                </div>
+            </div>
+
+            <pre id="detailedLog" class="detailed-log" aria-live="off">Ready.</pre>
+        </section>
+
+        <!-- Final Conclusion Log -->
+        <section class="log-section log-section--conclusion">
+            <div class="log-header">
+                <h2>Final Conclusion Log</h2>
+
+                <div class="log-actions">
+                    <button id="downloadLog" class="log-action-button" type="button">
+                        Download Log
+                    </button>
+
+                    <button id="copyLog" class="log-action-button" type="button">
+                        Copy
+                    </button>
+
+                    <button id="clearLog" class="clear-button" type="button">
+                        Clear Log
+                    </button>
+                </div>
+            </div>
+
+            <div id="log" class="log" aria-live="polite">
+                <div class="log-entry">
+                    <span class="log-time">--:--:--</span>
+                    <span class="log-message">Ready.</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="calibration.js"></script>
+</body>
+
+</html>

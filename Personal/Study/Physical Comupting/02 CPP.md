@@ -12,9 +12,9 @@ Here is everything you need to gather, download, and write for your very first s
 ## 💻 Step 1: Prepare Your Laptop (Software Setup)
 You do not need to install complex electronic drivers. The CoreS3 handles communication natively. Just install these three software tools:
 
-   1. [Visual Studio Code (VS Code)](https://code.visualstudio.com/): Your main code editor.
-   2. [PlatformIO IDE Extension](https://platformio.org/platformio-ide): Open VS Code, click the Extensions icon on the left sidebar, search for "PlatformIO", and click install. This manages your compiler and libraries automatically.
-   3. [M5Burner Utility](https://docs.m5stack.com/en/download): A small official desktop app used to quickly check if your laptop recognizes the board and to update its basic firmware.
+   1. Visual Studio Code (VS Code): Your main code editor.
+   2. PlatformIO IDE Extension: Open VS Code, click the Extensions icon on the left sidebar, search for "PlatformIO", and click install. This manages your compiler and libraries automatically.
+   3. M5Burner Utility: A small official desktop app used to quickly check if your laptop recognizes the board and to update its basic firmware.
 
 ------------------------------
 ## 🔌 Step 2: The Physical Connection
@@ -48,4 +48,3 @@ Replace the code in your src/main.cpp file with this exact foundational C++ stru
 ```
 Click the Checkmark icon at the bottom of VS Code to compile the code, then click the Right Arrow icon to upload it directly to your board. Your screen will instantly refresh and display your green text.
 Would you like me to show you how to expand this code to detect a physical touch on the screen using an object-oriented event handler?
-

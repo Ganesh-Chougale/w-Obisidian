@@ -1,0 +1,283 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    color: #1f2937;
+    background: #f3f4f6;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+.calibration {
+    width: min(1100px, 100%);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Header */
+.calibration__header {
+    padding: 0.5rem 0;
+}
+
+.calibration__header h1 {
+    margin: 0;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+}
+
+.calibration__header p {
+    margin: 0.25rem 0 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+/* Control rows */
+.control-row {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.control-row--operation {
+    grid-template-columns: 1fr;
+}
+
+.control-row--execution {
+    grid-template-columns: 1fr;
+}
+
+/* Fields */
+.field {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.field label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.optional {
+    font-weight: 400;
+    color: #9ca3af;
+}
+
+.field input,
+.field select,
+.field output {
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background: #ffffff;
+    color: #111827;
+    outline: none;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: #6b7280;
+    box-shadow:
+        0 0 0 2px rgba(107, 114, 128, 0.15);
+}
+
+/* Time */
+.field--time output {
+    display: flex;
+    align-items: center;
+    font-family: monospace;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Start / Stop */
+.trigger-button {
+    min-height: 2.75rem;
+    align-self: end;
+    border: 0;
+    border-radius: 0.5rem;
+    background: #111827;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform 0.1s ease,
+        opacity 0.1s ease;
+}
+
+.trigger-button:hover {
+    opacity: 0.9;
+}
+
+.trigger-button:active {
+    transform: scale(0.98);
+}
+
+.trigger-button.is-running {
+    background: #7f1d1d;
+}
+
+/* Log sections */
+.log-section {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.log-section--detailed {
+    flex: 1;
+}
+
+.log-section--conclusion {
+    flex: 0 0 auto;
+}
+
+.log-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.log-header h2 {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.log-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.clear-button,
+.log-action-button {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.35rem;
+    background: white;
+    color: #4b5563;
+    cursor: pointer;
+}
+
+.clear-button:hover,
+.log-action-button:hover {
+    background: #f9fafb;
+}
+
+/* Detailed log */
+.detailed-log {
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background: #111827;
+    color: #d1d5db;
+    font-family: monospace;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    overscroll-behavior: contain;
+}
+
+/* Final conclusion log */
+.log {
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background: #111827;
+    color: #d1d5db;
+    font-family: monospace;
+    font-size: 0.8rem;
+    overscroll-behavior: contain;
+}
+
+.log-entry {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    padding: 0.15rem 0;
+}
+
+.log-time {
+    color: #6b7280;
+    user-select: none;
+}
+
+.log-message {
+    overflow-wrap: anywhere;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+    .calibration {
+        padding: 1.5rem;
+    }
+
+    .control-row--operation {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+    }
+
+    .control-row--execution {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(140px, 0.5fr)
+            minmax(0, 1fr);
+    }
+
+    .detailed-log {
+        height: 350px;
+    }
+
+    .log {
+        max-height: 160px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+    .calibration {
+        padding: 2rem;
+    }
+
+    .detailed-log {
+        height: 400px;
+    }
+
+    .log {
+        max-height: 170px;
+    }
+}
