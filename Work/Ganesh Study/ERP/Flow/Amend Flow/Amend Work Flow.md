@@ -1,9 +1,9 @@
 Amend
 
 1. New Menu just below it
-2. New Business(H, I all), Controller(one controller), Views(all)
+2. New Business(H, I all), new Controller(one controller), new Views(all)
 3. use old DTO, Interface, DAL
-4. add 2 new methods in DAL [A.GetNextAmend B. CloseAmend]
+4. add 2 new methods in DAL [A.GetNextAmend B. CloseAmend] (can add another methods too if needed)
 
 5. View structure
 ```

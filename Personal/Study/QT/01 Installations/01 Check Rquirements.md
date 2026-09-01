@@ -21,5 +21,7 @@ qmake --version
 5. Verify everything
 ```
 
+Or just install `QT` from official website. it includes everything in it.  
+
 
 

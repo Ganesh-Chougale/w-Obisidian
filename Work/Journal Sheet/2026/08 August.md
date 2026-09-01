@@ -1,7 +1,7 @@
 ## Date: `08-08-2026 (Saturday | शनिवार)` to `09-08-2026 (Sunday | रविवार)`  
 ### Work
 ```yml
-Description : R
+Description : Finance Advance Notificaion
 Flow        : Finance => Other => Finance Advance Notificaion => New
 WFC         : 
 Ticket      : 
@@ -51,5 +51,29 @@ View        : (Index, GoCreate, Create, Edit, Delete, Details) x 2
 ### Git
 ```yml
 Push Date   : 28-08-2026
+```  
+
+After Work
+```yml
+WFC         : 
+``` 
+### Database
+```yml
+Tables     : TRN_PACKING_DETAILS_I_BOM_SUP
+```  
+##### New column in old tables 
+```yml
+TRN_PACKING_DETAILS_I_BOM: BOM_TYPE int
+```
+### Programming
+```yml
+D to D      : DTOTrnPackingDetailsIBomSup, ITrnPackingDetailsIBomSup, DALTrnPackingDetailsIBomSup
+BO          : PackingDetailsIBomSup
+Controller  : 
+View        : 
+```  
+### Git
+```yml
+Push Date   : 
 ```  
 ----------------------------------------------------------------------------------------------------    
