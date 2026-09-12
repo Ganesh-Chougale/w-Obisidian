@@ -1,1 +1,1 @@
-codex "C:\Users\Administrator\Documents\Ganesh Notes\Docs\Work\Quick Access\Templates\Web, View, UI Templates\UI Repo\Drafter\Output.md" ""
+codex "C:\Users\Administrator\Documents\Ganesh Notes\Docs\Work\Quick Access\Templates\Web, View, UI Templates\UI Repo\Drafter\Output.md" "C:\Users\Administrator\Documents\Ganesh Notes\Docs\Work\Quick Access\Templates\Web, View, UI Templates\UI Repo\Plain Web"
