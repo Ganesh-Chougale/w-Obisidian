@@ -31,7 +31,7 @@ namespace //....................................
                 interfaceObj = new DALName();
                 List<DTOName> dtoList = interfaceObj.GetDistinctMaterialList();
 
-                List<MaterialsEntity> matList = await MaterialsService.GetMaterialFillList(dtoList.Select(x=> x.MATERIAL_CODE).toList());
+                List<MaterialsEntity> matList = await MaterialsService.GetMaterialFillList(dtoList.Select(x=> x.MATERIAL_CODE).ToList());
 
 
                 List<BusinessName> lst = (

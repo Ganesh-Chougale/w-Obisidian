@@ -1,0 +1,1 @@
+codex "C:\Users\Administrator\Documents\Ganesh Notes\Docs\Work\Quick Access\Templates\Web, View, UI Templates\UI Repo\Drafter\Output.md" ""

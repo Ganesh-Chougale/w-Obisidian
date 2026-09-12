@@ -1,2 +1,4 @@
 Toggle text wrap 	: CTRL + E + W
 Snippet wrapper		: CTRL + K, CTRL + S
+
+F9                  : Add/Remove Breakpoint

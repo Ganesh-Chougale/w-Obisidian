@@ -5,7 +5,7 @@
 class Player {
 
 public:
-    std::string name;
+    std::string name;`
     int score = 0;
 
     void printStatus() {

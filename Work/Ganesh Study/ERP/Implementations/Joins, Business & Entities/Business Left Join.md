@@ -1,13 +1,15 @@
-### Normal Join
-```sql
-from dtoObj in dtoList
-join objSupplier in LstSupplierAccount
-on dtoObj.SELLER_COMPANY_CODE equals objSupplier.SubGlAcNo
-```  
 ### Left Join
 ```sql
-from dtoObj in dtoList
-join objSupplier in LstSupplierAccount
-on dtoObj.SELLER_COMPANY_CODE equals objSupplier.SubGlAcNo
-into item from objSupplier in item.DefaultIfEmpty()
+_objPatternDetails = (from objPatt in _objPatternDetails
+                        join objMat in lstItmStock on objPatt.RefMaterialCode equals objMat.MaterialCode into mstmat
+                        from objMat in mstmat.DefaultIfEmpty()
+                        select new PatternDetails
+                        {
+                            MaterialCode = objPatt.MaterialCode,
+                            PatternName = objPatt.PatternName,
+                            RefMaterialCode = objPatt.RefMaterialCode,
+                            MaterialName = objPatt.MaterialName,
+                            Qty = objPatt.Qty,
+                            StockQty = objMat?.Quantity ?? 0
+                        }).ToList();
 ```   

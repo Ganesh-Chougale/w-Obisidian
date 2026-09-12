@@ -1,7 +1,7 @@
 ## Date: `08-08-2026 (Saturday | शनिवार)` to `09-08-2026 (Sunday | रविवार)`  
 ### Work
 ```yml
-Description : Finance Advance Notificaion
+Description : One time or installment (Short Work)
 Flow        : Finance => Other => Finance Advance Notificaion => New
 WFC         : 
 Ticket      : 
@@ -35,7 +35,7 @@ Description : Production Plan Menu
 Flow        : Production => Production Plan => New Menu (Packing Details)
 Menus       : Packing Details, Packing Details Amend
 WFC         : 28
-Ticket      : 
+Ticket      : 2627-000136
 ```  
 ### Database
 ```yml

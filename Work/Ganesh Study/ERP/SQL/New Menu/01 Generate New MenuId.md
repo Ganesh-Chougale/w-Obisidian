@@ -12,31 +12,10 @@
 - clone the LI do the necessary changes & for last note the MENU ID of it
 # B. Checking process  
 ## DB: `ERP Master`  
-1. Verify name
+1. Find the Gaps
 ```sql
 DECLARE @MENU_ID INT = <MENU_ID>;
 
-select
-        *
-FROM 
-        ERP_MASTERS..MST_MENU
-        WHERE MENU_ID = @MENU_ID
-```   
-- check the Parent ID 
-```sql
-select 
-        MENU_ID,
-        PARENT_MENU_ID,
-        MODULE_ID,
-        * 
-FROM
-        ERP_MASTERS..MST_MENU
-        WHERE MENU_ID = @MENU_ID
-```   
-- check whether name is same is not.  
-
-2. check last within this
-```sql
 select 
         MENU_ID,
         PARENT_MENU_ID,
@@ -46,10 +25,11 @@ FROM
         ERP_MASTERS..MST_MENU
         WHERE MENU_ID >= @MENU_ID
 ```   
+
 check this list, find the last MENU_ID or any gap between MENU_IDs. use the Last+1 or Gap+1 number.  e.g (if 100 then 100+1=101)  
 verify that id is not being used to any other thing.  
 
-3. In SQL UI go to:
+2. In SQL UI go to:
 ```
 ERP_MASTERS  
             => Tables  

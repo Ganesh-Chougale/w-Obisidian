@@ -35,3 +35,13 @@ class="text-start"
 class="text-center"
 class="text-end"
 ```  
+
+#### Left Push
+```css
+#TableId .left-push{
+    padding-left:15px !important;
+}
+```  
+```js
+class="left-push"
+```  
