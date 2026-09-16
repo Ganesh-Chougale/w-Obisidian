@@ -121,7 +121,8 @@ namespace ZanvarGroup.Areas.Material.Controllers
         [AuthorizationFilter(MenuId = 40623, AccessType = "Console")]
         public async Task<ActionResult> Index(string FromDate, string ToDate)
         {
-            string strStartDate = DateUtility.getFormatedDate(FromDate.Replace("'", ""), 1), strToDate = DateUtility.getFormatedDate(ToDate.Replace("'", ""), 1);
+            // string strStartDate = DateUtility.getFormatedDate(FromDate.Replace("'", ""), 1), strToDate = DateUtility.getFormatedDate(ToDate.Replace("'", ""), 1);
+            string strStartDate = FromDate, strToDate = ToDate;
             List<ToolStockConversion> lst = await ToolStockConversion.GetDateWiseAll(strStartDate, strToDate);
             TranGridSettings _objTranGridSettings = new TranGridSettings() { TranFromDate = DateUtility.getFormatedDate(strStartDate, 0), TranToDate = DateUtility.getFormatedDate(strToDate, 0) };
             ViewData["trangridsettings"] = _objTranGridSettings;

@@ -1,0 +1,1 @@
+codex "C:\Users\Administrator\Documents\Ganesh Notes\Docs\Personal\Amends\output.md" "C:\Users\Administrator\Documents\Ganesh Notes\Docs\Personal\Idle Projects\Permission Widget" "skip['.css']"
