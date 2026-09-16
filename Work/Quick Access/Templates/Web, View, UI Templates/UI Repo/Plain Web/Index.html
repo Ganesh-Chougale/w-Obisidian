@@ -1,44 +1,34 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI Snippet Preview</title>
+    <title>UI Snippet Playground</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <header class="app-header">
+        <h1>UI Snippet Playground</h1>
+        <p>Paste components from Bootstrap, Tailwind CSS, or Font Awesome</p>
+    </header>
 
-    <main class="app">
-
-        <section class="panel code-panel">
-            <div class="panel-header">
-                <h2>Code Editor</h2>
-            </div>
-
-            <div class="panel-content">
-                <textarea id="codeEditor" spellcheck="false"><button>Hello</button></textarea>
-            </div>
+    <main class="workspace">
+        <section class="panel">
+            <div class="panel-header">Code Editor</div>
+            <textarea id="code-editor" placeholder="Paste your HTML/CSS snippet here..." spellcheck="false"></textarea>
         </section>
 
-
-        <section class="panel preview-panel">
+        <section class="panel">
             <div class="panel-header">
-                <h2>Live Preview</h2>
-                <span id="libraryName">Library: None</span>
+                Live Preview 
+                <div id="library-indicator" class="library-badge">Library: None</div>
             </div>
-
-            <div class="panel-content preview-content" id="preview">
-                <button>Hello</button>
+            <div class="iframe-container">
+                <iframe id="preview-frame" sandbox="allow-scripts allow-same-origin"></iframe>
             </div>
         </section>
-
     </main>
 
     <script src="script.js"></script>
-
 </body>
-
 </html>
