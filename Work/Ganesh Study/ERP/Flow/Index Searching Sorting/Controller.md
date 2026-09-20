@@ -1,3 +1,4 @@
+## GET method
 ```csharp
 [HttpGet]
 [AuthorizationFilter(MenuId = 80326, AccessType = "Console")]
@@ -140,5 +141,27 @@ public async Task<ActionResult> Index(string sortOrder, string sortdir, string s
     }
 
     return PartialView(objLst.ToPagedList(pageNumber, pageSize));
+}
+```  
+
+## POST method
+```csharp
+[HttpPost]
+[AuthorizationFilter(MenuId = 80326, AccessType = "Console")]
+public async Task<ActionResult> Index(string FromDate, string ToDate)
+{
+    string strStartDate = DateUtility.getFormatedDate(FromDate.Replace("'", ""), 1), strToDate = DateUtility.getFormatedDate(ToDate.Replace("'", ""), 1);
+    List<ChildPartConsumption> objLst = await ChildPartConsumption.GetDataBetweenDates(strStartDate, strToDate);
+
+    TranGridSettings _objTranGridSettings = new TranGridSettings() { TranFromDate = DateUtility.getFormatedDate(strStartDate, 0), TranToDate = DateUtility.getFormatedDate(strToDate, 0) };
+    ViewData["trangridsettings"] = _objTranGridSettings;
+    ViewBag.FromDate = strStartDate;
+    ViewBag.ToDate = strToDate;
+    ViewBag.SortDir = "asc";
+
+    int pageSize = 50;
+    int pageNumber = 1;
+
+    return PartialView(objLst.OrderByDescending(obj => obj.TrnDate).ThenByDescending(obj => obj.TrnNo).ToPagedList(pageNumber, pageSize));
 }
 ```  

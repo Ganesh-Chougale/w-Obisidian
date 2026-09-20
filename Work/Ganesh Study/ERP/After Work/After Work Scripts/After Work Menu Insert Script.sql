@@ -6,7 +6,7 @@ DECLARE @TARGET_ID INT = ''; -- Paste your newly created ID here
 SELECT 
     'INSERT INTO ' + CHAR(13) + CHAR(10) +
     '    [dbo].[MST_MENU] ' + CHAR(13) + CHAR(10) +
-    '        ([MENU_ID], [MENU_SHORT_NAME], [MENU_NAME], [MENU_DOC_NO], [PARENT_MENU_ID], [APPROVAL_REQ]) ' + CHAR(13) + CHAR(10) +
+    '        ([MENU_ID], [MENU_SHORT_NAME], [MENU_NAME], [MENU_DOC_NO], [PARENT_MENU_ID], [APPROVAL_REQ], [ENTRY_DAYS], [MODULE_ID]) ' + CHAR(13) + CHAR(10) +
     '    VALUES ' + CHAR(13) + CHAR(10) +
     '        (' +
         CAST(MENU_ID AS VARCHAR) + ', ' +
@@ -14,12 +14,14 @@ SELECT
         'N''' + ISNULL(REPLACE(MENU_NAME, '''', ''''''), '') + ''', ' +
         ISNULL(CAST(MENU_DOC_NO AS VARCHAR), 'NULL') + ', ' +
         ISNULL(CAST(PARENT_MENU_ID AS VARCHAR), 'NULL') + ', ' +
-        ISNULL(CAST(APPROVAL_REQ AS VARCHAR), 'NULL') +
+        ISNULL(CAST(APPROVAL_REQ AS VARCHAR), 'NULL') + ', ' +
+        CAST(ISNULL(ENTRY_DAYS, 5) AS VARCHAR) + ', ' +
+        ISNULL(CAST(MODULE_ID AS VARCHAR), 'NULL') +
     ');' + CHAR(13) + CHAR(10) +
     'PRINT ''Row inserted successfully!'';' + CHAR(13) + CHAR(10) +
     CHAR(13) + CHAR(10) +
-    '-- Preview newly created row' + CHAR(13) + CHAR(10) +
-    'SELECT MENU_ID, MENU_SHORT_NAME, MENU_NAME, MENU_DOC_NO, PARENT_MENU_ID, APPROVAL_REQ ' + CHAR(13) + CHAR(10) +
+    '-- Preview' + CHAR(13) + CHAR(10) +
+    'SELECT MENU_ID, MENU_SHORT_NAME, MENU_NAME, MENU_DOC_NO, PARENT_MENU_ID, APPROVAL_REQ, ENTRY_DAYS, MODULE_ID ' + CHAR(13) + CHAR(10) +
     'FROM [dbo].[MST_MENU] ' + CHAR(13) + CHAR(10) +
     'WHERE MENU_ID = ' + CAST(MENU_ID AS VARCHAR) + ';' AS [Generated_Insert_Script_For_Senior]
 FROM 

@@ -43,8 +43,13 @@ Tables     : TRN_PACKING_DETAILS_H, TRN_PACKING_DETAILS_I, TRN_PACKING_DETAILS_I
 ```  
 ### Programming
 ```yml
-D to D      : DTOTrnPackingDetailsH, ITrnPackingDetailsH, DALTrnPackingDetailsH, DTOTrnPackingDetailsI, ITrnPackingDetailsI, DALTrnPackingDetailsI, DTOTrnPackingDetailsIBom, ITrnPackingDetailsIBom, DALTrnPackingDetailsIBom 
-BO          : PackingDetails, PackingDetailsI, PackingDetailsIBom
+D to D      : DTOTrnPackingDetailsH,    DTOTrnPackingDetailsI,  DTOTrnPackingDetailsIBom,
+              ITrnPackingDetailsH,      ITrnPackingDetailsI,    ITrnPackingDetailsIBom,
+              DALTrnPackingDetailsH,    DALTrnPackingDetailsI,  DALTrnPackingDetailsIBom 
+
+BO          : PackingDetails,
+              PackingDetailsI,
+              PackingDetailsIBom
 Controller  : PackingDetailsController
 View        : (Index, GoCreate, Create, Edit, Delete, Details) x 2
 ```  

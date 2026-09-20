@@ -1,0 +1,11 @@
+DTOTrnPackingDetailsH
+DTOTrnPartPriceH
+
+ITrnPackingDetailsH
+ITrnPartPriceH
+
+DALTrnPackingDetailsH
+DALTrnPartPriceH
+
+PackingDetails
+PartPrice

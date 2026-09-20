@@ -14,3 +14,8 @@ Generation study
 5. refine
 6. make it frictionless / apply system
 ```
+
+## The Common Enemy  
+```
+
+```
