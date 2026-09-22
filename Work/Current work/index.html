@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Part Cost Agreement</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        background: #15181d;
+        color: #f1f3f6;
+        font-family:
+            Inter,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif;
+    }
+
+    body {
+        padding: 18px 19px;
+    }
+
+    .page {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* ---------------- HEADER ---------------- */
+
+    .title {
+        margin: 0;
+        color: #f4f5f7;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 700;
+        letter-spacing: .1px;
+    }
+
+    .subtitle {
+        margin-top: 2px;
+        color: #aeb6c7;
+        font-size: 10.5px;
+        line-height: 16px;
+    }
+
+    /* ---------------- TOP FORM ---------------- */
+
+    .selection-card {
+        margin-top: 12px;
+        padding: 15px 16px;
+        border: 1px solid #303641;
+        border-top: 2px solid #8b74e8;
+        border-radius: 5px;
+        background: #1b1f25;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .field-label {
+        display: block;
+        margin: 0 0 5px;
+        color: #aeb8ca;
+        font-size: 10.5px;
+        font-weight: 500;
+    }
+
+    .select-wrap {
+        position: relative;
+    }
+
+    .select-wrap::after {
+        content: "";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        border-right: 2px solid #d7dbe4;
+        border-bottom: 2px solid #d7dbe4;
+        transform: translateY(-65%) rotate(45deg);
+        pointer-events: none;
+    }
+
+    select {
+        width: 100%;
+        height: 30px;
+        padding: 0 31px 0 10px;
+        border: 1px solid #3d4655;
+        border-radius: 4px;
+        outline: none;
+        background: #20252c;
+        color: #f4f5f7;
+        font: inherit;
+        font-size: 12px;
+        appearance: none;
+    }
+
+    select:focus {
+        border-color: #8171dc;
+        box-shadow: 0 0 0 1px rgba(129,113,220,.18);
+    }
+
+    /* ---------------- LEGEND ---------------- */
+
+    .legend {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 17px;
+        margin: 16px 0 13px;
+        padding-left: 0;
+        color: #aeb6c7;
+        font-size: 10px;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        white-space: nowrap;
+    }
+
+    .legend-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        flex: 0 0 auto;
+    }
+
+    .dot-packing {
+        background: #73a5ff;
+    }
+
+    .dot-child {
+        background: #a784f1;
+    }
+
+    .dot-transport {
+        background: #ffa65c;
+    }
+
+    .dot-target {
+        background: #858993;
+    }
+
+    .dot-blocked {
+        background: #ff6b72;
+    }
+
+    /* ---------------- TABLE ---------------- */
+
+    .table-shell {
+        overflow: hidden;
+        border: 1px solid #303641;
+        border-radius: 5px;
+        background: #1b1f25;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    col.serial {
+        width: 42px;
+    }
+
+    col.part {
+        width: 154px;
+    }
+
+    col.cost {
+        width: auto;
+    }
+
+    th,
+    td {
+        padding: 0;
+        border-right: 1px solid #303641;
+        border-bottom: 1px solid #303641;
+    }
+
+    th:last-child,
+    td:last-child {
+        border-right: 0;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+    /* Main group header */
+
+    .group-row th {
+        height: 28px;
+        color: #f4f4f7;
+        font-size: 9px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .blank-head {
+        background: #20252c;
+    }
+
+    .packing-head {
+        background: #638fe0;
+    }
+
+    .child-head {
+        background: #a384ed;
+    }
+
+    .transport-head {
+        background: #ffa65b;
+    }
+
+    /* Secondary header */
+
+    .sub-row th {
+        height: 29px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #dce0e8;
+    }
+
+    .serial-head,
+    .part-head {
+        background: #20252c;
+        text-align: left;
+        padding-left: 15px;
+    }
+
+    .serial-head {
+        text-align: center;
+        padding-left: 0;
+    }
+
+    .packing-sub {
+        background: #243b65;
+    }
+
+    .child-sub {
+        background: #382b65;
+    }
+
+    .transport-sub {
+        background: #54371e;
+    }
+
+    /* Body */
+
+    tbody td {
+        height: 36px;
+        background: #1b1f25;
+        color: #e7e9ee;
+        font-size: 10.5px;
+    }
+
+    .serial {
+        text-align: center;
+        color: #aab2c1;
+    }
+
+    .part-name {
+        padding: 0 10px;
+        color: #eef0f4;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .last-row .part-name {
+        color: #8e96a5;
+    }
+
+    /* Cost cells */
+
+    .packing-cell {
+        background: #1c2a42;
+    }
+
+    .child-cell {
+        background: #29213f;
+    }
+
+    .transport-cell {
+        background: #33271d;
+    }
+
+    .diff-cell {
+        width: 34px;
+        text-align: center;
+        color: #d2d5dc;
+    }
+
+    .cost-input {
+        width: calc(100% - 16px);
+        height: 25px;
+        margin: 0 8px;
+        padding: 0 9px;
+        border: 0;
+        border-radius: 3px;
+        outline: none;
+        background: #f5f5f7;
+        color: #22252a;
+        font-family: inherit;
+        font-size: 10px;
+        text-align: right;
+    }
+
+    .cost-input::placeholder {
+        color: #969aa2;
+        opacity: 1;
+    }
+
+    .cost-input:focus {
+        box-shadow: 0 0 0 2px rgba(127,110,222,.5);
+    }
+
+    .target {
+        background: #9ca7b7;
+        color: #5f6671;
+        border: 1px dashed #596273;
+        cursor: not-allowed;
+    }
+
+    .target::placeholder {
+        color: #676e79;
+    }
+
+    .dash {
+        color: #cfd3da;
+        font-size: 12px;
+    }
+
+    /* ---------------- NOTES ---------------- */
+
+    .notes {
+        margin-top: 13px;
+        padding: 13px 15px 12px;
+        border: 1px solid #303641;
+        border-radius: 5px;
+        background: #1b1f25;
+    }
+
+    .notes-title {
+        margin: 0 0 7px;
+        color: #f2f4f7;
+        font-size: 10px;
+        line-height: 14px;
+        font-weight: 700;
+    }
+
+    .notes ol {
+        margin: 0;
+        padding-left: 17px;
+        color: #b7bfce;
+        font-size: 10px;
+        line-height: 17px;
+    }
+
+    /* ---------------- FOOTER ---------------- */
+
+    .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 17px;
+    }
+
+    .success {
+        color: #48e69b;
+        font-size: 10.5px;
+        font-weight: 500;
+    }
+
+    .actions {
+        display: flex;
+        gap: 9px;
+    }
+
+    button {
+        height: 31px;
+        min-width: 65px;
+        padding: 0 14px;
+        border-radius: 5px;
+        font-family: inherit;
+        font-size: 10.5px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .reset {
+        border: 1px solid #3b4453;
+        background: #1c2128;
+        color: #e5e8ee;
+    }
+
+    .reset:hover {
+        background: #252a32;
+    }
+
+    .save {
+        border: 1px solid #8d79ee;
+        background: #8871ed;
+        color: white;
+    }
+
+    .save:hover {
+        background: #967ff5;
+    }
+
+    /* ---------------- RESPONSIVE ---------------- */
+
+    @media (max-width: 760px) {
+        body {
+            padding: 14px;
+        }
+
+        .selection-card {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .table-shell {
+            overflow-x: auto;
+        }
+
+        table {
+            min-width: 900px;
+        }
+
+        .legend {
+            gap: 10px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <h1 class="title">Part Cost Agreement</h1>
+
+    <div class="subtitle">
+        Compare agreed cost against system target cost across packing, child parts and transport.
+        Target values are pulled from the parts price breakup and are read-only.
+    </div>
+
+    <!-- CUSTOMER / PART SELECTORS -->
+    <div class="selection-card">
+
+        <div>
+            <label class="field-label">Customer Name</label>
+
+            <div class="select-wrap">
+                <select id="customer">
+                    <option>Tata Motors</option>
+                    <option>Mahindra</option>
+                    <option>Maruti Suzuki</option>
+                    <option>Hyundai</option>
+                </select>
+            </div>
+        </div>
+
+        <div>
+            <label class="field-label">Parts Name</label>
+
+            <div class="select-wrap">
+                <select id="parts">
+                    <option>Suspension Assembly</option>
+                    <option>Brake Assembly</option>
+                    <option>Steering Assembly</option>
+                    <option>Engine Assembly</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+
+        <div class="legend-item">
+            <span class="legend-dot dot-packing"></span>
+            Packing
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-dot dot-child"></span>
+            Child parts
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-dot dot-transport"></span>
+            Transport
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-dot dot-target"></span>
+            Target cost — from price breakup, read-only
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-dot dot-blocked"></span>
+            Row blocked — agreed cost is below target
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-shell">
+
+        <table>
+
+            <colgroup>
+                <col class="serial">
+                <col class="part">
+
+                <col class="cost">
+                <col class="cost">
+                <col style="width:34px">
+
+                <col class="cost">
+                <col class="cost">
+                <col style="width:34px">
+
+                <col class="cost">
+                <col class="cost">
+                <col style="width:34px">
+            </colgroup>
+
+            <thead>
+
+                <tr class="group-row">
+
+                    <th colspan="2" class="blank-head"></th>
+
+                    <th colspan="3" class="packing-head">
+                        PACKING COST
+                    </th>
+
+                    <th colspan="3" class="child-head">
+                        CHILD PARTS COST
+                    </th>
+
+                    <th colspan="3" class="transport-head">
+                        TRANSPORT COST
+                    </th>
+
+                </tr>
+
+                <tr class="sub-row">
+
+                    <th class="serial-head">Sr.</th>
+
+                    <th class="part-head">Name of the Parts</th>
+
+                    <th class="packing-sub">Agreed</th>
+                    <th class="packing-sub">Target</th>
+                    <th class="packing-sub">Diff</th>
+
+                    <th class="child-sub">Agreed</th>
+                    <th class="child-sub">Target</th>
+                    <th class="child-sub">Diff</th>
+
+                    <th class="transport-sub">Agreed</th>
+                    <th class="transport-sub">Target</th>
+                    <th class="transport-sub">Diff</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="costRows"></tbody>
+
+        </table>
+
+    </div>
+
+    <!-- NOTES -->
+    <div class="notes">
+
+        <div class="notes-title">NOTES</div>
+
+        <ol>
+            <li>
+                Row data is populated automatically once a customer and parts group are selected,
+                sourced from the parts price breakup.
+            </li>
+
+            <li>
+                An agreed cost cannot be saved below its target cost — the row is flagged and Save
+                is blocked until it's corrected.
+            </li>
+        </ol>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+
+        <div class="success" id="status">
+            Saved successfully.
+        </div>
+
+        <div class="actions">
+            <button class="reset" id="resetBtn">
+                Reset
+            </button>
+
+            <button class="save" id="saveBtn">
+                Save
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const parts = [
+    {
+        name: "Lower Control Arm",
+        packing: 180,
+        child: 640,
+        transport: 95
+    },
+    {
+        name: "Upper Bushing Kit",
+        packing: 60,
+        child: 210,
+        transport: 40
+    },
+    {
+        name: "Coil Spring",
+        packing: 120,
+        child: 480,
+        transport: 70
+    },
+    {
+        name: "Shock Absorber",
+        packing: 150,
+        child: 920,
+        transport: 110
+    },
+    {
+        name: "Stabilizer Link",
+        packing: 80,
+        child: 140,
+        transport: 25
+    },
+    {
+        name: "Mounting Bracket",
+        packing: 45,
+        child: 100,
+        transport: 30
+    },
+    {
+        name: "",
+        packing: "",
+        child: "",
+        transport: ""
+    }
+];
+
+const tbody = document.getElementById("costRows");
+const status = document.getElementById("status");
+
+function money(value) {
+    if (value === "" || value === null || value === undefined) {
+        return "";
+    }
+
+    return Number(value).toLocaleString("en-IN");
+}
+
+function createInput(type, value, row, category) {
+
+    const input = document.createElement("input");
+
+    input.className = "cost-input";
+
+    if (type === "target") {
+        input.classList.add("target");
+        input.readOnly = true;
+        input.disabled = true;
+        input.value = value === "" ? "" : money(value);
+        input.placeholder = value === "" ? "" : money(value);
+    } else {
+        input.type = "number";
+        input.min = "0";
+        input.step = "0.01";
+        input.placeholder = "—";
+        input.dataset.row = row;
+        input.dataset.category = category;
+    }
+
+    return input;
+}
+
+function renderRows() {
+
+    tbody.innerHTML = "";
+
+    parts.forEach((part, index) => {
+
+        const tr = document.createElement("tr");
+
+        if (index === parts.length - 1) {
+            tr.classList.add("last-row");
+        }
+
+        const sr = document.createElement("td");
+        sr.className = "serial";
+        sr.textContent = index + 1;
+
+        const name = document.createElement("td");
+        name.className = "part-name";
+        name.textContent = part.name || "Part name";
+
+        tr.appendChild(sr);
+        tr.appendChild(name);
+
+        /* PACKING */
+
+        const packingAgreed = document.createElement("td");
+        packingAgreed.className = "packing-cell";
+        packingAgreed.appendChild(
+            createInput("agreed", "", index, "packing")
+        );
+
+        const packingTarget = document.createElement("td");
+        packingTarget.className = "packing-cell";
+        packingTarget.appendChild(
+            createInput("target", part.packing, index, "packing")
+        );
+
+        const packingDiff = document.createElement("td");
+        packingDiff.className = "packing-cell diff-cell";
+        packingDiff.innerHTML = `<span class="dash">—</span>`;
+
+        /* CHILD */
+
+        const childAgreed = document.createElement("td");
+        childAgreed.className = "child-cell";
+        childAgreed.appendChild(
+            createInput("agreed", "", index, "child")
+        );
+
+        const childTarget = document.createElement("td");
+        childTarget.className = "child-cell";
+        childTarget.appendChild(
+            createInput("target", part.child, index, "child")
+        );
+
+        const childDiff = document.createElement("td");
+        childDiff.className = "child-cell diff-cell";
+        childDiff.innerHTML = `<span class="dash">—</span>`;
+
+        /* TRANSPORT */
+
+        const transportAgreed = document.createElement("td");
+        transportAgreed.className = "transport-cell";
+        transportAgreed.appendChild(
+            createInput("agreed", "", index, "transport")
+        );
+
+        const transportTarget = document.createElement("td");
+        transportTarget.className = "transport-cell";
+        transportTarget.appendChild(
+            createInput("target", part.transport, index, "transport")
+        );
+
+        const transportDiff = document.createElement("td");
+        transportDiff.className = "transport-cell diff-cell";
+        transportDiff.innerHTML = `<span class="dash">—</span>`;
+
+        tr.append(
+            packingAgreed,
+            packingTarget,
+            packingDiff,
+            childAgreed,
+            childTarget,
+            childDiff,
+            transportAgreed,
+            transportTarget,
+            transportDiff
+        );
+
+        tbody.appendChild(tr);
+    });
+
+    bindInputs();
+}
+
+function bindInputs() {
+
+    document.querySelectorAll(".cost-input:not(.target)")
+        .forEach(input => {
+
+            input.addEventListener("input", () => {
+
+                const row = Number(input.dataset.row);
+                const category = input.dataset.category;
+
+                const target = parts[row][category];
+
+                const agreed =
+                    input.value === ""
+                        ? null
+                        : Number(input.value);
+
+                const diffCell =
+                    input.parentElement
+                        .nextElementSibling
+                        .nextElementSibling;
+
+                if (
+                    agreed !== null &&
+                    target !== "" &&
+                    agreed < Number(target)
+                ) {
+
+                    diffCell.innerHTML =
+                        `<span style="color:#ff6b72">!</span>`;
+
+                } else if (
+                    agreed !== null &&
+                    target !== ""
+                ) {
+
+                    const diff =
+                        agreed - Number(target);
+
+                    diffCell.innerHTML =
+                        `<span class="dash">${money(diff)}</span>`;
+
+                } else {
+
+                    diffCell.innerHTML =
+                        `<span class="dash">—</span>`;
+                }
+
+                status.textContent = "";
+            });
+
+        });
+}
+
+/* RESET */
+
+document.getElementById("resetBtn")
+    .addEventListener("click", () => {
+
+        document.querySelectorAll(".cost-input:not(.target)")
+            .forEach(input => {
+                input.value = "";
+            });
+
+        document.querySelectorAll(".diff-cell")
+            .forEach(cell => {
+                cell.innerHTML =
+                    `<span class="dash">—</span>`;
+            });
+
+        status.textContent = "Reset successfully.";
+    });
+
+
+/* SAVE */
+
+document.getElementById("saveBtn")
+    .addEventListener("click", () => {
+
+        let invalid = false;
+
+        document.querySelectorAll(".cost-input:not(.target)")
+            .forEach(input => {
+
+                const row = Number(input.dataset.row);
+                const category = input.dataset.category;
+
+                const target = parts[row][category];
+
+                if (
+                    input.value !== "" &&
+                    target !== "" &&
+                    Number(input.value) < Number(target)
+                ) {
+                    invalid = true;
+                }
+            });
+
+        if (invalid) {
+
+            status.style.color = "#ff6b72";
+            status.textContent =
+                "Save blocked — agreed cost is below target.";
+
+            return;
+        }
+
+        status.style.color = "#48e69b";
+        status.textContent = "Saved successfully.";
+    });
+
+
+renderRows();
+
+</script>
+
+</body>
+</html>

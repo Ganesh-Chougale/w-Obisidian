@@ -1,0 +1,136 @@
+* RESEARCH METHODOLOGY — KOTHARI
+** 1. UNDERSTANDING RESEARCH
+*** 1.1 Meaning of Research
+*** 1.2 Objectives of Research
+*** 1.3 Motivation in Research
+*** 1.4 Types of Research
+**** Descriptive vs Analytical
+**** Applied vs Fundamental
+**** Quantitative vs Qualitative
+**** Conceptual vs Empirical
+**** Other Types
+*** 1.5 Research Approaches
+**** Quantitative
+**** Qualitative
+*** 1.6 Research Methods vs Methodology
+*** 1.7 Research and Scientific Method
+*** 1.8 Significance of Research
+*** 1.9 Research Process — Overview
+
+** 2. DEFINING & DESIGNING THE RESEARCH
+*** 2.1 Defining the Research Problem
+**** What is a Research Problem?
+**** Selecting the Problem
+**** Necessity of Defining the Problem
+**** Technique of Defining the Problem
+*** 2.2 Literature Survey
+**** Conceptual Literature
+**** Empirical Literature
+**** Previous Research
+*** 2.3 Developing Hypotheses
+**** Working Hypothesis
+**** Sources of Hypotheses
+**** Formulating Testable Hypotheses
+*** 2.4 Research Design
+**** Meaning & Need
+**** Features of Good Design
+**** Different Research Designs
+**** Experimental Designs
+*** 2.5 Research Planning
+**** Developing a Research Plan
+
+** 3. SAMPLING, MEASUREMENT & DATA COLLECTION
+*** 3.1 Sampling Design
+**** Census vs Sample Survey
+**** Steps in Sampling
+**** Probability Sampling
+***** Simple Random
+***** Systematic
+***** Stratified
+***** Cluster / Area
+**** Non-Probability Sampling
+***** Convenience
+***** Judgement
+***** Quota
+*** 3.2 Measurement
+**** Measurement in Research
+**** Measurement Scales
+**** Sources of Error
+**** Tests of Sound Measurement
+*** 3.3 Scaling
+**** Meaning of Scaling
+**** Scale Classification
+**** Scaling Techniques
+**** Scale Construction
+*** 3.4 Data Collection
+**** Primary Data
+***** Observation
+***** Interview
+***** Questionnaire
+***** Schedule
+**** Secondary Data
+**** Selecting Appropriate Method
+**** Case Study Method
+
+** 4. DATA PROCESSING, STATISTICS & HYPOTHESIS TESTING
+*** 4.1 Processing of Data
+**** Editing
+**** Coding
+**** Classification
+**** Tabulation
+*** 4.2 Descriptive Statistics
+**** Central Tendency
+**** Dispersion
+**** Skewness
+**** Measures of Relationship
+*** 4.3 Correlation & Regression
+**** Simple Regression
+**** Multiple Correlation
+**** Multiple Regression
+**** Partial Correlation
+*** 4.4 Sampling Fundamentals
+**** Sampling Distributions
+**** Central Limit Theorem
+**** Standard Error
+**** Estimation
+*** 4.5 Hypothesis Testing
+**** Meaning of Hypothesis
+**** Basic Concepts
+**** Procedure
+**** Power of a Test
+*** 4.6 Parametric Tests
+**** Tests of Means
+**** Difference between Means
+**** Proportions
+**** Variances
+**** Correlation Coefficients
+*** 4.7 Chi-Square Test
+*** 4.8 ANOVA / ANOCOVA
+*** 4.9 Non-Parametric Tests
+
+** 5. ADVANCED ANALYSIS, INTERPRETATION & REPORTING
+*** 5.1 Multivariate Analysis
+**** Characteristics & Applications
+**** Classification
+**** Variables
+**** Factor Analysis
+**** Factor Rotation
+**** R-Type & Q-Type Analysis
+**** Path Analysis
+*** 5.2 Interpretation
+**** Meaning of Interpretation
+**** Why Interpretation?
+**** Technique of Interpretation
+**** Precautions
+*** 5.3 Research Report Writing
+**** Steps in Writing
+**** Layout of Research Report
+**** Types of Reports
+**** Oral Presentation
+**** Mechanics of Writing
+**** Precautions
+*** 5.4 Computer in Research
+**** Computer System
+**** Computer Technology
+**** Computer Applications
+**** Computers and Researcher

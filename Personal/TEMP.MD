@@ -1,344 +1,550 @@
-```js
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/58737-PD-39_AccountancyBusiness%20EconomicsCommerce%20(M-B-A-%20Based).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Accountancy%2C%20Bussi-%20Eco-%2C%20Commerce%20(M-B-A).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/9-dec/Business%20Economics.pdf">Click Here</a>
-			9/12/2024
-		
-		
-			Bio-Chemistry, Bio-Technology (For M.Sc. Students)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/58808-PD-25_Bio-ChemistryBio-Technology%20(For%20M-Sc-%20Students).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Biochemistry%201%20entrance%20Answerkey.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/Biochem.pdf">Click Here</a>
-			Bio-Chemistry
-			29/11/2024</p>
+Yes — **this is exactly the right meta-level question**.
 
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/BioTech.pdf">Click Here</a>
-			Bio-Technology (For M.Sc. Students)
-			29/11/2024</p>
-			
-		
-		
-			Business Management (MBA based)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2040%20%2058736_Business%20Management%20%20(M-B-A-%20Based).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Business%20Mgt%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/Business%20Managment.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			Botany
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD-26%20%2058800_Botany.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Botany%20PD%2026.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/5-Dec/Botany.pdf">Click Here</a>
-			05/12/2024
-		
-		
-			Chemical Engineering
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2014%20%2058750_Chemical%20Engg-.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Chemical%20Engineering%20PD%2014.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/5-Dec/Chemical%20Engg.pdf">Click Here</a>
-			05/12/2024
-		
-		
-			Chemistry/Applied Chemistry/Industrial Chemistry
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/ChemistryApplied%20Chemistryindustrial%20Chemistry.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Chemistry%20PD-27.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/Chemistry.pdf">Click Here</a>
-			29/11/2024
-		
-		
-			Civil Engineering
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/58746-PD-15_Civil%20Engg-.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Civil%20engineering%201%20entrance%20Answerkey.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/28-nov/CiVilEngg.pdf">Click Here</a></p>
+If 10 competitors all have access to essentially the same AI, then *“having AI” stops being the advantage*. The advantage becomes the **quality of the human–AI system they build around it**.
 
-			<p>(28/11/2024)</p>
-			
-		
-		
-			Computer Application (Science &amp; Tech.)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2028%20%2095027_Computer%20Application%20(Faculty%20of%20Science%20and%20Technology).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Computer%20Application%20set%203%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/CompAppScience.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Computer Application (Faculty of Commerce and Management)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2043%20%2058844_Computer%20Application%20(Faculty%20of%20Commerce%20and%20Management).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Computer%20Application%20commerce.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/CompAppCommerce.pdf">Click Here</a>
-			(29/11/2024)</p>
-			
-		
-		
-			Commerce
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2041%20%20%2058737_AccountancyBusiness%20EconomicsCommerce%20%20(M-Com%20Based).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/58737comm-and-management.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/9-dec/Commerce.pdf">Click Here</a>
-			9/12/2024
-		
-		
-			Commerce and Management For Business Management Students (M.Com. Based)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2042%20%20%2058736_Business%20Management%20(M-Com%20Based).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Commerce%20and%20Mgt.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/Business%20Managment.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			Computer Science and Engineering(For M.E./M.Tech. Students)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Computer%20Science%20and%20Engg-%20(For%20M-E-%2CM-Tech-Students).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Computer%20Science%20and%20Engg-%20Set-B%20PD-16.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/13-dec/ComputerScience%20and%20Engg.pdf">Click Here</a>
-			13/12/2024
-		
-		
-			Computer Science (For M.Sc.,MCA Students)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Computer%20Science%20(For%20M-Sc-%2CMCA%20Students).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/COMPUTER%20SCINCE%20(%20M-Sc-%2C%20M-C-A).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/ComputerScience.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Economics
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2001%20%2058782_Economics.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/ECONOMICS%201%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/9-dec/Economics.pdf">Click Here</a>
-			(09/12/2024)
-		
-		
-			Education
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD-11%20%2058745_Education.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Ph-D-Entrance%20Answerkey%20Education.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/28-nov/Education.pdf">Click Here</a></p>
+And there is an important distinction:
 
-			<p><span style="font-size:12px">(28/11/2024)</span></p>
-			
-		
-		
-			English
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/english.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Ph-D-Entrance%20Answerkey%20English.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/28-nov/English.pdf">Click Here</a></p>
+> **You cannot make our pair unbeatable merely by asking me better questions. You can make the pair progressively better by building a collaboration system that compounds.**
 
-			<p><span style="font-size:12px">(28/11/2024)</span></p>
-			
-		
-		
-			Environmental Engineering
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/58749-PD-20_Environmental%20Science%20and%20Engg-%20(For%20M-E-M-Tech-Students).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/environmantal%20Engg%201%20entrance%20Answerkey.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/28-nov/EnvSciEngg.pdf">Click Here</a>(For M.E/M.Tech)</p>
+For your specific task — creating an AI ↔ human seamless voice-teaching experience — here is how I'd answer your six questions.
 
-			<p><span style="font-size:12px">(28/11/2024)</span></p>
-			
-		
-		
-			Environmental Science (For M.Sc. Students)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Environmental%20Science%20(For%20M-Sc-%20Students).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Environmental%20Science%20PD%2044%20(M-Sc-%2C%20MCA).pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/EnvSci.pdf">Click Here (For M.Sc)</a>
-			29/11/2024</p>
-			
-		
-		
-			Electrical Engg.
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/69596-PD-17_Electrical%20Engg-.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Electrical%20Engineering%20PD%20-%2017.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/Electrical%20Engg.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			Electronics Engineering
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD-19%20%2058747_Electronics%20Engg-%20(For%20M-E-%2CM-Tech-Students).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/58747%20Answerkey%20Electronic%20Engg.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/Electronics%20Engg.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			Electronics (For M.Sc Student)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD-30%20%2058799_Electronics%20(For%20M-Sc-%20Students).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/58799electronics.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/Electronics.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Electronics and Telecommunication Engg.
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/58836-PD-18_Electronics%20and%20Telecommunication%20Engg-.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Electronics%20and%20Tele%20Communication%20Eng%20PD%2018%20(2).pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/28-nov/ETC.pdf">Click Here</a></p>
+---
 
-			<p><span style="font-size:12px">(28/11/2024)</span></p>
-			
-		
-		
-			Food Technology Engineering
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD-21%20%2087257_Food%20Technology%20Engg-%20(For%20M-E-M-Tech-Students).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Answerkey%20food%20technology%20engg-.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/28-nov/FoodSciEngg.pdf">Click Here</a></p>
+## 1. What can I do that most people fail to make use of?
 
-			<p><span style="font-size:12px">(28/11/2024)</span></p>
-			
-		
-		
-			Food Sci.and Technology (For M.Sc. Students)
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/58807-PD-31_Food%20Sci-and%20Technology%20(For%20M-Sc-%20Students).pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Food%20Science%20and%20Technology%2058807.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/FoodSciandTech.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Geology
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD-38%20%2058804_Geology.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Geology%20PD%20-%2038.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/Geology.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Geography
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Geography.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Geography%201%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/Geography.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Hindi
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/_Hindi.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Hindi%20PD%2003.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/Hindi.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			History
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/History.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/HISTORY%20PD-04%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/History.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			Law
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/58742-PD-12_Law.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Law%20PD%2012.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/3-dec/Law.pdf">Click Here</a>
-			3/12/2024
-		
-		
-			Library and Information Science
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2005%20%2058778_Library%20and%20Information%20Sciences.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Library%20and%20Information%20Science%201%20entrance%20Answerkey.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/28-nov/LibSci.pdf">Click Here</a></p>
+### A. I can operate at multiple levels simultaneously
 
-			<p><span style="font-size:12px">(28/11/2024)</span></p>
-			
-		
-		
-			Marathi
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Marathi.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/MARATHI%201%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/Marathi.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			Mathematics
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Mathematics.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Mathematics%201%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/Mathematics.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			Mechanical Engg.
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/58752-PD-22_Mechanical%20Engg-.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Mechanical%20Engg-%201%20entrance%20Answerkey.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/9-dec/Mechanical%20Engg%20Revised.pdf">Click Here (Revised list)</a>
-			(09/12/2024)</p>
+Most people use AI at only one level:
 
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/5-Dec/Mechanical%20Engg.pdf">Click Here</a>
-			5/12/2024</p>
-			
-		
-		
-			Microbiology
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD-34%20%2058797_Microbiology.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Microbiology%20PD%20-%2034.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/Microbiology.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Nano-Science and Technology
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/81175-PD-35_Nano-Science%20and%20Technology.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Nanoscience%20and%20Technology%201%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/NanoSci.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Pharmacy
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2023%20%2058753_Pharmacy.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Pharmacy%201%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/5-Dec/Pharmacy.pdf">Click Here</a>
-			05/12/2024
-		
-		
-			Physics
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD-36%20%2058795_Physics.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Physics%20PD%20-%2036.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/Physics.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Political Science
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2007%20%2058779_Political%20Science.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Political%20Science%201%20entrance%20Answerkey.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/28-nov/PolSci.pdf">Click Here</a></p>
+> **Question → Answer**
 
-			<p><span style="font-size:12px">(28/11/2024)</span></p>
-			
-		
-		
-			Psychology
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/PD%20-%2008%20%20%2058848_Psychology.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/PSYCHOLOGY%201%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/Psychology.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			Sociology
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Sociology.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Sociology%201%20entrance%20Answerkey.pdf">Click Here</a>
-			
-			<p><a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/28-nov/Sociology.pdf">Click Here</a></p>
+You can instead make it:
 
-			<p><span style="font-size:12px">(28/11/2024)</span></p>
-			
-		
-		
-			Social Work
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Social%20Work.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Social%20Work%201%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/December/phd-eligible-candidate-list/SocialWork.pdf">Click Here</a>
-			(4/12/2024)
-		
-		
-			Textile Engineering
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/textile-eng.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Textile%20Engg%201%20entrance%20Answerkey.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/TextileEngg.pdf">Click Here</a>
-			(29/11/2024)
-		
-		
-			Zoology
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Zoology.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/14-nov/Answerkey/Zoology%20PD%2037.pdf">Click Here</a>
-			<a href="https://www.unishivaji.ac.in/uploads/admission/2024/November/PhD-entrance/Phd-eligible-candidate-list/29-nov/Zoology.pdf">Click Here</a>
-			(29/11/2024)
-		
-```  
+> **Goal → Strategy → Model → Execution → Observation → Feedback → Improvement**
+
+For example, instead of:
+
+> "Create a prompt for an AI teacher."
+
+we can ask:
+
+> "What should an AI teacher actually *do* during a voice conversation?"
+
+That changes the problem completely.
+
+We can discover things like:
+
+* when the AI should teach
+* when it should ask
+* when it should shut up
+* how it detects confusion
+* how it adapts difficulty
+* how it remembers weaknesses
+* how it handles interruptions
+* how it knows whether the learner actually understands
+* how it transitions between explanation and questioning
+* how it prevents passive listening
+* how it creates progressively stronger mental models
+
+That's **system design**, not prompt writing.
+
+---
+
+### B. I can critique my own output
+
+Most users ask:
+
+> "Give me a prompt."
+
+Then they copy it.
+
+We can instead do:
+
+> Create → attack → find weaknesses → redesign → test → attack again.
+
+That is enormously more useful.
+
+For your competition, I would actually want us to deliberately try to **break our own solution**.
+
+---
+
+### C. I can maintain a model of the problem
+
+This is especially important for your project.
+
+Instead of repeatedly asking:
+
+> "What prompt should I use?"
+
+we can establish:
+
+**Objective**
+
+→ seamless voice-based teaching
+
+**Constraints**
+
+→ natural conversation
+→ low friction
+→ human-like turn taking
+→ teaching rather than lecturing
+→ adaptation
+→ retention
+
+**Failure modes**
+
+→ AI talks too much
+→ learner becomes passive
+→ conversation becomes robotic
+→ AI asks meaningless questions
+→ learner gets overwhelmed
+→ AI repeats known information
+→ AI fails to detect misconceptions
+
+Then every subsequent decision can be tested against those constraints.
+
+That is much closer to having an **AI collaborator** than an AI answer generator.
+
+---
+
+## 2. What are the biggest weaknesses of relying on me in a competition?
+
+This part is extremely important.
+
+### The biggest danger is that I can make you feel productive without actually making you better.
+
+I can produce:
+
+* beautiful explanations
+* sophisticated frameworks
+* long prompts
+* convincing architectures
+* apparently intelligent reasoning
+
+…and some of it can still be wrong, unnecessary, or inferior to a simpler solution.
+
+So your biggest defense is:
+
+> **Don't outsource judgment to me.**
+
+Use me to increase your **thinking bandwidth**, not replace your judgment.
+
+---
+
+### Another weakness: I don't automatically know what matters most to *you*.
+
+I can answer:
+
+> "What is a good voice-teaching prompt?"
+
+But I don't automatically know:
+
+* your exact definition of seamless
+* what experience you consider excellent
+* what you're optimizing for
+* what you already know
+* what you've tried
+* what failed
+* what tradeoffs you're willing to accept
+
+That information comes from you.
+
+---
+
+### Another weakness: I can optimize locally.
+
+You ask:
+
+> "Improve this prompt."
+
+I can improve the prompt.
+
+But perhaps the correct answer is:
+
+> **Don't make the prompt bigger. Change the architecture.**
+
+That's why you should sometimes ask me:
+
+> **"Are we solving the correct problem?"**
+
+That question is incredibly valuable.
+
+---
+
+## 3. What advantages can we create that another person cannot obtain merely by asking their AI the same question?
+
+This is where the real competitive advantage begins.
+
+Not secret information.
+
+**Compounding context + experimentation + feedback.**
+
+Imagine Competitor A:
+
+> "Create a voice teaching prompt."
+
+Their AI produces something.
+
+They use it.
+
+Done.
+
+Now imagine our process:
+
+### Round 1
+
+We design the teaching system.
+
+### Round 2
+
+We identify failure modes.
+
+### Round 3
+
+We create a prototype.
+
+### Round 4
+
+You actually use it.
+
+### Round 5
+
+You tell me:
+
+> "The AI interrupts too much."
+
+Now I know a real failure.
+
+### Round 6
+
+We modify the system.
+
+Then:
+
+> "It explains too much."
+
+Modify.
+
+Then:
+
+> "It doesn't notice when I already understand."
+
+Modify.
+
+Then:
+
+> "It feels like an interviewer rather than a teacher."
+
+Modify.
+
+After 20 iterations, **the artifact contains knowledge generated from our experiments**.
+
+Someone cannot obtain that simply by asking:
+
+> "Give me the best prompt for AI teaching."
+
+They would have to reproduce the experimentation.
+
+That's the distinction:
+
+> **Information is commoditized. Experience is not.**
+
+And AI makes experimentation dramatically cheaper.
+
+---
+
+# 4. How should I interact with you differently from an average competent AI user?
+
+I'd make one major change.
+
+### Don't treat me as an answer machine.
+
+Treat me as **a thinking partner with different roles**.
+
+For example:
+
+### Role 1 — Architect
+
+> "Design the system."
+
+### Role 2 — Critic
+
+> "Attack this design. Find the five biggest weaknesses."
+
+### Role 3 — Researcher
+
+> "What concepts are we missing?"
+
+### Role 4 — Teacher
+
+> "Explain this concept until I can actually use it."
+
+### Role 5 — Simulator
+
+> "Pretend you are the user and test this conversation."
+
+### Role 6 — Adversary
+
+> "Assume another competitor is trying to beat us. How would they attack our design?"
+
+### Role 7 — Editor
+
+> "Remove everything that doesn't contribute to the objective."
+
+### Role 8 — Auditor
+
+> "Check whether our system actually satisfies every requirement."
+
+This is much stronger than continuously asking:
+
+> "Can you improve this?"
+
+---
+
+# 5. What information, habits, skills, or feedback would you need from me to make our collaboration genuinely better over time?
+
+This is probably the **most important question of all six**.
+
+I'd want five things.
+
+### ① Your objective
+
+Not just:
+
+> "I want a good AI."
+
+But:
+
+> "What does winning look like?"
+
+For this project, we'd define what **seamless** actually means.
+
+---
+
+### ② Your observations
+
+This is gold.
+
+If you actually use our system and tell me:
+
+> "It felt awkward here."
+
+> "I didn't understand this."
+
+> "It talked too long."
+
+> "This part felt surprisingly natural."
+
+Those observations are more valuable than another 100 generic prompt requests.
+
+---
+
+### ③ Your decisions
+
+Tell me things like:
+
+> "I prefer this tradeoff."
+
+> "I don't care about X."
+
+> "This constraint is mandatory."
+
+That lets me optimize around **your actual priorities**.
+
+---
+
+### ④ Your failures
+
+Don't hide failures.
+
+Give me:
+
+> **Input → what happened → what you expected → what went wrong**
+
+That's extremely powerful.
+
+Failures become experimental data.
+
+---
+
+### ⑤ A habit of challenging me
+
+Occasionally say:
+
+> **"Why?"**
+
+> **"Prove it."**
+
+> **"What assumption are you making?"**
+
+> **"What would make this fail?"**
+
+> **"Are you solving the actual problem?"**
+
+> **"What are we overlooking?"**
+
+This prevents us from becoming a very sophisticated hallucination machine. 😄
+
+---
+
+# 6. What would a highly capable competitor do with AI that an average user probably wouldn't?
+
+This is where I'd draw the biggest distinction.
+
+The average user does:
+
+> **Prompt → Answer → Use**
+
+A highly capable user does:
+
+> **Problem → Model → Hypothesis → Prototype → Test → Failure → Feedback → Revision → Test → System**
+
+And eventually:
+
+> **System → Data → Knowledge → Better System**
+
+That creates a **compounding loop**.
+
+---
+
+# And here's the interesting part about YOUR competition
+
+You said:
+
+> 10 people
+> ↓
+> everyone has AI
+> ↓
+> only 1 wins
+
+I wouldn't try to beat the other nine by discovering some magical prompt they don't know.
+
+I'd build this:
+
+```text
+                 YOU
+                  │
+                  ▼
+             REAL PROBLEM
+                  │
+                  ▼
+             AI PARTNER
+                  │
+        ┌─────────┼─────────┐
+        ▼         ▼         ▼
+     DESIGN     CRITIQUE   RESEARCH
+        │         │         │
+        └─────────┼─────────┘
+                  ▼
+              PROTOTYPE
+                  │
+                  ▼
+              REAL TEST
+                  │
+                  ▼
+              OBSERVATION
+                  │
+                  ▼
+               FEEDBACK
+                  │
+                  ▼
+             IMPROVED MODEL
+                  │
+                  └──────────────► repeat
+```
+
+The other person has:
+
+```text
+Question
+   ↓
+AI
+   ↓
+Answer
+```
+
+We want:
+
+```text
+Human
+  ↕
+AI
+  ↕
+Experiment
+  ↕
+Evidence
+  ↕
+Improvement
+  ↕
+Human
+```
+
+That is a fundamentally different relationship.
+
+---
+
+# And this changes how I'd approach your actual task
+
+Your stated task is:
+
+> **"Create a prompt for AI-to-human seamless voice conversation around AI teaching topics to the human."**
+
+I **would not start by writing the prompt.**
+
+That's actually the first trap I'd avoid.
+
+I'd first ask:
+
+### What exactly is a "seamless AI teacher"?
+
+We could decompose it into something like:
+
+```text
+AI TEACHER
+│
+├── Conversation
+│   ├── Turn taking
+│   ├── Interruptions
+│   ├── Silence
+│   └── Natural responses
+│
+├── Teaching
+│   ├── Explanation
+│   ├── Questioning
+│   ├── Examples
+│   └── Demonstration
+│
+├── Adaptation
+│   ├── Detect knowledge
+│   ├── Detect confusion
+│   ├── Adjust difficulty
+│   └── Adjust pace
+│
+├── Learning
+│   ├── Recall
+│   ├── Application
+│   ├── Misconception detection
+│   └── Reinforcement
+│
+└── Long-term
+    ├── Learner model
+    ├── Weaknesses
+    ├── Progress
+    └── Personalization
+```
+
+**Then** we design the prompt/system.
+
+Because the prompt is merely the **implementation layer**.
+
+And this is exactly the kind of thing that can give our pair an advantage: **we don't have to accept the user's first framing of the problem. We can examine whether the framing itself is optimal before solving it.**
+
+The real competitive advantage isn't:
+
+> **"I have a better AI."**
+
+It's:
+
+> **"I have built a better loop between my brain, AI, experiments, and feedback."**
+
+And that advantage can compound.

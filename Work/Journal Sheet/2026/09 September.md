@@ -2,7 +2,7 @@
 ### Work
 ```yml
 Description : 
-Menu Path   : Producttion => Foundry Production => Child Part Consumption (NEW MENU)
+Menu Path   : Production => Foundry Production => Child Part Consumption (NEW MENU)
 Menus       : Child Part Consumption
 WFC         : 18
 Ticket      : 
