@@ -1,7 +1,7 @@
 USE ERP_MASTERS;
 GO
 
-DECLARE @TARGET_ID INT = ''; -- Paste your newly created ID here
+DECLARE @TARGET_ID INT = '';
 
 SELECT 
     'INSERT INTO ' + CHAR(13) + CHAR(10) +
