@@ -12,7 +12,8 @@ $(document)on("click", "your_Id_Or_class_name", function () {
 ```  
 ### Safe from Multi-firing
 ```csharp
-$(document).off("click", ".your_Id_Or_class_name").on("click", ".your_Id_Or_class_name", function () {
+$(document).off("click", ".your_Id_Or_class_name")
+           .on( "click", ".your_Id_Or_class_name", function () {
     
 });
 ```  

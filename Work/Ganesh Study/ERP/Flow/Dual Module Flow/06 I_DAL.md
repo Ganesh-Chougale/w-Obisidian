@@ -37,29 +37,29 @@ namespace ZanvarGroup.Erp.DALDapper.Implementation.Transactions
             {
                 string query = @"
                                     SELECT
-	                                    TTSC_I.TRN_NO,
-	                                    TTSC_I.SR_NO,
-	                                    TTSC_I.REF_TRN_NO, -- previousely know as GRNO
+	                                    CURRENT_I.TRN_NO,
+	                                    CURRENT_I.SR_NO,
+	                                    CURRENT_I.REF_TRN_NO, -- previousely know as GRNO
 	                                    -- H_MAT.TRN_NO AS GRN_NO, -- same as above trn no
 	                                    H_MAT.TRN_DATE AS GRN_DATE,
-	                                    TTSC_I.GRN_QTY,
-	                                    TTSC_I.MATERIAL_CODE,
-	                                    TTSC_I.CONVERSION_QTY,
-	                                    TTSC_I.SCRAP_MATERIAL_CODE,
-	                                    TTSC_I.MATERIAL_WEIGHT,
-	                                    TTSC_I.CONVERSION_WEIGHT,
-	                                    TTSC_I.STATUS_CODE,
+	                                    CURRENT_I.GRN_QTY,
+	                                    CURRENT_I.MATERIAL_CODE,
+	                                    CURRENT_I.CONVERSION_QTY,
+	                                    CURRENT_I.SCRAP_MATERIAL_CODE,
+	                                    CURRENT_I.MATERIAL_WEIGHT,
+	                                    CURRENT_I.CONVERSION_WEIGHT,
+	                                    CURRENT_I.STATUS_CODE,
                                         H_MAT.SUB_GL_ACNO,
 	                                    H_MAT.PARTY_BILL_NO,
 	                                    H_MAT.PARTY_BILL_DATE
                                     FROM
-	                                    TRN_TOOL_STOCK_CONVERSION_I AS TTSC_I
+	                                    TRN_TOOL_STOCK_CONVERSION_I AS CURRENT_I
 
 	                                    INNER JOIN TRN_ACCT_MAT_H AS H_MAT
-	                                    ON H_MAT.TRN_NO = TTSC_I.REF_TRN_NO
+	                                    ON H_MAT.TRN_NO = CURRENT_I.REF_TRN_NO
 
                                     WHERE
-	                                    TTSC_I.TRN_NO = @TrnNo
+	                                    CURRENT_I.TRN_NO = @TrnNo
                                 ";
                 List<DtoTrnToolStockConversionI> dtoObj;
                 using (ConManager con = new ConManager())
@@ -130,7 +130,7 @@ namespace ZanvarGroup.Erp.DALDapper.Implementation.Transactions
 
 
         // .Execute => returns affected row count (Status_Code = 1 & returns affected row count)
-        public int Delete(Int64 TrnNo)
+        public int Delete(Int64 longTrnNo)
         {
             try
             {
@@ -138,7 +138,7 @@ namespace ZanvarGroup.Erp.DALDapper.Implementation.Transactions
                 int rowsAffectedCount;
                 using (ConManager con = new ConManager())
                 {
-                    rowsAffectedCount = con.transactionDb.Execute(query, new { TrnNo = TrnNo });
+                    rowsAffectedCount = con.transactionDb.Execute(query, new { TrnNo = longTrnNo });
                 }
                 return rowsAffectedCount;
             }
