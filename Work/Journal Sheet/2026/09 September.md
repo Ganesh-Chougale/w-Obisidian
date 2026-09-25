@@ -3,9 +3,9 @@
 ```yml
 Description : 
 Menu Path   : Production => Foundry Production => Child Part Consumption (NEW MENU)
-Menus       : Child Part Consumption
+Menus       : Child Part Consumption [MENU_ID = 80326]
 WFC         : 18
-Ticket      : 
+Ticket      : 2627-000139
 ```  
 ### Database
 ```yml
@@ -42,11 +42,11 @@ Push Date   :
 ![alt](./Z_imagges/09/01%20Target%20Price%20Create%20page.png)
 ### Work
 ```yml
-Description : New Menu [Red Theme]
+Description : New Menu
 Menu Path   : Marketing => Transaction => New Menu
-Menus       : Target Price [720102]
+Menus       : Target Price [MENU_ID = 29205]
 WFC         : 
-Ticket      : 
+Ticket      : 2627-000162
 ```  
 ### Database
 ```yml
@@ -64,7 +64,7 @@ D to D      : DTOTrnPartPriceH, DTOTrnPartPriceI,
               ITrnPartPriceH,   ITrnPartPriceI,
               DALTrnPartPriceH, DALTrnPartPriceI
 
-BO          : 
+BO          : PartPrice, PartPrice
 Controller  : 
 View        : 
 ```  
