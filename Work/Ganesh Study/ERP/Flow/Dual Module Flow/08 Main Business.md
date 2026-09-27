@@ -414,12 +414,24 @@ namespace ZanvarGroup.Erp.Business.Transactions.Production
                 {
                     intStatusCode = 101;
                 }
+
                 if (_dtoCnfTranTypes != null)
                 {
-                    intTrnNo = _dalPdH.GetTranNo(TranType, _dtoCnfTranTypes.TRAN_SERIES, strFinancialYear);
-                    if (intTrnNo == 1)
+                    if (Convert.ToBoolean(_dtoCnfTranTypes.MONTHLY_NUMBERING) == true)
                     {
-                        intTrnNo = CustomTranNo.GetCustomTranNo(TranType, _dtoCnfTranTypes.TRAN_SERIES, strTranDate);
+                        intTrnNo = _dalPdH.GetMonthlyTranNo(TranType, _dtoCnfTranTypes.TRAN_SERIES, strTranDate.Substring(0, 6));
+                        if (intTrnNo == 1)
+                        {
+                            intTrnNo = CustomTranNo.GetCustomMonthlyTranNo(TranType, _dtoCnfTranTypes.TRAN_SERIES, strTranDate);
+                        }
+                    }
+                    else
+                    {
+                        intTrnNo = _dalPdH.GetTranNo(TranType, _dtoCnfTranTypes.TRAN_SERIES, strFinancialYear);
+                        if (intTrnNo == 1)
+                        {
+                            intTrnNo = CustomTranNo.GetCustomTranNo(TranType, _dtoCnfTranTypes.TRAN_SERIES, strTranDate);
+                        }
                     }
                 }
 

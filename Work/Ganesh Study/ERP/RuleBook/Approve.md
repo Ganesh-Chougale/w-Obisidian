@@ -1,0 +1,1 @@
+stop doing approve from approve index page. it should always enter the details page & then approve.
