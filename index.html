@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Zombie Siege</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#080a08}
+body{display:flex;align-items:center;justify-content:center;font-family:Arial,Helvetica,sans-serif}
+canvas{display:block;background:#101510;image-rendering:auto;cursor:crosshair}
+</style>
+</head>
+<body>
+<canvas id="game" width="1024" height="768"></canvas>
+
+<script>
+"use strict";
+
+/* =========================================================
+   ZOMBIE SIEGE
+   Self-contained HTML5 / Canvas / Web Audio game
+   ========================================================= */
+
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+const W=1024,H=768;
+const TAU=Math.PI*2;
+
+let state="TITLE";
+let last=performance.now();
+let time=0;
+let stage=1;
+let score=0;
+let money=0;
+let highScore=0;
+let highStage=0;
+let muted=false;
+
+try{
+  highScore=Number(localStorage.getItem("zombieSiegeHighScore"))||0;
+  highStage=Number(localStorage.getItem("zombieSiegeHighStage"))||0;
+}catch(e){}
+
+const mouse={x:W/2,y:H/2,down:false};
+const keys={};
+
+let audioCtx=null;
+let master=null;
+let musicTimer=null;
+
+const player={
+  x:W/2,y:430,r:30,
+  maxHealth:100,health:100,
+  damage:18,
+  maxAmmo:12,ammo:12,
+  reloadTime:1.15,reload:0,
+  fireCooldown:0,
+  damageCooldown:0,
+  recoil:0,
+  flash:0,
+  invuln:0,
+  critical:.08,
+  level:1
+};
+
+const upgrades={
+  damage:0,
+  ammo:0,
+  reload:0,
+  health:0,
+  crit:0
+};
+
+const enemies=[];
+const bullets=[];
+const particles=[];
+const texts=[];
+const splats=[];
+const spawnTimers={small:0,medium:0,large:0};
+
+let stageData=null;
+let stageSpawned=0;
+let stageKilled=0;
+let stageFinished=false;
+let stageIntro=0;
+let transition=0;
+let shake=0;
+let flash=0;
+let banner="";
+let bannerTimer=0;
+
+const upgradeDefs=[
+  {key:"damage",name:"WEAPON DAMAGE",base:70,desc:"+5 damage"},
+  {key:"ammo",name:"MAX AMMO",base:90,desc:"+2 magazine"},
+  {key:"reload",name:"RELOAD SPEED",base:100,desc:"15% faster"},
+  {key:"health",name:"MAX HEALTH",base:110,desc:"+20 maximum HP"},
+  {key:"crit",name:"CRITICAL HIT",base:130,desc:"+5% critical chance"}
+];
+
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function rand(a,b){return a+Math.random()*(b-a)}
+function lerp(a,b,t){return a+(b-a)*t}
+function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+function angle(a,b){return Math.atan2(b.y-a.y,b.x-a.x)}
+
+function saveScores(){
+  try{
+    localStorage.setItem("zombieSiegeHighScore",String(highScore));
+    localStorage.setItem("zombieSiegeHighStage",String(highStage));
+  }catch(e){}
+}
+
+function resize(){
+  const scale=Math.min(innerWidth/W,innerHeight/H);
+  canvas.style.width=Math.floor(W*scale)+"px";
+  canvas.style.height=Math.floor(H*scale)+"px";
+}
+addEventListener("resize",resize);
+resize();
+
+function pointer(e){
+  const r=canvas.getBoundingClientRect();
+  mouse.x=(e.clientX-r.left)*W/r.width;
+  mouse.y=(e.clientY-r.top)*H/r.height;
+}
+
+canvas.addEventListener("mousemove",pointer);
+canvas.addEventListener("mousedown",e=>{
+  pointer(e);
+  if(e.button===0){
+    mouse.down=true;
+    handleClick(mouse.x,mouse.y);
+  }
+});
+addEventListener("mouseup",e=>{
+  if(e.button===0)mouse.down=false;
+});
+
+addEventListener("keydown",e=>{
+  keys[e.code]=true;
+  if(e.code==="Escape"){
+    if(state==="PLAYING")pauseGame();
+    else if(state==="PAUSED")resumeGame();
+  }
+  if(e.code==="KeyR" && state==="PLAYING")startReload();
+});
+addEventListener("keyup",e=>keys[e.code]=false);
+
+/* =========================================================
+   AUDIO
+   ========================================================= */
+
+function initAudio(){
+  if(audioCtx)return;
+  try{
+    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    master=audioCtx.createGain();
+    master.gain.value=.16;
+    master.connect(audioCtx.destination);
+    startMusic();
+  }catch(e){}
+}
+
+function tone(freq,duration,type="sine",volume=.15,slide=0){
+  if(!audioCtx||muted)return;
+  const o=audioCtx.createOscillator();
+  const g=audioCtx.createGain();
+  o.type=type;
+  o.frequency.setValueAtTime(freq,audioCtx.currentTime);
+  if(slide)o.frequency.linearRampToValueAtTime(freq+slide,audioCtx.currentTime+duration);
+  g.gain.setValueAtTime(.0001,audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(volume,audioCtx.currentTime+.008);
+  g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+duration);
+  o.connect(g);g.connect(master);
+  o.start();o.stop(audioCtx.currentTime+duration+.02);
+}
+
+function noise(duration=.08,volume=.1){
+  if(!audioCtx||muted)return;
+  const buffer=audioCtx.createBuffer(1,audioCtx.sampleRate*duration,audioCtx.sampleRate);
+  const data=buffer.getChannelData(0);
+  for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*(1-i/data.length);
+  const src=audioCtx.createBufferSource();
+  const g=audioCtx.createGain();
+  g.gain.value=volume;
+  src.buffer=buffer;
+  src.connect(g);g.connect(master);
+  src.start();
+}
+
+function gunSound(){
+  tone(rand(115,145),.075,"sawtooth",.22,rand(-35,-15));
+  noise(.055,.12);
+}
+function hitSound(){tone(rand(110,170),.06,"square",.07,-50)}
+function deathSound(){tone(90,.18,"sawtooth",.08,-55)}
+function damageSound(){noise(.16,.18);tone(70,.15,"square",.1,-35)}
+function reloadSound(){tone(420,.08,"square",.06);setTimeout(()=>tone(620,.1,"square",.06),100)}
+function buySound(){tone(500,.07,"triangle",.08,180);setTimeout(()=>tone(760,.12,"triangle",.07),75)}
+function clickSound(){tone(500,.045,"square",.045)}
+function stageSound(){tone(440,.1,"triangle",.08,100);setTimeout(()=>tone(660,.14,"triangle",.07),100)}
+function victorySound(){
+  [440,554,659,880].forEach((n,i)=>setTimeout(()=>tone(n,.3,"triangle",.09),i*110));
+}
+function gameOverSound(){
+  tone(220,.35,"sawtooth",.08,-100);
+  setTimeout(()=>tone(130,.5,"sawtooth",.07,-70),250);
+}
+
+function startMusic(){
+  if(musicTimer)clearInterval(musicTimer);
+  musicTimer=setInterval(()=>{
+    if(!audioCtx||muted||state==="TITLE")return;
+    const notes=[82,98,110,123];
+    tone(notes[Math.floor(time*2)%notes.length],.16,"triangle",.018);
+  },280);
+}
+
+/* =========================================================
+   STAGES
+   ========================================================= */
+
+function makeStage(n){
+  const difficulty=n-1;
+  const total=9+Math.floor(n*2.15);
+  return {
+    total,
+    small:Math.max(2,Math.floor(total*(.72-Math.min(.2,difficulty*.015)))),
+    medium:n<3?0:Math.floor(total*(.18+Math.min(.1,difficulty*.01))),
+    large:n<6?0:Math.floor(total*(.06+Math.min(.12,difficulty*.012))),
+    spawnRate:Math.max(.22,1.05-n*.035),
+    hpMul:1+difficulty*.075,
+    speedMul:1+difficulty*.018
+  };
+}
+
+function resetRun(){
+  stage=1;
+  score=0;
+  money=0;
+  player.maxHealth=100;
+  player.health=100;
+  player.damage=18;
+  player.maxAmmo=12;
+  player.ammo=12;
+  player.reloadTime=1.15;
+  player.critical=.08;
+  player.level=1;
+  Object.keys(upgrades).forEach(k=>upgrades[k]=0);
+  beginStage();
+}
+
+function beginStage(){
+  stageData=makeStage(stage);
+  enemies.length=0;
+  bullets.length=0;
+  particles.length=0;
+  texts.length=0;
+  splats.length=0;
+  stageSpawned=0;
+  stageKilled=0;
+  stageFinished=false;
+  stageIntro=1.4;
+  transition=.7;
+  player.health=Math.min(player.maxHealth,player.health+12);
+  player.ammo=player.maxAmmo;
+  player.reload=0;
+  spawnTimers.small=.2;
+  spawnTimers.medium=.8;
+  spawnTimers.large=1.4;
+  banner="STAGE "+stage;
+  bannerTimer=1.5;
+  stageSound();
+}
+
+/* =========================================================
+   ENEMIES
+   ========================================================= */
+
+const TYPES={
+  small:{
+    r:24,hp:28,speed:68,damage:7,reward:10,color:"#879b65",
+    name:"RUNNER"
+  },
+  medium:{
+    r:32,hp:65,speed:48,damage:11,reward:22,color:"#66754d",
+    name:"WALKER"
+  },
+  large:{
+    r:43,hp:150,speed:28,damage:18,reward:55,color:"#46543b",
+    name:"BRUTE"
+  }
+};
+
+function spawnEnemy(type){
+  const t=TYPES[type];
+  const side=Math.floor(Math.random()*4);
+  let x,y;
+  if(side===0){x=rand(45,W-45);y=-50}
+  if(side===1){x=W+50;y=rand(115,H-70)}
+  if(side===2){x=rand(45,W-45);y=H+50}
+  if(side===3){x=-50;y=rand(115,H-70)}
+
+  enemies.push({
+    type,
+    x,y,
+    r:t.r,
+    hp:t.hp*stageData.hpMul,
+    maxHp:t.hp*stageData.hpMul,
+    speed:t.speed*stageData.speedMul,
+    damage:t.damage,
+    reward:t.reward,
+    wobble:Math.random()*TAU,
+    hit:0,
+    attack:0,
+    death:0,
+    dead:false
+  });
+  stageSpawned++;
+}
+
+function chooseSpawn(){
+  const remain=stageData.total-stageSpawned;
+  if(remain<=0)return;
+
+  const available=[];
+  if(stageSpawned<stageData.small)available.push("small");
+  if(stageSpawned>=stageData.small &&
+     stageSpawned<stageData.small+stageData.medium)available.push("medium");
+  if(stageSpawned>=stageData.small+stageData.medium)available.push("large");
+
+  if(!available.length){
+    if(stageSpawned<stageData.total)available.push(stage>=6&&Math.random()<.3?"large":"medium");
+  }
+
+  spawnEnemy(available[Math.floor(Math.random()*available.length)]);
+}
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+function particle(x,y,opts={}){
+  particles.push({
+    x,y,
+    vx:opts.vx??rand(-80,80),
+    vy:opts.vy??rand(-80,80),
+    life:opts.life??.5,
+    max:opts.life??.5,
+    size:opts.size??rand(2,5),
+    color:opts.color??"#d8d0a0",
+    gravity:opts.gravity??0
+  });
+}
+
+function burst(x,y,color,count=12,power=100){
+  for(let i=0;i<count;i++){
+    const a=Math.random()*TAU;
+    const s=Math.random()*power;
+    particle(x,y,{
+      vx:Math.cos(a)*s,
+      vy:Math.sin(a)*s,
+      life:rand(.25,.7),
+      size:rand(2,5),
+      color
+    });
+  }
+}
+
+function floating(text,x,y,color="#fff"){
+  texts.push({text,x,y,life:1,max:1,color});
+}
+
+/* =========================================================
+   WEAPON
+   ========================================================= */
+
+function startReload(){
+  if(state!=="PLAYING")return;
+  if(player.reload>0||player.ammo>=player.maxAmmo)return;
+  player.reload=player.reloadTime;
+  reloadSound();
+}
+
+function shoot(){
+  if(state!=="PLAYING"||stageIntro>0||player.reload>0)return;
+  if(player.fireCooldown>0)return;
+
+  if(player.ammo<=0){
+    startReload();
+    return;
+  }
+
+  const a=Math.atan2(mouse.y-player.y,mouse.x-player.x);
+  const spread=rand(-.025,.025);
+  const finalA=a+spread;
+  const critical=Math.random()<player.critical;
+  const damage=player.damage*(critical?2:1);
+
+  bullets.push({
+    x:player.x+Math.cos(finalA)*34,
+    y:player.y+Math.sin(finalA)*34,
+    vx:Math.cos(finalA)*900,
+    vy:Math.sin(finalA)*900,
+    life:1,
+    damage,
+    critical,
+    r:4
+  });
+
+  player.ammo--;
+  player.fireCooldown=.16;
+  player.recoil=.1;
+  player.flash=.06;
+
+  gunSound();
+
+  for(let i=0;i<4;i++){
+    particle(
+      player.x+Math.cos(finalA)*36,
+      player.y+Math.sin(finalA)*36,
+      {vx:Math.cos(finalA)*rand(80,180)+rand(-30,30),
+       vy:Math.sin(finalA)*rand(80,180)+rand(-30,30),
+       life:.12,size:rand(2,4),color:"#e7c77b"}
+    );
+  }
+
+  shake=Math.max(shake,2);
+}
+
+/* =========================================================
+   UPGRADES
+   ========================================================= */
+
+function upgradeCost(def){
+  return Math.floor(def.base*Math.pow(1.35,upgrades[def.key]));
+}
+
+function buyUpgrade(i){
+  const def=upgradeDefs[i];
+  const cost=upgradeCost(def);
+  if(money<cost)return;
+  money-=cost;
+  upgrades[def.key]++;
+
+  if(def.key==="damage")player.damage+=5;
+  if(def.key==="ammo"){
+    player.maxAmmo+=2;
+    player.ammo=player.maxAmmo;
+  }
+  if(def.key==="reload"){
+    player.reloadTime=Math.max(.35,player.reloadTime*.85);
+  }
+  if(def.key==="health"){
+    player.maxHealth+=20;
+    player.health=player.maxHealth;
+  }
+  if(def.key==="crit"){
+    player.critical=Math.min(.6,player.critical+.05);
+  }
+
+  buySound();
+  floating("UPGRADED",W/2,H/2+210,"#8cff8c");
+}
+
+/* =========================================================
+   GAME FLOW
+   ========================================================= */
+
+function startGame(){
+  initAudio();
+  resetRun();
+  state="PLAYING";
+}
+
+function pauseGame(){
+  if(state!=="PLAYING")return;
+  state="PAUSED";
+  if(audioCtx)audioCtx.suspend().catch(()=>{});
+}
+
+function resumeGame(){
+  if(state!=="PAUSED")return;
+  state="PLAYING";
+  if(audioCtx)audioCtx.resume().catch(()=>{});
+}
+
+function gameOver(){
+  state="GAME_OVER";
+  gameOverSound();
+  if(score>highScore)highScore=score;
+  if(stage>highStage)highStage=stage;
+  saveScores();
+}
+
+function victory(){
+  state="VICTORY";
+  victorySound();
+  score+=money*2;
+  if(score>highScore)highScore=score;
+  if(stage>highStage)highStage=stage;
+  saveScores();
+}
+
+function completeStage(){
+  if(stageFinished)return;
+  stageFinished=true;
+  state="UPGRADE";
+  stageSound();
+  score+=stage*100;
+  if(stage>=15)return;
+}
+
+/* =========================================================
+   UI CLICK HANDLING
+   ========================================================= */
+
+function button(x,y,w,h){
+  return mouse.x>=x&&mouse.x<=x+w&&mouse.y>=y&&mouse.y<=y+h;
+}
+
+function handleClick(x,y){
+  initAudio();
+
+  if(state==="TITLE"){
+    if(button(382,405,260,72)){
+      clickSound();
+      startGame();
+    }
+    else if(button(382,495,260,52)){
+      muted=!muted;
+      clickSound();
+    }
+    return;
+  }
+
+  if(state==="PAUSED"){
+    if(button(382,300,260,60)){
+      clickSound();
+      resumeGame();
+    }
+    else if(button(382,375,260,60)){
+      clickSound();
+      resetRun();
+      state="PLAYING";
+    }
+    else if(button(382,450,260,52)){
+      muted=!muted;
+      clickSound();
+    }
+    return;
+  }
+
+  if(state==="UPGRADE"){
+    for(let i=0;i<upgradeDefs.length;i++){
+      const y0=155+i*83;
+      if(button(130,y0,764,68)){
+        buyUpgrade(i);
+        return;
+      }
+    }
+
+    if(button(370,610,284,65)){
+      clickSound();
+      if(stage>=15)victory();
+      else{
+        stage++;
+        state="PLAYING";
+        beginStage();
+      }
+    }
+    return;
+  }
+
+  if(state==="GAME_OVER"||state==="VICTORY"){
+    if(button(382,535,260,65)){
+      clickSound();
+      startGame();
+    }
+    return;
+  }
+}
+
+/* =========================================================
+   UPDATE
+   ========================================================= */
+
+function update(dt){
+  time+=dt;
+
+  if(bannerTimer>0)bannerTimer-=dt;
+  if(transition>0)transition-=dt;
+  if(shake>0)shake=Math.max(0,shake-dt*15);
+  if(flash>0)flash-=dt;
+
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.life-=dt;
+    p.x+=p.vx*dt;
+    p.y+=p.vy*dt;
+    p.vy+=p.gravity*dt;
+    if(p.life<=0)particles.splice(i,1);
+  }
+
+  for(let i=texts.length-1;i>=0;i--){
+    const t=texts[i];
+    t.life-=dt;
+    t.y-=30*dt;
+    if(t.life<=0)texts.splice(i,1);
+  }
+
+  if(state!=="PLAYING")return;
+
+  if(stageIntro>0)stageIntro-=dt;
+
+  if(player.damageCooldown>0)player.damageCooldown-=dt;
+  if(player.invuln>0)player.invuln-=dt;
+  if(player.fireCooldown>0)player.fireCooldown-=dt;
+  if(player.recoil>0)player.recoil-=dt;
+  if(player.flash>0)player.flash-=dt;
+
+  if(player.reload>0){
+    player.reload-=dt;
+    if(player.reload<=0){
+      player.reload=0;
+      player.ammo=player.maxAmmo;
+      reloadSound();
+    }
+  }
+
+  if(mouse.down)shoot();
+
+  if(stageIntro<=0&&!stageFinished){
+    spawnTimers.small-=dt;
+    spawnTimers.medium-=dt;
+    spawnTimers.large-=dt;
+
+    if(stageSpawned<stageData.total){
+      if(spawnTimers.small<=0){
+        chooseSpawn();
+        spawnTimers.small=stageData.spawnRate*rand(.75,1.25);
+      }
+    }
+  }
+
+  updateBullets(dt);
+  updateEnemies(dt);
+
+  if(stageSpawned>=stageData.total&&enemies.length===0&&!stageFinished){
+    completeStage();
+  }
+}
+
+function updateBullets(dt){
+  for(let i=bullets.length-1;i>=0;i--){
+    const b=bullets[i];
+    b.life-=dt;
+    b.x+=b.vx*dt;
+    b.y+=b.vy*dt;
+
+    let hit=false;
+
+    for(let j=enemies.length-1;j>=0;j--){
+      const e=enemies[j];
+      if(e.dead)continue;
+
+      if(Math.hypot(b.x-e.x,b.y-e.y)<e.r+b.r){
+        e.hp-=b.damage;
+        e.hit=.1;
+        hit=true;
+
+        hitSound();
+        floating(
+          Math.round(b.damage)+(b.critical?" CRIT!":""),
+          e.x,e.y-e.r-8,
+          b.critical?"#ffd34e":"#ffffff"
+        );
+
+        burst(b.critical?"#ffd34e":"#d8d0a0",e.x,e.y,4,45);
+
+        if(e.hp<=0){
+          killEnemy(e);
+        }
+        break;
+      }
+    }
+
+    if(hit||b.life<=0||b.x<-30||b.x>W+30||b.y<70||b.y>H+30){
+      bullets.splice(i,1);
+    }
+  }
+}
+
+function killEnemy(e){
+  e.dead=true;
+  stageKilled++;
+  money+=e.reward;
+  score+=e.reward*5;
+
+  floating("+"+e.reward,e.x,e.y,"#f5d15d");
+  burst(e.x,e.y,e.type==="large"?"#5c6d4d":"#81905e",e.type==="large"?25:14,e.type==="large"?180:110);
+  deathSound();
+  shake=Math.max(shake,e.type==="large"?7:3);
+
+  setTimeout(()=>{
+    const i=enemies.indexOf(e);
+    if(i>=0)enemies.splice(i,1);
+  },250);
+}
+
+function updateEnemies(dt){
+  for(const e of enemies){
+    if(e.dead){
+      e.death+=dt;
+      continue;
+    }
+
+    if(e.hit>0)e.hit-=dt;
+
+    let dx=player.x-e.x;
+    let dy=player.y-e.y;
+    const d=Math.hypot(dx,dy)||1;
+
+    let sx=dx/d,sy=dy/d;
+
+    // Separation.
+    let pushX=0,pushY=0;
+    for(const other of enemies){
+      if(other===e||other.dead)continue;
+      const dd=Math.hypot(e.x-other.x,e.y-other.y);
+      const min=e.r+other.r+8;
+      if(dd<min&&dd>0){
+        pushX+=(e.x-other.x)/dd*(min-dd);
+        pushY+=(e.y-other.y)/dd*(min-dd);
+      }
+    }
+
+    const wobble=Math.sin(time*5+e.wobble)*.04;
+
+    if(d>player.r+e.r-3){
+      e.x+=(sx+(-sy*wobble))*e.speed*dt+pushX*dt*2;
+      e.y+=(sy+(sx*wobble))*e.speed*dt+pushY*dt*2;
+    }else{
+      e.attack-=dt;
+      if(e.attack<=0&&player.damageCooldown<=0){
+        player.health-=e.damage;
+        player.damageCooldown=.55;
+        player.invuln=.22;
+        player.flash=.16;
+        flash=.12;
+        shake=Math.max(shake,8);
+        damageSound();
+        burst(player.x,player.y,"#d75a45",12,120);
+
+        if(player.health<=0){
+          player.health=0;
+          gameOver();
+          return;
+        }
+
+        e.attack=e.type==="small"?.65:e.type==="medium"?.85:1.15;
+      }
+    }
+  }
+}
+
+/* =========================================================
+   DRAWING
+   ========================================================= */
+
+function clear(){
+  ctx.fillStyle="#0b100d";
+  ctx.fillRect(0,0,W,H);
+}
+
+function drawBackground(){
+  const g=ctx.createLinearGradient(0,70,0,H);
+  g.addColorStop(0,"#172018");
+  g.addColorStop(1,"#080c09");
+  ctx.fillStyle=g;
+  ctx.fillRect(0,0,W,H);
+
+  ctx.fillStyle="#111811";
+  ctx.fillRect(0,70,W,H-70);
+
+  // floor boards / arena markings
+  ctx.strokeStyle="rgba(130,145,105,.08)";
+  ctx.lineWidth=2;
+  for(let x=0;x<W;x+=64){
+    ctx.beginPath();
+    ctx.moveTo(x,70);
+    ctx.lineTo(x,H);
+    ctx.stroke();
+  }
+  for(let y=100;y<H;y+=64){
+    ctx.beginPath();
+    ctx.moveTo(0,y);
+    ctx.lineTo(W,y);
+    ctx.stroke();
+  }
+
+  // dark corners
+  const vign=ctx.createRadialGradient(W/2,H/2,180,W/2,H/2,650);
+  vign.addColorStop(0,"rgba(0,0,0,0)");
+  vign.addColorStop(1,"rgba(0,0,0,.58)");
+  ctx.fillStyle=vign;
+  ctx.fillRect(0,70,W,H-70);
+
+  // arena boundary
+  ctx.strokeStyle="#293629";
+  ctx.lineWidth=4;
+  ctx.strokeRect(22,91,W-44,H-110);
+}
+
+function drawHUD(){
+  ctx.fillStyle="#101510";
+  ctx.fillRect(0,0,W,70);
+  ctx.strokeStyle="#394637";
+  ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(0,69);ctx.lineTo(W,69);ctx.stroke();
+
+  ctx.fillStyle="#d6d2b5";
+  ctx.font="bold 22px Arial";
+  ctx.fillText("ZOMBIE SIEGE",24,31);
+
+  ctx.font="bold 16px Arial";
+  ctx.fillStyle="#929d85";
+  ctx.fillText("STAGE",250,23);
+  ctx.fillStyle="#f1e7bd";
+  ctx.font="bold 25px Arial";
+  ctx.fillText(stage,250,51);
+
+  ctx.fillStyle="#929d85";
+  ctx.font="bold 16px Arial";
+  ctx.fillText("CREDITS",330,23);
+  ctx.fillStyle="#f1d35b";
+  ctx.font="bold 25px Arial";
+  ctx.fillText("$"+money,330,51);
+
+  ctx.fillStyle="#929d85";
+  ctx.font="bold 16px Arial";
+  ctx.fillText("SCORE",450,23);
+  ctx.fillStyle="#e6e0c4";
+  ctx.font="bold 25px Arial";
+  ctx.fillText(score,450,51);
+
+  // health
+  ctx.fillStyle="#929d85";
+  ctx.font="bold 14px Arial";
+  ctx.fillText("HEALTH",590,20);
+  ctx.fillStyle="#241616";
+  ctx.fillRect(590,28,170,17);
+  ctx.fillStyle="#b34d42";
+  ctx.fillRect(590,28,170*clamp(player.health/player.maxHealth,0,1),17);
+  ctx.strokeStyle="#766458";
+  ctx.strokeRect(590,28,170,17);
+  ctx.fillStyle="#eee5cb";
+  ctx.font="bold 13px Arial";
+  ctx.fillText(Math.ceil(player.health)+" / "+player.maxHealth,645,41);
+
+  ctx.fillStyle="#929d85";
+  ctx.font="bold 14px Arial";
+  ctx.fillText("AMMO",785,20);
+  ctx.fillStyle="#e7dcae";
+  ctx.font="bold 25px Arial";
+  ctx.fillText(player.ammo+" / "+player.maxAmmo,785,51);
+
+  if(player.reload>0){
+    ctx.fillStyle="#e3bb58";
+    ctx.font="bold 13px Arial";
+    ctx.fillText("RELOADING...",900,20);
+    ctx.fillStyle="#473d25";
+    ctx.fillRect(900,28,98,12);
+    ctx.fillStyle="#d8b34f";
+    ctx.fillRect(900,28,98*(1-player.reload/player.reloadTime),12);
+  }
+}
+
+function drawPlayer(){
+  const a=Math.atan2(mouse.y-player.y,mouse.x-player.x);
+  const recoil=player.recoil>0?Math.sin(player.recoil*60)*5:0;
+
+  ctx.save();
+  ctx.translate(player.x,player.y);
+  ctx.rotate(a);
+
+  // shadow
+  ctx.fillStyle="rgba(0,0,0,.45)";
+  ctx.beginPath();
+  ctx.ellipse(-3,28,33,12,0,0,TAU);
+  ctx.fill();
+
+  // legs/body
+  ctx.fillStyle="#2f3730";
+  ctx.fillRect(-19,8,13,27);
+  ctx.fillRect(7,8,13,27);
+
+  ctx.fillStyle=player.invuln>0?"#ffffff":"#b7ad8d";
+  ctx.beginPath();
+  ctx.arc(0,-5,25,0,TAU);
+  ctx.fill();
+
+  ctx.fillStyle="#5b6656";
+  ctx.fillRect(-22,-2,44,25);
+
+  // head
+  ctx.fillStyle=player.invuln>0?"#fff":"#c9c09e";
+  ctx.beginPath();
+  ctx.arc(2,-24,17,0,TAU);
+  ctx.fill();
+
+  // hair
+  ctx.fillStyle="#33352f";
+  ctx.beginPath();
+  ctx.arc(2,-29,17,Math.PI,TAU);
+  ctx.fill();
+
+  // gun
+  ctx.save();
+  ctx.translate(14,-2);
+  ctx.rotate(-.02);
+  ctx.fillStyle="#161816";
+  ctx.fillRect(5,-5,44,10);
+  ctx.fillStyle="#383c35";
+  ctx.fillRect(34,-7,23,7);
+  ctx.fillStyle="#171916";
+  ctx.fillRect(20,4,10,17);
+  ctx.restore();
+
+  if(player.flash>0){
+    ctx.fillStyle="#fff3a1";
+    ctx.beginPath();
+    ctx.moveTo(69,-3);
+    ctx.lineTo(93,-12);
+    ctx.lineTo(82,0);
+    ctx.lineTo(98,8);
+    ctx.lineTo(68,6);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function drawEnemy(e){
+  const t=TYPES[e.type];
+  const wob=Math.sin(time*7+e.wobble)*2;
+  const deathScale=e.dead?Math.max(0,1-e.death*3):1;
+
+  ctx.save();
+  ctx.translate(e.x,e.y);
+  ctx.scale(deathScale,deathScale);
+
+  ctx.fillStyle="rgba(0,0,0,.4)";
+  ctx.beginPath();
+  ctx.ellipse(0,e.r*.8,e.r*.9,e.r*.3,0,0,TAU);
+  ctx.fill();
+
+  if(e.type==="small")drawSmallZombie(wob,e);
+  if(e.type==="medium")drawMediumZombie(wob,e);
+  if(e.type==="large")drawLargeZombie(wob,e);
+
+  if(!e.dead){
+    const bw=e.r*2.2;
+    ctx.fillStyle="#241817";
+    ctx.fillRect(-bw/2,-e.r-15,bw,6);
+    ctx.fillStyle="#a94e42";
+    ctx.fillRect(-bw/2,-e.r-15,bw*clamp(e.hp/e.maxHp,0,1),6);
+  }
+
+  ctx.restore();
+}
+
+function zombieHead(color,r,y){
+  ctx.fillStyle=color;
+  ctx.beginPath();
+  ctx.arc(0,y,r,0,TAU);
+  ctx.fill();
+  ctx.strokeStyle="#263022";
+  ctx.lineWidth=3;
+  ctx.stroke();
+
+  ctx.fillStyle="#252b20";
+  ctx.beginPath();ctx.arc(-r*.35,y-r*.1,r*.13,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.arc(r*.35,y-r*.1,r*.13,0,TAU);ctx.fill();
+
+  ctx.strokeStyle="#303726";
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.arc(0,y+r*.05,r*.45,.2,Math.PI-.2);
+  ctx.stroke();
+}
+
+function drawSmallZombie(w,e){
+  ctx.fillStyle="#4b5d40";
+  ctx.fillRect(-15,2,30,31);
+  zombieHead("#879b65",17,-12+w*.3);
+
+  ctx.strokeStyle="#56664a";
+  ctx.lineWidth=8;
+  ctx.beginPath();
+  ctx.moveTo(-13,7);ctx.lineTo(-28,24+w);
+  ctx.moveTo(13,7);ctx.lineTo(27,22-w);
+  ctx.stroke();
+}
+
+function drawMediumZombie(w,e){
+  ctx.fillStyle="#3e4c38";
+  ctx.fillRect(-22,-1,44,47);
+  ctx.fillStyle="#566649";
+  ctx.beginPath();
+  ctx.arc(0,20,28,0,TAU);
+  ctx.fill();
+  zombieHead("#78895e",21,-19+w*.25);
+
+  ctx.strokeStyle="#4d5c43";
+  ctx.lineWidth=10;
+  ctx.beginPath();
+  ctx.moveTo(-19,8);ctx.lineTo(-34,32+w);
+  ctx.moveTo(19,8);ctx.lineTo(34,31-w);
+  ctx.stroke();
+}
+
+function drawLargeZombie(w,e){
+  ctx.fillStyle="#303d2d";
+  ctx.fillRect(-31,-8,62,65);
+  ctx.fillStyle="#46553b";
+  ctx.beginPath();
+  ctx.ellipse(0,24,39,42,0,0,TAU);
+  ctx.fill();
+
+  zombieHead("#687b50",28,-27+w*.2);
+
+  ctx.strokeStyle="#3d4c35";
+  ctx.lineWidth=15;
+  ctx.beginPath();
+  ctx.moveTo(-27,3);ctx.lineTo(-52,37+w);
+  ctx.moveTo(27,3);ctx.lineTo(52,36-w);
+  ctx.stroke();
+}
+
+function drawBullets(){
+  for(const b of bullets){
+    const a=Math.atan2(b.vy,b.vx);
+    ctx.save();
+    ctx.translate(b.x,b.y);
+    ctx.rotate(a);
+    ctx.fillStyle=b.critical?"#ffd34e":"#e8d8a0";
+    ctx.fillRect(-10,-2,20,4);
+    ctx.restore();
+  }
+}
+
+function drawParticles(){
+  for(const p of particles){
+    ctx.globalAlpha=clamp(p.life/p.max,0,1);
+    ctx.fillStyle=p.color;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,TAU);
+    ctx.fill();
+  }
+  ctx.globalAlpha=1;
+
+  for(const t of texts){
+    ctx.globalAlpha=clamp(t.life/t.max,0,1);
+    ctx.fillStyle=t.color;
+    ctx.font="bold 16px Arial";
+    ctx.textAlign="center";
+    ctx.fillText(t.text,t.x,t.y);
+  }
+  ctx.textAlign="left";
+  ctx.globalAlpha=1;
+}
+
+function drawCrosshair(){
+  if(state==="TITLE")return;
+  ctx.save();
+  ctx.translate(mouse.x,mouse.y);
+  ctx.strokeStyle=mouse.down?"#f4d56b":"#d7d3b6";
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.arc(0,0,10,0,TAU);
+  ctx.moveTo(-18,0);ctx.lineTo(-7,0);
+  ctx.moveTo(7,0);ctx.lineTo(18,0);
+  ctx.moveTo(0,-18);ctx.lineTo(0,-7);
+  ctx.moveTo(0,7);ctx.lineTo(0,18);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function panel(x,y,w,h){
+  ctx.fillStyle="rgba(12,16,12,.95)";
+  ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle="#59644e";
+  ctx.lineWidth=3;
+  ctx.strokeRect(x,y,w,h);
+  ctx.strokeStyle="#252d24";
+  ctx.lineWidth=1;
+  ctx.strokeRect(x+7,y+7,w-14,h-14);
+}
+
+function buttonDraw(x,y,w,h,text,sub="",active=true){
+  const hover=active&&button(x,y,w,h);
+  ctx.fillStyle=hover?"#59684e":"#30392d";
+  ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle=hover?"#b3bf8e":"#66705c";
+  ctx.lineWidth=2;
+  ctx.strokeRect(x,y,w,h);
+
+  ctx.fillStyle="#eee7ce";
+  ctx.font="bold 20px Arial";
+  ctx.textAlign="center";
+  ctx.fillText(text,x+w/2,y+31);
+
+  if(sub){
+    ctx.fillStyle="#aab09d";
+    ctx.font="12px Arial";
+    ctx.fillText(sub,x+w/2,y+h-12);
+  }
+  ctx.textAlign="left";
+}
+
+/* =========================================================
+   SCREENS
+   ========================================================= */
+
+function drawTitle(){
+  clear();
+  drawBackground();
+
+  ctx.fillStyle="rgba(0,0,0,.35)";
+  ctx.fillRect(0,70,W,H-70);
+
+  // decorative zombie
+  ctx.save();
+  ctx.translate(512,250);
+  ctx.scale(1.7,1.7);
+  drawLargeZombie(0,{});
+  ctx.restore();
+
+  ctx.textAlign="center";
+  ctx.fillStyle="#e7dfc1";
+  ctx.font="bold 68px Arial";
+  ctx.fillText("ZOMBIE SIEGE",512,145);
+
+  ctx.fillStyle="#9ba88c";
+  ctx.font="18px Arial";
+  ctx.fillText("A classic fixed-position Flash-style survival shooter",512,177);
+
+  buttonDraw(382,405,260,72,"PLAY","START SURVIVAL");
+  buttonDraw(382,495,260,52,muted?"SOUND: OFF":"SOUND: ON");
+
+  ctx.fillStyle="#777e70";
+  ctx.font="14px Arial";
+  ctx.fillText("Mouse: aim & fire    •    R: reload    •    ESC: pause",512,600);
+  ctx.fillText("High Score: "+highScore+"    •    Best Stage: "+highStage,512,630);
+  ctx.fillText("15 stages • 3 zombie classes • upgrades",512,660);
+  ctx.textAlign="left";
+}
+
+function drawPause(){
+  drawWorld();
+  ctx.fillStyle="rgba(0,0,0,.7)";
+  ctx.fillRect(0,0,W,H);
+
+  panel(332,225,360,345);
+
+  ctx.textAlign="center";
+  ctx.fillStyle="#e8e1c7";
+  ctx.font="bold 46px Arial";
+  ctx.fillText("PAUSED",512,275);
+
+  buttonDraw(382,300,260,60,"RESUME");
+  buttonDraw(382,375,260,60,"RESTART");
+  buttonDraw(382,450,260,52,muted?"SOUND: OFF":"SOUND: ON");
+  ctx.textAlign="left";
+}
+
+function drawUpgrade(){
+  drawWorld();
+  ctx.fillStyle="rgba(5,8,5,.82)";
+  ctx.fillRect(0,70,W,H-70);
+
+  panel(90,88,844,630);
+
+  ctx.textAlign="center";
+  ctx.fillStyle="#eee6ca";
+  ctx.font="bold 36px Arial";
+  ctx.fillText(stage>=15?"FINAL STAGE COMPLETE":"STAGE "+stage+" COMPLETE",512,130);
+
+  ctx.fillStyle="#f0d35b";
+  ctx.font="bold 20px Arial";
+  ctx.fillText("CREDITS: $"+money,512,155);
+
+  ctx.textAlign="left";
+
+  upgradeDefs.forEach((def,i)=>{
+    const y=155+i*83;
+    const cost=upgradeCost(def);
+    const affordable=money>=cost;
+
+    ctx.fillStyle=button(x=130,y,w=764,h=68)?"#45523e":"#30392d";
+    ctx.fillRect(130,y,764,68);
+    ctx.strokeStyle=affordable?"#66755b":"#4a5147";
+    ctx.strokeRect(130,y,764,68);
+
+    ctx.fillStyle="#e5dfc7";
+    ctx.font="bold 18px Arial";
+    ctx.fillText(def.name,155,y+25);
+
+    ctx.fillStyle="#a5ad99";
+    ctx.font="13px Arial";
+    ctx.fillText("LEVEL "+upgrades[def.key]+"   •   "+def.desc,155,y+47);
+
+    ctx.fillStyle=affordable?"#f0d25a":"#817d69";
+    ctx.font="bold 18px Arial";
+    ctx.textAlign="right";
+    ctx.fillText("$"+cost,865,y+38);
+    ctx.textAlign="left";
+  });
+
+  buttonDraw(370,610,284,65,stage>=15?"VIEW VICTORY":"CONTINUE","Proceed to next stage");
+}
+
+function drawGameOver(){
+  drawWorld();
+  ctx.fillStyle="rgba(0,0,0,.76)";
+  ctx.fillRect(0,0,W,H);
+
+  panel(320,190,384,405);
+
+  ctx.textAlign="center";
+  ctx.fillStyle="#d35d4e";
+  ctx.font="bold 52px Arial";
+  ctx.fillText("GAME OVER",512,260);
+
+  ctx.fillStyle="#dcd6bd";
+  ctx.font="18px Arial";
+  ctx.fillText("The siege has overwhelmed you.",512,300);
+
+  ctx.font="bold 20px Arial";
+  ctx.fillStyle="#eee6c8";
+  ctx.fillText("Stage reached: "+stage,512,350);
+  ctx.fillText("Score: "+score,512,380);
+  ctx.fillText("Credits: $"+money,512,410);
+  ctx.fillText("High Score: "+highScore,512,440);
+
+  buttonDraw(382,535,260,65,"RESTART");
+  ctx.textAlign="left";
+}
+
+function drawVictory(){
+  drawWorld();
+  ctx.fillStyle="rgba(0,0,0,.72)";
+  ctx.fillRect(0,0,W,H);
+
+  panel(320,175,384,440);
+
+  ctx.textAlign="center";
+  ctx.fillStyle="#e6d266";
+  ctx.font="bold 50px Arial";
+  ctx.fillText("VICTORY",512,255);
+
+  ctx.fillStyle="#b8c29e";
+  ctx.font="18px Arial";
+  ctx.fillText("All 15 stages survived.",512,295);
+
+  ctx.fillStyle="#eee6c8";
+  ctx.font="bold 20px Arial";
+  ctx.fillText("FINAL SCORE: "+score,512,355);
+  ctx.fillText("CREDITS: $"+money,512,390);
+  ctx.fillText("HIGH SCORE: "+highScore,512,425);
+
+  buttonDraw(382,535,260,65,"RESTART");
+  ctx.textAlign="left";
+}
+
+/* =========================================================
+   WORLD
+   ========================================================= */
+
+function drawWorld(){
+  ctx.save();
+
+  const sx=rand(-shake,shake);
+  const sy=rand(-shake,shake);
+  ctx.translate(sx,sy);
+
+  drawBackground();
+  drawHUD();
+
+  for(const e of enemies)drawEnemy(e);
+  drawBullets();
+  drawPlayer();
+  drawParticles();
+
+  if(stageIntro>0){
+    ctx.fillStyle="rgba(0,0,0,.42)";
+    ctx.fillRect(0,70,W,H-70);
+    ctx.textAlign="center";
+    ctx.fillStyle="#eee6ca";
+    ctx.font="bold 50px Arial";
+    ctx.fillText("STAGE "+stage,W/2,350);
+    ctx.font="18px Arial";
+    ctx.fillStyle="#aeb59f";
+    ctx.fillText(
+      "SURVIVE • ELIMINATE "+stageData.total+" HOSTILES",
+      W/2,385
+    );
+    ctx.textAlign="left";
+  }
+
+  if(bannerTimer>0&&stageIntro<=0){
+    ctx.globalAlpha=clamp(bannerTimer/.5,0,1);
+    ctx.textAlign="center";
+    ctx.fillStyle="#e7d36b";
+    ctx.font="bold 26px Arial";
+    ctx.fillText(banner,W/2,115);
+    ctx.textAlign="left";
+    ctx.globalAlpha=1;
+  }
+
+  if(flash>0){
+    ctx.fillStyle="rgba(220,60,45,"+Math.min(.3,flash*2)+")";
+    ctx.fillRect(0,0,W,H);
+  }
+
+  ctx.restore();
+}
+
+function draw(){
+  if(state==="TITLE")drawTitle();
+  else if(state==="PLAYING")drawWorld();
+  else if(state==="PAUSED")drawPause();
+  else if(state==="UPGRADE")drawUpgrade();
+  else if(state==="GAME_OVER")drawGameOver();
+  else if(state==="VICTORY")drawVictory();
+
+  drawCrosshair();
+}
+
+/* =========================================================
+   MAIN LOOP
+   ========================================================= */
+
+function loop(now){
+  const dt=Math.min(.033,(now-last)/1000);
+  last=now;
+  update(dt);
+  draw();
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+
+/* Start title state. */
+</script>
+</body>
+</html>
