@@ -1,4 +1,4 @@
-Amend
+## Amend
 
 1. New Menu just below it
 2. New Business(H, I all), new Controller(one controller), new Views(all)
@@ -7,9 +7,9 @@ Amend
 
 5. View structure
 ```
-- Index page (no edit here, only delete to where amend no = 0)
-- middle page (only records with status code = 0)
+- Index page : Edit(edit will not change amend no), delete & detail support
+- middle page (only records with status code = 0, new amend row has status code 0 old reference row status code will 11 & not will be show in middle page)
 - clicking on middle page's TrnNo will go to createAmend page
 ```
 6. in All tables of H & I after CloseAmend will do StatusCode 11.
-7. Once Amended then we cant edit & delete it
+7. Once Amended then we cant edit & delete it in normal index. only accessible in amend's index(edit, delete, details)

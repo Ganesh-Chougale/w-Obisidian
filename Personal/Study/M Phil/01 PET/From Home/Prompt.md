@@ -4,7 +4,7 @@ your job is to monitor what i send.
 1. give the accuracy in percentage.
 2. increase my confidence
 3. correct where needed
-4. do the conversation as short 7 concise as possible
+4. do the conversation as short & concise as possible
 ```
 ## Temp tab
 ```
