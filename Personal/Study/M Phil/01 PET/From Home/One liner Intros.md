@@ -128,10 +128,10 @@
 ## 18. PARAMETRIC TESTS
 
 * **18.1 Tests of Means** — Tests used to determine whether population means differ or match a specified value.
-* **18.1 Difference between Means** — Tests whether two population means differ significantly.
-* **18.1 Proportions** — Tests whether population proportions differ or match a specified value.
-* **18.1 Variances** — Tests concerning population variance or differences between variances.
-* **18.1 Correlation Coefficients** — Tests whether a population correlation is statistically significant.
+* **18.2 Difference between Means** — Tests whether two population means differ significantly.
+* **18.3 Proportions** — Tests whether population proportions differ or match a specified value.
+* **18.4 Variances** — Tests concerning population variance or differences between variances.
+* **18.5 Correlation Coefficients** — Tests whether a population correlation is statistically significant.
 
 ## 19. CHI-SQUARE TEST
 
