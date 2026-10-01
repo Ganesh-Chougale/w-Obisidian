@@ -1,0 +1,1 @@
+Click DB's folder. such as Table, Stored Procedure & then click `F7` to open object search feature.  

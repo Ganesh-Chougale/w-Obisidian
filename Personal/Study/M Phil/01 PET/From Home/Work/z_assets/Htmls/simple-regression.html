@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Linear Regression Interactive Visualization</title>
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222222;
+            --border-color: #dddddd;
+            --primary-color: #2563eb;
+            --secondary-color: #dc2626;
+            --accent-color: #16a34a;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #555555;
+            margin-bottom: 24px;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .workspace {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .graph-container {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 10px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible;
+        }
+
+        .axis line, .axis path {
+            stroke: #333;
+            stroke-width: 1px;
+        }
+
+        .grid line {
+            stroke: #e5e7eb;
+            stroke-width: 1px;
+            stroke-dasharray: 2,2;
+        }
+
+        .axis-label {
+            font-size: 11px;
+            fill: #444;
+            font-weight: 600;
+        }
+
+        .tick-label {
+            font-size: 10px;
+            fill: #666;
+        }
+
+        .data-point {
+            fill: var(--primary-color);
+            cursor: grab;
+            transition: r 0.1s ease;
+        }
+
+        .data-point:active {
+            cursor: grabbing;
+            fill: #1d4ed8;
+        }
+
+        .data-point:hover {
+            r: 7px;
+        }
+
+        .regression-line {
+            stroke: var(--secondary-color);
+            stroke-width: 2.5px;
+            stroke-dasharray: none;
+        }
+
+        .residual-line {
+            stroke: var(--accent-color);
+            stroke-width: 1.5px;
+            stroke-dasharray: 3,3;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .metrics-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 16px;
+        }
+
+        .equation-box {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid var(--secondary-color);
+            margin-bottom: 14px;
+            text-align: center;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 0.9rem;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            color: #555;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        button {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            background: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        button:hover {
+            background: #f9fafb;
+            border-color: #adbcb6;
+        }
+
+        button.btn-reset {
+            grid-column: span 2;
+            background: #f3f4f6;
+        }
+
+        button.btn-reset:hover {
+            background: #e5e7eb;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 4px;
+            user-select: none;
+        }
+
+        .checkbox-container input {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        .explanation {
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+            margin-top: 8px;
+        }
+
+        .explanation h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .explanation ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .explanation li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Simple Regression</h1>
+    <div class="subtitle">Drag the observed points and watch the least-squares regression line respond.</div>
+
+    <div class="workspace">
+        <!-- Scatter Plot Canvas -->
+        <div class="graph-container">
+            <svg id="regression-graph" viewBox="0 0 500 400">
+                <!-- Grid Lines -->
+                <g id="grid-lines" class="grid"></g>
+                <!-- Residual Lines Group -->
+                <g id="residuals-group"></g>
+                <!-- Regression Line -->
+                <line id="regression-line" class="regression-line" x1="0" y1="0" x2="0" y2="0" />
+                <!-- Axis Systems -->
+                <g id="axis-system" class="axis">
+                    <line x1="50" y1="350" x2="480" y2="350" /> <!-- X Axis -->
+                    <line x1="50" y1="20" x2="50" y2="350" />  <!-- Y Axis -->
+                </g>
+                <!-- Labels and Ticks -->
+                <g id="ticks-labels"></g>
+                <!-- Axis Titles -->
+                <text class="axis-label" x="265" y="388" text-anchor="middle">Study Hours (X)</text>
+                <text class="axis-label" x="15" y="185" text-anchor="middle" transform="rotate(-90,15,185)">Exam Marks (Y)</text>
+                <!-- Data Points Group -->
+                <g id="points-group"></g>
+            </svg>
+        </div>
+
+        <!-- Metric Information Sidebar -->
+        <div class="sidebar">
+            <div class="metrics-card">
+                <div class="equation-box" id="eq-display">Ŷ = a + bX</div>
+                
+                <div class="metric-row">
+                    <span class="metric-label">Slope (b)</span>
+                    <span class="metric-value" id="val-b">0.00</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Intercept (a)</span>
+                    <span class="metric-value" id="val-a">0.00</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">R² (Variance Expl.)</span>
+                    <span class="metric-value" id="val-r2">0.00</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Observations (N)</span>
+                    <span class="metric-value" id="val-n">0</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="btn-group">
+                    <button id="btn-add" title="Add a random observation point">+ Add Point</button>
+                    <button id="btn-remove" title="Remove the last observation point">- Remove Point</button>
+                    <button id="btn-reset" class="btn-reset" title="Reset dataset to initial values">Reset Dataset</button>
+                </div>
+                
+                <label class="checkbox-container">
+                    <input type="checkbox" id="chk-residuals" checked>
+                    Show residuals (errors)
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Educational Footer Context -->
+    <div class="explanation">
+        <h3>What you are seeing:</h3>
+        <ul>
+            <li><strong>Each dot</strong> represents a real-world observed pair of data points matching Study Hours ($X$) to Exam Marks ($Y$).</li>
+            <li><strong>The solid red regression line</strong> represents the ordinary least-squares (OLS) line of best fit calculated dynamically from your dataset.</li>
+            <li><strong>The green dashed lines</strong> show the <em>residuals</em> (the vertical gap between what was actually observed ($Y$) and what the regression model predicts ($Ŷ$)).</li>
+            <li><strong>Ordinary Least Squares (OLS)</strong> mathematically calculates and positions the line to minimize the sum of all squared residual values ($\sum e^2$).</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Configuration Map and Constraints
+    const svg = document.getElementById('regression-graph');
+    const pointsGroup = document.getElementById('points-group');
+    const residualsGroup = document.getElementById('residuals-group');
+    const regLine = document.getElementById('regression-line');
+    const gridLines = document.getElementById('grid-lines');
+    const ticksLabels = document.getElementById('ticks-labels');
+
+    // Chart Area Dimensions
+    const padding = { left: 50, right: 20, top: 20, bottom: 50 };
+    const width = 500;
+    const height = 400;
+    const graphWidth = width - padding.left - padding.right;
+    const graphHeight = height - padding.top - padding.bottom;
+
+    // Fixed Domains matching the mental model
+    const xMin = 0, xMax = 20;   // Study Hours range
+    const yMin = 0, yMax = 100;  // Exam Marks scale
+
+    // Initial realistic data configuration (positive linear trend with organic variance)
+    const initialPoints = [
+        { x: 2,  y: 25 },
+        { x: 5,  y: 45 },
+        { x: 8,  y: 50 },
+        { x: 11, y: 72 },
+        { x: 14, y: 68 },
+        { x: 17, y: 90 },
+        { x: 19, y: 95 }
+    ];
+
+    let points = JSON.parse(JSON.stringify(initialPoints));
+    let draggedPointIdx = null;
+
+    // Coordinate conversions between Data Space & SVG Pixel coordinate system
+    function dataToPixelX(x) {
+        return padding.left + ((x - xMin) / (xMax - xMin)) * graphWidth;
+    }
+
+    function dataToPixelY(y) {
+        return height - padding.bottom - ((y - yMin) / (yMax - yMin)) * graphHeight;
+    }
+
+    function pixelToDataX(px) {
+        let x = xMin + ((px - padding.left) / graphWidth) * (xMax - xMin);
+        return Math.max(xMin, Math.min(xMax, x));
+    }
+
+    function pixelToDataY(py) {
+        let y = yMin + ((height - padding.bottom - py) / graphHeight) * (yMax - yMin);
+        return Math.max(yMin, Math.min(yMax, y));
+    }
+
+    // Render Grid Background and Axis Labels Static Templates
+    function setupGraphInfrastructure() {
+        gridLines.innerHTML = '';
+        ticksLabels.innerHTML = '';
+
+        // Draw X Axis Ticks and Grid Guides
+        for (let x = xMin; x <= xMax; x += 2) {
+            let px = dataToPixelX(x);
+            gridLines.innerHTML += `<line x1="${px}" y1="${dataToPixelY(yMin)}" x2="${px}" y2="${dataToPixelY(yMax)}" />`;
+            ticksLabels.innerHTML += `
+                <line x1="${px}" y1="${dataToPixelY(yMin)}" x2="${px}" y2="${dataToPixelY(yMin)+4}" stroke="#333" />
+                <text class="tick-label" x="${px}" y="${dataToPixelY(yMin)+16}" text-anchor="middle">${x}</text>
+            `;
+        }
+
+        // Draw Y Axis Ticks and Grid Guides
+        for (let y = yMin; y <= yMax; y += 10) {
+            let py = dataToPixelY(y);
+            gridLines.innerHTML += `<line x1="${dataToPixelX(xMin)}" y1="${py}" x2="${dataToPixelX(xMax)}" y2="${py}" />`;
+            ticksLabels.innerHTML += `
+                <line x1="${dataToPixelX(xMin)-4}" y1="${py}" x2="${dataToPixelX(xMin)}" stroke="#333" />
+                <text class="tick-label" x="${dataToPixelX(xMin)-8}" y="${py+4}" text-anchor="end">${y}</text>
+            `;
+        }
+    }
+
+    // Core Linear Least-Squares Engine Implementation
+    function computeRegression() {
+        const n = points.length;
+        document.getElementById('val-n').innerText = n;
+
+        if (n < 2) {
+            updateMetricsUI(null, null, null, "Insufficient Data");
+            regLine.setAttribute('stroke-opacity', 0);
+            residualsGroup.innerHTML = '';
+            return;
+        }
+
+        let sumX = 0, sumY = 0;
+        for (let p of points) {
+            sumX += p.x;
+            sumY += p.y;
+        }
+        const meanX = sumX / n;
+        const meanY = sumY / n;
+
+        let num = 0;
+        let den = 0;
+        let ssTot = 0;
+
+        for (let p of points) {
+            num += (p.x - meanX) * (p.y - meanY);
+            den += (p.x - meanX) * (p.x - meanX);
+            ssTot += (p.y - meanY) * (p.y - meanY);
+        }
+
+        // Catch edge-case of vertical variance cluster (identical X values)
+        if (den === 0) {
+            updateMetricsUI(null, null, null, "Undefined (Vertical)");
+            regLine.setAttribute('stroke-opacity', 0);
+            residualsGroup.innerHTML = '';
+            return;
+        }
+
+        const b = num / den;
+        const a = meanY - (b * meanX);
+
+        // Compute residuals error framework & R-squared model fit score
+        let ssRes = 0;
+        for (let p of points) {
+            let predictedY = a + b * p.x;
+            ssRes += (p.y - predictedY) * (p.y - predictedY);
+        }
+
+        let r2 = (ssTot === 0) ? 1.0 : 1 - (ssRes / ssTot);
+        if (r2 < 0) r2 = 0; // Safeguard numeric rounding discrepancies
+
+        updateMetricsUI(a, b, r2, null);
+        renderVisuals(a, b);
+    }
+
+    // Update Interactive Dashboard View
+    function updateMetricsUI(a, b, r2, errorMsg) {
+        if (errorMsg) {
+            document.getElementById('eq-display').innerText = errorMsg;
+            document.getElementById('val-b').innerText = "-";
+            document.getElementById('val-a').innerText = "-";
+            document.getElementById('val-r2').innerText = "-";
+            return;
+        }
+
+        const sign = b >= 0 ? "+" : "-";
+        const absB = Math.abs(b).toFixed(2);
+        document.getElementById('eq-display').innerText = `Ŷ = ${a.toFixed(2)} ${sign} ${absB}X`;
+        document.getElementById('val-b').innerText = b.toFixed(4);
+        document.getElementById('val-a').innerText = a.toFixed(4);
+        document.getElementById('val-r2').innerText = r2.toFixed(4);
+    }
+
+    // Draw Dynamic Regression Paths & Residual Vectors
+    function renderVisuals(a, b) {
+        // Draw standard OLS regression line across the full bounding landscape width
+        const xLineMin = xMin;
+        const yLineMin = a + b * xLineMin;
+        const xLineMax = xMax;
+        const yLineMax = a + b * xLineMax;
+
+        regLine.setAttribute('x1', dataToPixelX(xLineMin));
+        regLine.setAttribute('y1', dataToPixelY(yLineMin));
+        regLine.setAttribute('x2', dataToPixelX(xLineMax));
+        regLine.setAttribute('y2', dataToPixelY(yLineMax));
+        regLine.setAttribute('stroke-opacity', 1);
+
+        // Clear and evaluate residual vectors render layers
+        residualsGroup.innerHTML = '';
+        const showResiduals = document.getElementById('chk-residuals').checked;
+
+        points.forEach((p, idx) => {
+            const predY = a + b * p.x;
+            const px = dataToPixelX(p.x);
+            const pyActual = dataToPixelY(p.y);
+            const pyPredicted = dataToPixelY(predY);
+
+            if (showResiduals) {
+                residualsGroup.innerHTML += `
+                    <line class="residual-line" x1="${px}" y1="${pyActual}" x2="${px}" y2="${pyPredicted}" />
+                `;
+            }
+        });
+    }
+
+    // Dynamic Scatter Node Renderer mapping dataset state
+    function updatePointsDataView() {
+        pointsGroup.innerHTML = '';
+        points.forEach((p, idx) => {
+            const cx = dataToPixelX(p.x);
+            const cy = dataToPixelY(p.y);
+            pointsGroup.innerHTML += `
+                <circle class="data-point" data-index="${idx}" cx="${cx}" cy="${cy}" r="5.5" />
+            `;
+        });
+    }
+
+    // Transform event screen coordinates safely to native internal relative SVG coordinate frame
+    function getSVGEventCoords(e) {
+        const rect = svg.getBoundingClientRect();
+        let clientX = e.clientX;
+        let clientY = e.clientY;
+
+        // Extract coordinates from touch parameters if mobile gesture
+        if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        }
+
+        // Map scale ratios back accurately
+        const x = ((clientX - rect.left) / rect.width) * width;
+        const y = ((clientY - rect.top) / rect.height) * height;
+        return { x, y };
+    }
+
+    // Pointer Interaction Engine & Event Bindings
+    svg.addEventListener('pointerdown', (e) => {
+        if (e.target.classList.contains('data-point')) {
+            draggedPointIdx = parseInt(e.target.getAttribute('data-index'));
+            e.target.setPointerCapture(e.pointerId);
+            e.preventDefault();
+        }
+    });
+
+    svg.addEventListener('pointermove', (e) => {
+        if (draggedPointIdx !== null) {
+            const coords = getSVGEventCoords(e);
+            const dataX = pixelToDataX(coords.x);
+            const dataY = pixelToDataY(coords.y);
+
+            points[draggedPointIdx].x = parseFloat(dataX.toFixed(2));
+            points[draggedPointIdx].y = parseFloat(dataY.toFixed(2));
+
+            // Immediate DOM micro updates during frame shift
+            const circle = pointsGroup.querySelector(`[data-index="${draggedPointIdx}"]`);
+            if (circle) {
+                circle.setAttribute('cx', dataToPixelX(points[draggedPointIdx].x));
+                circle.setAttribute('cy', dataToPixelY(points[draggedPointIdx].y));
+            }
+
+            computeRegression();
+        }
+    });
+
+    const stopDragging = (e) => {
+        if (draggedPointIdx !== null) {
+            draggedPointIdx = null;
+            updatePointsDataView(); // Synchronize clean state tracking matrix mapping
+            computeRegression();
+        }
+    };
+
+    svg.addEventListener('pointerup', stopDragging);
+    svg.addEventListener('pointercancel', stopDragging);
+
+    // Sidebar Controller Implementations
+    document.getElementById('btn-add').addEventListener('click', () => {
+        // Generate uniform stochastic values matching structural linear environment bounds
+        const randX = parseFloat((xMin + Math.random() * (xMax - xMin)).toFixed(1));
+        const randY = parseFloat((yMin + Math.random() * (yMax - yMin)).toFixed(1));
+        points.push({ x: randX, y: randY });
+        updatePointsDataView();
+        computeRegression();
+    });
+
+    document.getElementById('btn-remove').addEventListener('click', () => {
+        if (points.length > 0) {
+            points.pop();
+            updatePointsDataView();
+            computeRegression();
+        }
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+        points = JSON.parse(JSON.stringify(initialPoints));
+        updatePointsDataView();
+        computeRegression();
+    });
+
+    document.getElementById('chk-residuals').addEventListener('change', () => {
+        computeRegression();
+    });
+
+    // Main Init Orchestrator Execution Frame
+    setupGraphInfrastructure();
+    updatePointsDataView();
+    computeRegression();
+</script>
+
+</body>
+</html>
