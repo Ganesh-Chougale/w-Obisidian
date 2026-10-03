@@ -56,7 +56,7 @@ SPs        :
 ```  
 ##### New column in old tables 
 ```yml
-
+1. TRN_PACKING_DETAILS_I_BOM : RATE : UTYPE_Decimal1:decimal(14, 3)
 ```
 ### Programming
 ```yml
@@ -64,7 +64,7 @@ D to D      : DTOTrnPartPriceH, DTOTrnPartPriceI,
               ITrnPartPriceH,   ITrnPartPriceI,
               DALTrnPartPriceH, DALTrnPartPriceI
 
-BO          : PartPrice, PartPrice
+BO          : PartPrice, PartPriceI, PartPriceAmend, PartPriceIAmend
 Controller  : 
 View        : 
 ```  
@@ -72,4 +72,6 @@ View        :
 ```yml
 Push Date   : 
 ```  
+
+NOTE::::::::::::::::::::::::::::::::::::::::::::::: remove isnull from H's dal query
 ----------------------------------------------------------------------------------------------------    
