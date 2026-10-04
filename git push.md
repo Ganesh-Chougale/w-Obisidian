@@ -10,7 +10,7 @@ cd "C:\Users\Administrator\Documents\Ganesh Notes\Docs"
 ```
 ```cmd
 cd "C:\Users\Administrator\Documents\Ganesh Notes\Docs"
-"..\hub\cmd\git.exe" push origin main
+"..\hub\cmd\git.exe" pull origin main
 ``` 
 
 # H
@@ -20,5 +20,5 @@ git commit -m "saved"
 git push origin main
 ```
 ```cmd
-git push origin main
+git pull origin main
 ``` 
