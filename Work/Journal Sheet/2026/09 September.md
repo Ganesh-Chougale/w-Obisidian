@@ -44,7 +44,7 @@ Push Date   :
 ```yml
 Description : New Menu
 Menu Path   : Marketing => Transaction => New Menu
-Menus       : Target Price [MENU_ID = 29205]
+Menus       : Target Price [MENU_ID = 29205], Target Price Amend [MENU_ID = 29205], Packing Cost [MENU_ID = 29406]
 WFC         : 
 Ticket      : 2627-000162
 ```  
@@ -64,9 +64,9 @@ D to D      : DTOTrnPartPriceH, DTOTrnPartPriceI,
               ITrnPartPriceH,   ITrnPartPriceI,
               DALTrnPartPriceH, DALTrnPartPriceI
 
-BO          : PartPrice, PartPriceI, PartPriceAmend, PartPriceIAmend
-Controller  : 
-View        : 
+BO          : PartPrice, PartPriceI, PartPriceAmend, PartPriceIAmend, PackingCost
+Controller  : TargetPriceController, TargetPriceAmendController, PackingCostController
+View        : (Index, GoCreate, ApproveIndex, GoApprove, Edit, Details, Delete), (Index, GoCreate, Create Edit, Details, Delete), (Index)
 ```  
 ### Git
 ```yml
