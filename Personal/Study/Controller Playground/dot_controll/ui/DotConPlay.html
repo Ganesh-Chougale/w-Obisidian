@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot Controller Playground</title>
+</head>
+
+<body style="
+            margin: 0;
+            width: 100vw; height: 100vh;
+            background: #050505;
+            display: flex;
+            flex-direction: column; /* Stacks items vertically */
+            justify-content: center;
+            align-items: center; /* Centers items horizontally */
+            gap: 15px; /* Adds space between the dropdown and the canvas */
+            ">
+    
+    <div>
+        <select id="controllerSelect" style="padding: 5px; cursor: pointer;">
+            <option value=""></option>
+            <option value="desktop_querty_keyboard">Desktop Qwerty Keyboard</option>
+        </select>        
+    </div>
+
+    <canvas id="playground"
+        style="
+                width: 90vw; height: 85vh; /* Reduced height slightly to account for the dropdown */
+                background: #111111;
+                border: 1px solid #1c1c1c;
+                ">
+    </canvas>
+
+<script src="../hardwares/desktop_querty_keyboard/desktop_querty_keyboard.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
