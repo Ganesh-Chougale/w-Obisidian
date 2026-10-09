@@ -14,4 +14,7 @@
 * **Closeness Check:** The AI can ask about the "closeness of flow" up to **2 times max** for **0 points**. The player responds with `close`, `mid`, or `far`.
 
 the title of each output should be clear like Qustion || Normal Hint || Special Hint || Closeness Check
+
+use the option whenever needed, no need to shy.
+use output concisely to save token.
 ```   
