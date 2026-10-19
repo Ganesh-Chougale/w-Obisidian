@@ -1,0 +1,1 @@
+codex "C:\Users\gchou\OneDrive\Desktop\Code\w-Obisidian\Personal\output.md" "C:\Users\gchou\OneDrive\Desktop\Code\w-Obisidian\Personal\Study\Mathematics"
