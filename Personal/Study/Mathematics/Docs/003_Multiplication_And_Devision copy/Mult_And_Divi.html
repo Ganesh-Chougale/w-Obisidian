@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Mathematics</title>
+  <title>multiplication and division</title>
   <link rel="stylesheet" href="../../z_assets/libs/katex.min.css">
   <link rel="stylesheet" href="../../z_assets/libs/pico.min.css">
 
@@ -28,10 +28,12 @@
     <section id="view">
       <input id="input1" type="number" placeholder="First value">
       <input id="input2" type="number" placeholder="Second value">
-      <button id="calculate">Calculate</button>
+      <button id="Mult">Multiply</button>
+      <button id="Divi">Devide</button>
       <output id="result">—</output>
     </section>
   </main>
+
 
   <script>
     fetch("./markdown.md")
@@ -52,27 +54,30 @@
       .catch(() => {
         document.getElementById("notes").textContent = "Notes unavailable.";
       });
-  </script>
+  </script>  
 
   <script>
-    document.getElementById("calculate").onclick = () => {
-      const fields = ["input1", "input2"].map(id =>
-        document.getElementById(id)
-      );
 
-      if (fields.some(el => el.value.trim() === "" || !el.checkValidity())) {
-        document.getElementById("result").textContent = "Enter valid numbers.";
-        return;
-      }
-
-      const [input1, input2] = fields.map(el => el.valueAsNumber);
-
+    const Mult = document.getElementById("Mult");
+    Mult.addEventListener("click", () => {
+      const input1Val = Number(document.getElementById("input1").value.trim());
+      const input2Val = Number(document.getElementById("input2").value.trim());
       // logic starts
-      let result = input1 + input2;
+      let result = input1Val * input2Val;
       // logic ends
-
       document.getElementById("result").textContent = result;
-    };
+    });
+
+    const Divi = document.getElementById("Divi");
+    Divi.addEventListener("click", () => {
+      const input1Val = Number(document.getElementById("input1").value.trim());
+      const input2Val = Number(document.getElementById("input2").value.trim());
+      // logic starts
+      let result = input1Val / input2Val;
+      // logic ends
+      document.getElementById("result").textContent = result;
+    });
+
   </script>
 </body>
 </html>

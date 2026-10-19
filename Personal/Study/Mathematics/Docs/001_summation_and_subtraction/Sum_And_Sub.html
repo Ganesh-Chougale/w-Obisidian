@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>summation and subtraction</title>
+  <link rel="stylesheet" href="../../z_assets/libs/katex.min.css">
+  <link rel="stylesheet" href="../../z_assets/libs/pico.min.css">
+
+  <style>
+    body { min-height:100vh; display:grid; place-items:center; }
+    main { width:min(90%,420px); margin:0; }
+    #view { display:grid; gap:1rem; text-align:center; }
+  </style>
+
+  <script defer src="../../z_assets/libs/marked.min.js"></script>
+  <script defer src="../../z_assets/libs/katex.min.js"></script>
+  <script defer src="../../z_assets/libs/auto-render.min.js"></script>
+</head>
+
+<body>
+  <main>
+    <details>
+      <summary>Detail</summary>
+      <div id="notes"></div>
+    </details>
+
+    <section id="view">
+      <input id="input1" type="number" placeholder="First value">
+      <input id="input2" type="number" placeholder="Second value">
+      <button id="Sum">Sum</button>
+      <button id="Sub">Sub</button>
+      <output id="result">—</output>
+    </section>
+  </main>
+
+  <script>
+    fetch("./markdown.md")
+      .then(r => {
+        if (!r.ok) throw Error(r.status);
+        return r.text();
+      })
+      .then(md => {
+        const notes = document.getElementById("notes");
+        notes.innerHTML = marked.parse(md);
+        renderMathInElement(notes, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\(", right: "\\)", display: false }
+          ]
+        });
+      })
+      .catch(() => {
+        document.getElementById("notes").textContent = "Notes unavailable.";
+      });
+  </script>   
+
+  <script>
+
+    const Sum = document.getElementById("Sum");
+    Sum.addEventListener("click", () => {
+      const input1Val = Number(document.getElementById("input1").value.trim());
+      const input2Val = Number(document.getElementById("input2").value.trim());
+      // logic starts
+      let result = input1Val + input2Val;
+      // logic ends
+      document.getElementById("result").textContent = result;
+    });
+
+    const Sub = document.getElementById("Sub");
+    Sub.addEventListener("click", () => {
+      const input1Val = Number(document.getElementById("input1").value.trim());
+      const input2Val = Number(document.getElementById("input2").value.trim());
+      // logic starts
+      let result = input1Val - input2Val;
+      // logic ends
+      document.getElementById("result").textContent = result;
+    });
+
+  </script>
+</body>
+</html>
