@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .calculator-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 24px;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .label-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .numeric-input {
+            width: 120px;
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: right;
+            outline: none;
+        }
+
+        .numeric-input:focus {
+            border-color: var(--primary);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .results-container {
+            background-color: #f1f5f9;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 28px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-top: 4px;
+        }
+
+        .result-row.highlight {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .result-row.highlight .result-label {
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+        }
+
+        .result-value {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .result-row.highlight .result-value {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-container">
+    <h2>Loan Calculator</h2>
+
+    <!-- Principal Amount Input -->
+    <div class="input-group">
+        <div class="label-container">
+            <label for="principalNum">Principal Amount (₹)</label>
+            <input type="number" id="principalNum" class="numeric-input" min="100000" max="100000000" step="50000" value="3000000">
+        </div>
+        <input type="range" id="principalRange" min="100000" max="100000000" step="50000" value="3000000">
+    </div>
+
+    <!-- Loan Duration Input -->
+    <div class="input-group">
+        <div class="label-container">
+            <label for="durationNum">Duration (Years)</label>
+            <input type="number" id="durationNum" class="numeric-input" min="1" max="30" step="1" value="10">
+        </div>
+        <input type="range" id="durationRange" min="1" max="30" step="1" value="10">
+    </div>
+
+    <!-- Interest Rate Input -->
+    <div class="input-group">
+        <div class="label-container">
+            <label for="interestNum">Interest Rate (% p.a.)</label>
+            <input type="number" id="interestNum" class="numeric-input" min="1" max="20" step="0.1" value="8.5">
+        </div>
+        <input type="range" id="interestRange" min="1" max="20" step="0.1" value="8.5">
+    </div>
+
+    <!-- Calculation Outputs -->
+    <div class="results-container">
+        <div class="result-row highlight">
+            <span class="result-label">Monthly EMI</span>
+            <span class="result-value" id="emiResult">₹0</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">Total Interest Payable</span>
+            <span class="result-value" id="interestResult">₹0</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">Total Payback Amount</span>
+            <span class="result-value" id="paybackResult">₹0</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Input elements
+    const pRange = document.getElementById('principalRange');
+    const pNum = document.getElementById('principalNum');
+    
+    const dRange = document.getElementById('durationRange');
+    const dNum = document.getElementById('durationNum');
+    
+    const iRange = document.getElementById('interestRange');
+    const iNum = document.getElementById('interestNum');
+
+    // Output elements
+    const emiOut = document.getElementById('emiResult');
+    const interestOut = document.getElementById('interestResult');
+    const paybackOut = document.getElementById('paybackResult');
+
+    // Helper function to format numbers into Indian Currency Format
+    function formatCurrency(num) {
+        return '₹' + Math.round(num).toLocaleString('en-IN');
+    }
+
+    // Core EMI Math function
+    function calculateMortgage() {
+        const P = parseFloat(pNum.value) || 0;
+        const numberOfYears = parseFloat(dNum.value) || 0;
+        const annualRate = parseFloat(iNum.value) || 0;
+
+        const N = numberOfYears * 12; // Total months
+        const R = (annualRate / 12) / 100; // Monthly interest rate fraction
+
+        let monthlyEmi = 0;
+        let totalPayback = 0;
+        let totalInterest = 0;
+
+        if (P > 0 && N > 0) {
+            if (R === 0) {
+                // Edge case handling for 0% interest rate
+                monthlyEmi = P / N;
+            } else {
+                // Standard Equated Monthly Installment Formula
+                monthlyEmi = P * R * Math.pow(1 + R, N) / (Math.pow(1 + R, N) - 1);
+            }
+            totalPayback = monthlyEmi * N;
+            totalInterest = totalPayback - P;
+        }
+
+        // Render values to screen
+        emiOut.innerText = formatCurrency(monthlyEmi);
+        interestOut.innerText = formatCurrency(totalInterest);
+        paybackOut.innerText = formatCurrency(totalPayback);
+    }
+
+    // Function to sync range input slider with number box
+    function setupSync(rangeInput, numInput) {
+        rangeInput.addEventListener('input', (e) => {
+            numInput.value = e.target.value;
+            calculateMortgage();
+        });
+        
+        numInput.addEventListener('input', (e) => {
+            // Keep numeric bounds safe
+            let val = parseFloat(e.target.value);
+            const max = parseFloat(numInput.max);
+            const min = parseFloat(numInput.min);
+            
+            if (val > max) val = max;
+            if (val < min) val = min;
+            
+            rangeInput.value = val || min;
+            calculateMortgage();
+        });
+    }
+
+    // Tie components together
+    setupSync(pRange, pNum);
+    setupSync(dRange, dNum);
+    setupSync(iRange, iNum);
+
+    // Initial load rendering
+    calculateMortgage();
+</script>
+
+</body>
+</html>

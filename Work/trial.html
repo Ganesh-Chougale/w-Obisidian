@@ -1,60 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
+<input type="hidden" class="hfSupplierName" value="${item.SupplierName}" />
+<input type="hidden" class="hfSupplierSubGlAcno" value="${item.SupplierSubGlAcno}" />
+</td>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<td class="OutSourceQty SumOfPlanQty text-center">
+    ${item.SumOfPlanQty}
+    <input type="hidden" class="hfSumOfPlanQty" value="${item.SumOfPlanQty}" />
+</td>`
 
-<style>
-    *{
-        border: 1px solid black;
+if (item.ShortSchNo == "") {
+row = row + `
+<td class="ScheduleNo SchNo text-center"></td>
+
+<td class="ScheduleQty BookedSchQty text-center"></td>
+
+<td class="text-center">
+    <a title="View" href="javascript:void(0);"
+        onclick="goCreatePo('${item.StrPoNo}', '${item.AmendNo}', '${item.BomMaterialCode}')"
+        data-ajax-update="#mainContent" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true">
+        ${item.ShortPoNo}
+    </a>
+    <input type="hidden" class="hfStrPoNo" value="${item.StrPoNo}" />
+</td>`;
+} else {
+
+if (item.SumofPlanQty < item.BookedSchQty) { row=row + ` <td class="text-center">
+    <a title="View" href="javascript:void(0);"
+        onclick="goCreateSchedule('${item.StrSchNo}', '${item.SchAmendNo}', '${item.MaterialCode}')"
+        data-ajax-update="#mainContent" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true">
+        ${item.ShortSchNo}
+    </a>
+    <input type="hidden" class="hfStrSchNo" value="${item.StrSchNo}" />
+    </td>`;
+    } else {
+    row = row + `
+    <td class="ScheduleNo SchNo text-center">
+        ${item.ShortSchNo}
+        <input type="hidden" class="hfStrSchNo" value="${item.StrSchNo}" />
+    </td>
+    `;
     }
-</style>
 
-<body>
-    <div >
-        <table >
-            <thead>
-                <tr>
-                    <th rowspan="2">
-                        Sr.
-                    </th>
+    row = row + `
+    <td class="ScheduleQty BookedSchQty text-center">
+        ${item.BookedSchQty}
+        <input type="hidden" class="hfBookedSchQty" value="${item.BookedSchQty}" />
+    </td>
 
-                    <th rowspan="2">
-                        Name of the Parts
-                    </th>
+    <td class="PoNo text-center">
+        ${item.ShortPoNo}
+        <input type="hidden" class="hfStrPoNo" value="${item.StrPoNo}" />
+    </td>
+    `;
+    }
+    row = row + `
+    <td class="PoDate text-center">
+        ${item.FormattedPoDate}
+        <input type="hidden" class="hfPoDate" value="${item.PoDate}" />
+    </td>
 
-                    <th colspan="3">
-                        PACKING COST
-                    </th>
+    </tr>
+    `;
 
-                    <th colspan="3">
-                        CHILD PARTS COST
-                    </th>
+    $("#tblPendingSchedule > tbody").append(row);
+    })
 
-                    <th colspan="3">
-                        TRANSPORT COST
-                    </th>
-                </tr>
-                <tr>
-                    <th style="width: 8.66%; text-align:center;"> Agreed </th>
-                    <th style="width: 8.66%; text-align:center;"> Target </th>
-                    <th style="width: 8.66%; text-align:center;"> Diff </th>
-                    <th style="width: 8.66%; text-align:center;"> Agreed </th>
-                    <th style="width: 8.66%; text-align:center;"> Target </th>
-                    <th style="width: 8.66%; text-align:center;"> Diff </th>
-                    <th style="width: 8.66%; text-align:center;"> Agreed </th>
-                    <th style="width: 8.66%; text-align:center;"> Target </th>
-                    <th style="width: 8.66%; text-align:center;"> Diff </th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
 
-</body>
+    }
 
-</html>
+    },
+    error: function (xhr) {
+    //alert(`<div> ${err.responseText} </div>`);
+    console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+    }
+    });
+    }
+    }
+
+    // 2nd Tab => pending schedule => PoNo hyper link
+    function goCreatePo(StrPoNo, AmendNo, BomMaterialCode) {
+
+    debugger;
+    var Monthdate = $("#ddlScheduleMonth").val();
+    var urlName = 'PackingDetailsOutSource/CreateAgPo?StrPoNo=' + StrPoNo + '&PoAmend=' + AmendNo + '&MaterialCode=' +
+    BomMaterialCode + '&Monthdate=' + Monthdate;
+    $.ajax({
+    url: urlName,
+    type: "GET",
+    success: function (response, status, xhr) {
+    $("#mainContent").html(response);
+    },
+    error: function (err) {
+    alert(`Error ${xhr.status}: ${xhr.statusText}`);
+    Paused while stepping
+    success/< - :320:28 success ​ <this>: {…}
+        ​
+        arguments: Arguments
+        ​
+        i: 0
+        ​
+        item: {…}
+        ​
+        row: '\n <tr>\n <td class="ConsumableName BomMaterialName">\n ADAPTOR BT 50 MTB3-60 (SPL ADAPTOR WITH SCREW
+                CLAMPING)\n <input type="hidden" class="hfBomMaterialName"
+                    value="ADAPTOR BT 50 MTB3-60 (SPL ADAPTOR WITH SCREW CLAMPING)" />\n <input type="hidden"
+                    class="hfBomMaterialCode" value="1011307607" />\n </td>\n\n <td class="SupplierName">\n FAIRFIELD
+                ATLAS LTD,EOU.PLANT\n <input type="hidden" class="hfSupplierName"
+                    value="FAIRFIELD ATLAS LTD,EOU.PLANT" />\n <input type="hidden" class="hfSupplierSubGlAcno"
+                    value="1011205110" />\n </td>\n\n <td class="OutSourceQty SumOfPlanQty text-center">\n 400\n <input
+                    type="hidden" class="hfSumOfPlanQty" value="400" />\n </td>\n <td
+                class="ScheduleNo SchNo text-center">\n 2627-000015-0\n <input type="hidden" class="hfStrSchNo"
+                    value="101262790314000015" />\n </td> \n \n <td class="ScheduleQty BookedSchQty text-center">\n
+                400\n <input type="hidden" class="hfBookedSchQty" value="400" />\n </td>\n \n <td
+                class="PoNo text-center">\n 2627-000033-0\n <input type="hidden" class="hfStrPoNo"
+                    value="101262770111000033" />\n </td>\n \n <td class="PoDate text-center">\n 23/10/2026\n <input
+                    type="hidden" class="hfPoDate" value="20261023" />\n </td>\n\n </tr>\n '
+        success
+        GetPackingDetailsPendindScheduleData
+        Window: Global

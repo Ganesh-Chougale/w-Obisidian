@@ -179,20 +179,22 @@ namespace ZanvarGroup.Erp.DALDapper.Implementation.Transactions
         // .Query => returns (TrnNo + 1 Or 1 if null
         public long GetMonthlyTranNo(int intTrnType, int intTrnSeries, string strYearMonth)
         {
+            
             try
             {
-                string query = @"SELECT 
+                string Month = strYearMonth.Substring(4, 2);
+                string query = $@"SELECT 
                                     ISNULL(MAX(TRN_NO),0) + 1  
                                 FROM TRN_TOOL_STOCK_CONVERSION_H 
                                 WHERE 
-                                    LEFT(TRN_DATE,6)=@YearMonth 
-                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),13,2) = @Month 
-                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),8,3) = @TrnType 
-                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),11,2) = @TrnSeries";
+                                    LEFT(TRN_DATE,6)={strYearMonth} 
+                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),13,2) = {Month} 
+                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),8,3) = {intTrnType} 
+                                    AND SUBSTRING(CONVERT(VARCHAR(20),TRN_NO),11,2) = {intTrnSeries}";
                 Int64 returningTrn;
                 using (ConManager con = new ConManager())
                 {
-                    returningTrn = (con.transactionDb.Query<Int64>(query, new { YearMonth = strYearMonth, Month = strYearMonth.Substring(4, 2), TrnType = intTrnType, TrnSeries = intTrnSeries }).SingleOrDefault());
+                    returningTrn = (con.transactionDb.Query<Int64>(query).SingleOrDefault());
                 }
                 return returningTrn;
             }

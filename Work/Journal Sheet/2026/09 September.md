@@ -39,7 +39,8 @@ Push Date   :
 ----------------------------------------------------------------------------------------------------    
 
 #### Date: `18-09-2026 (Friday | शुक्रवार)` to
-![alt](./Z_imagges/09/01%20Target%20Price%20Create%20page.png)
+
+
 ### Work
 ```yml
 Description : New Menu
@@ -70,8 +71,13 @@ View        : (Index, GoCreate, ApproveIndex, GoApprove, Edit, Details, Delete),
 ```  
 ### Git
 ```yml
-Push Date   : 
+Push Date   : 20-10-2026
 ```  
+## 1. `Target Price`
+![alt](./Z_imagges/09/01%20Target%20Price%20Create%20page.png)
+## 2. `Target Price Amend`
+![alt](./Z_imagges/09/02%20Target%20Price%20Amend.png)
+## 3. `Packing Cost Dashboard`
+![alt](./Z_imagges/09/03%20Packing%20Cost%20DashBoard.png)
 
-NOTE::::::::::::::::::::::::::::::::::::::::::::::: remove isnull from H's dal query
 ----------------------------------------------------------------------------------------------------    

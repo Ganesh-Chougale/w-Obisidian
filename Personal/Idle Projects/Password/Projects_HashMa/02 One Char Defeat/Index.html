@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Character Defeat</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        button, input {
+            margin: 8px 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        .number {
+            text-align: right;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        #status {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>One Character Defeat</h2>
+
+    <input type="file" id="fileInput" accept=".txt">
+    <br>
+
+    <button id="startButton">Start Experiment</button>
+
+    <h3>Experiment Results</h3>
+
+    <p id="status">Waiting to start.</p>
+    <p id="passwordLength">Password Length: —</p>
+    <p id="recoveredPassword">Recovered Password: —</p>
+    <p id="totalTime">Total Time: —</p>
+
+    <h3>Character Timing</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="center">Position</th>
+                <th>Matched Character</th>
+                <th class="number">ASCII Code</th>
+                <th class="number">Attempts</th>
+                <th class="number">Time (ms)</th>
+            </tr>
+        </thead>
+
+        <tbody id="resultsBody"></tbody>
+    </table>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const startButton = document.getElementById("startButton");
+        const status = document.getElementById("status");
+        const passwordLength = document.getElementById("passwordLength");
+        const recoveredPassword = document.getElementById("recoveredPassword");
+        const totalTime = document.getElementById("totalTime");
+        const resultsBody = document.getElementById("resultsBody");
+
+        startButton.addEventListener("click", async function () {
+            const file = fileInput.files[0];
+
+            if (!file) {
+                status.textContent = "Please select text file first.";
+                return;
+            }
+
+            startButton.disabled = true;
+            resultsBody.replaceChildren();
+
+            passwordLength.textContent = "Password Length: —";
+            recoveredPassword.textContent = "Recovered Password: ";
+            totalTime.textContent = "Total Time: —";
+            status.textContent = "Reading file...";
+
+            try {
+                const secret = (await file.text()).replace(/[\r\n]+$/, "");
+
+                if (secret.length === 0) {
+                    status.textContent = "The file contains an empty password.";
+                    return;
+                }
+
+                passwordLength.textContent =
+                    "Password Length: " + secret.length;
+
+                status.textContent = "Experiment running...";
+
+                const experimentStart = performance.now();
+                let recovered = "";
+
+                for (let position = 0; position < secret.length; position++) {
+                    const characterStart = performance.now();
+
+                    let matchedCharacter = "";
+                    let matchedCode = -1;
+                    let attempts = 0;
+
+                    // Test printable ASCII characters: 32 through 126.
+                    for (let code = 32; code <= 126; code++) {
+                        attempts++;
+
+                        const candidate = String.fromCharCode(code);
+
+                        // Local educational simulation:
+                        // compare each guess with the corresponding
+                        // character in the selected file.
+                        if (candidate === secret[position]) {
+                            matchedCharacter = candidate;
+                            matchedCode = code;
+                            break;
+                        }
+                    }
+
+                    const characterEnd = performance.now();
+                    const characterTime = characterEnd - characterStart;
+
+                    if (matchedCode === -1) {
+                        status.textContent =
+                            "Stopped: a character is outside printable ASCII.";
+                        return;
+                    }
+
+                    recovered += matchedCharacter;
+
+                    const row = document.createElement("tr");
+
+                    const values = [
+                        { value: position + 1, className: "center" },
+                        { value: matchedCharacter },
+                        { value: matchedCode, className: "number" },
+                        { value: attempts, className: "number" },
+                        {
+                            value: characterTime.toFixed(6),
+                            className: "number"
+                        }
+                    ];
+
+                    for (const item of values) {
+                        const cell = document.createElement("td");
+                        cell.textContent = item.value;
+
+                        if (item.className) {
+                            cell.className = item.className;
+                        }
+
+                        row.appendChild(cell);
+                    }
+
+                    resultsBody.appendChild(row);
+
+                    recoveredPassword.textContent =
+                        "Recovered Password: " + recovered;
+                }
+
+                const experimentEnd = performance.now();
+
+                totalTime.textContent =
+                    "Total Time: " +
+                    (experimentEnd - experimentStart).toFixed(6) +
+                    " ms";
+
+                status.textContent = "Experiment completed.";
+            } catch (error) {
+                status.textContent = "Error reading file: " + error.message;
+            } finally {
+                startButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

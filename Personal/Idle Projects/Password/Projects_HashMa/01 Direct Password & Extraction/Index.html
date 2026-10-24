@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Experiment - Phase 1</title>
+</head>
+<body>
+    <h2>Password Experiment</h2>
+
+    <input type="file" id="fileInput" accept=".txt">
+    <button id="readButton">Read File</button>
+
+    <h3>Results</h3>
+    <p id="passwordResult"></p>
+    <p id="lengthResult"></p>
+
+    <script>
+        document.getElementById("readButton").addEventListener("click", async () => {
+            const file = document.getElementById("fileInput").files[0];
+
+            const passwordResult = document.getElementById("passwordResult");
+            const lengthResult = document.getElementById("lengthResult");
+
+            if (!file) {
+                passwordResult.textContent = "Please select a text file.";
+                lengthResult.textContent = "";
+                return;
+            }
+
+            const password = (await file.text()).trim();
+
+            passwordResult.textContent = "Password: " + password;
+            lengthResult.textContent = "Password Length: " + password.length;
+        });
+    </script>
+</body>
+</html>
