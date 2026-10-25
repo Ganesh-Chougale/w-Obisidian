@@ -1,5 +1,5 @@
 #### Date: `07-05-2026 (Thursday | गुरुवार)` to `14-05-2026 (Thursday | गुरुवार)`   
-![](./Z_imagges/05/01.png "")  
+![](../Z_imagges/05/01.png "")  
 ### Work
 ```yml
 Description : CR & MR Popup

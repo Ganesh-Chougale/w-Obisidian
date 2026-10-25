@@ -1,5 +1,5 @@
 ## Date: `09-07-2026 (Thursday | गुरुवार)` to `01-08-2026 (Saturday | शनिवार)`
-![alt](./Z_imagges/07/01.png)
+![alt](../Z_imagges/07/01.png)
 ### Work
 ```yml
 Description : Branch and Dept wise min max

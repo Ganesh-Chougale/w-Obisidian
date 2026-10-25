@@ -11,7 +11,7 @@ Ticket      :
 ----------------------------------------------------------------------------------------------------  
 
 ## Date: `27-02-2026 (Friday | शुक्रवार)` to `10-03-2026 (Tuesday | मंगलवार)`  
-![Core Consumption tooltip](./Z_imagges/02/01.png "Core Consumption")
+![Core Consumption tooltip](../Z_imagges/02/01.png "Core Consumption")
 ```yml
 Work        : Core Consumption (New Menu)
 Flow        : Production ⇒ Core Production ⇒ Core Consumption (Menu ID = 80504)

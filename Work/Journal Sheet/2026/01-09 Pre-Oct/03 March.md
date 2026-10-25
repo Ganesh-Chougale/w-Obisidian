@@ -26,7 +26,7 @@ Ticket      :
 
 ## Date: `15-03-2026 (Sunday | रविवार)`  
 ### Work
-![Branch Names DDM](./Z_imagges/03/01.png "Branch Names")  
+![Branch Names DDM](../Z_imagges/03/01.png "Branch Names")  
 ```yml
 Description : Add new Branch name dropdown(checkbox) & and populate color codes & flow after that based on selected branch codes
 Flow        : Sub Contract => Challan => Tools and Tips Challan => Resharp  
@@ -46,7 +46,7 @@ View        : ResharpToolTipChallanSummary
 ----------------------------------------------------------------------------------------------------  
 ## Date: `17-03-2026 (Tuesday | मंगलवार)`
 ### Work: `Export ROTEP Claim`  
-![Export ROTEP Claim](./Z_imagges/03/02.png "Export ROTEP Claim image")  
+![Export ROTEP Claim](../Z_imagges/03/02.png "Export ROTEP Claim image")  
 ```yml
 Description : Appending two columns ROTEP Rate & ROTEP Amount and saving it in Database accordingly.  
 Flow        : Sales => Other => Export => Shipping Bill => New Button => Entry Selection

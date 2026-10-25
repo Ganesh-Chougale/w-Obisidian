@@ -1,5 +1,5 @@
 #### Date: `01-04-2026 (Wednesday | बुधवार)` to `08-04-2026 (Wednesday | बुधवार)`  
-![Discription](./Z_imagges/04/01.png "User-description-tooltip")  
+![Discription](../Z_imagges/04/01.png "User-description-tooltip")  
 ### Work
 ```yml
 Description : Rework of Final Inspection
@@ -118,7 +118,7 @@ View        : Index
 ```  
 ----------------------------------------------------------------------------------------------------    
 #### Date: `15-04-2026 (Wednesday | बुधवार)` to  `21-04-2026 (Tuesday | मंगलवार)`
-![Discription](./Z_imagges/04/02.JPG "Mainitenance Module Overview")  
+![Discription](../Z_imagges/04/02.JPG "Mainitenance Module Overview")  
 ### Work
 ```yml
 Description : Maintainance Home Page Cards
