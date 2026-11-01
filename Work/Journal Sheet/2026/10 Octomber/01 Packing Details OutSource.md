@@ -1,5 +1,5 @@
 # While Work
-## Date: `07-10-2026 (Wednesday | बुधवार)` to
+## Date: `10-10-2026 (Saturday | शनिवार)` to 
 ## A. Menu Images
 ### Images: ``
 ![alt](../Z_imagges/10/Packing%20Details%20[707705].png)  
@@ -12,7 +12,7 @@ Menu Ids    : Packing Details
                 |- TranType = 809
                 |- TrnSubType = 15
                 |- MenuDocNo = 80915
-WFC         : 
+WFC         : 8
 Ticket      : 
 ```  
 ## C. Database
@@ -35,7 +35,7 @@ View        : Index, CreateAgPo, CreateSchedule
 ```  
 ## E. Git
 ```yml
-Push Date   : 
+Push Date   : 29-10-2026
 ```  
 
 ----------------------------------------------------------------------------------------------------    
@@ -90,32 +90,7 @@ SELECT * FROM [dbo].[MST_MENU] WHERE MENU_ID = 707705;
 ```   
 
 ## B. Comments for removal
-- 1. MonthlySalesScheduleController => Create
-```csharp
-            //if (flag == 1) {
-            //    $.smallBox({
-            //        title: "Auto Planning",
-            //        content: "हे मटेरियल शेड्यूल प्लॅनिंग मॉड्यूलमधून भरले पाहिजे.",
-            //        color: "#C46A69",
-            //        timeout: 6000,
-            //    });
-            //    return false;
-            //}
-```  
-- 2. DailySalesScheduleController => Create
-```csharp
-                    //if (flag == 1) {
-                    //    $.smallBox({
-                    //        title: "Auto Planning",
-                    //        content: "This customer and plan configure in auto planning.",
-                    //        color: "#C46A69",
-                    //        timeout: 4000,
-                    //    });
-                    //    return false;
-                    //}  
-```  
-
-----------------------------------------------------------------------------------------------------    
+- all done
 
 ## Save Order UI
 1. Prodction

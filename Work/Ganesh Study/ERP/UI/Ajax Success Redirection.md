@@ -21,8 +21,9 @@ $.ajax({
             });
         }
     },
-    error: function (xhr) {
-        alert("Error: " + xhr.status + ": " + xhr.statusText);
+    error: function (xhr, status, error) {
+        console.error("AJAX Error Status: " + xhr.status + " (" + error + ")");
+        console.error("Server Response: ", xhr.responseText);
     }
 });
 ```  

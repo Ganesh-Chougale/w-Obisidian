@@ -1,17 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Development Tools Suite</title>
 
-                                        if (item.SumofPlanQty <= item.BookedSchQty) {
-                                            row = row + `
-                                                <td class="text-center">
-                                                    <a title="View" href="javascript:void(0);" onclick="goCreateSchedule('${item.StrSchNo}', '${item.SchAmendNo}', '${item.MaterialCode}')" data-ajax-update="#mainContent" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true">
-                                                        ${item.ShortSchNo}
-                                                    </a>
-                                                    <input type="hidden" class ="hfStrSchNo" value="${item.StrSchNo}" />
-                                                </td>`;
-                                         } else {
-                                            row = row + `
-                                                <td class ="ScheduleNo SchNo text-center">
-                                                    ${item.ShortSchNo}
-                                                    <input type="hidden" class ="hfStrSchNo" value="${item.StrSchNo}" />
-                                                </td>        
-                                            `;
-                                        }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+.meter-container {
+  height: 22px;
+  background: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.meter {
+  height: 100%;
+  background: #198754;
+  transition: width 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.meter.full {
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de;
+  }
+  to {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 60px #ff00de;
+  }
+}
+
+.revealer-base {
+  position: relative;
+  width: 100%;
+}
+
+.table-wrapper {
+  position: relative;
+  width: 100%;
+  border: 1px dashed #ccc;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+th, td {
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.edit {
+  cursor: pointer;
+  margin-left: 6px;
+  color: #0d6efd;
+}
+
+.revealer-area {
+  position: relative;
+  right: 120px;
+  /* position: absolute; */
+  top: 0;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    #f8d7da,
+    #f8d7da 10px,
+    #ffffff 10px,
+    #ffffff 20px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #842029;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.spacer-col {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  background: rgba(13, 110, 253, 0.2);
+}
+
+.resizer:hover {
+  background: rgba(13, 110, 253, 0.6);
+}
+.revealerID{
+  position: relative;
+  right: 120px;
+}
+
+textarea {
+  min-height: 120px;
+  resize: none;
+  overflow: hidden;
+  font-family: monospace;
+}
+
+.tool-section {
+  display: none;
+}
+
+.tool-section.active {
+  display: block;
+}
+</style>
+</head>
+
+<body class="bg-light">
+<div class="container py-4">
+
+<!-- Header with Tool Selector -->
+<div class="row mb-4">
+  <div class="col-12">
+    <h4 class="mb-3">Development Tools Suite</h4>
+    <div class="row g-2">
+      <div class="col-12">
+        <select id="toolSelector" class="form-select" onchange="switchTool()">
+          <option value="tableManager">Table Column Manager</option>
+          <option value="draftGenerator">Automator Draft Generator</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Table Column Manager Section -->
+<div id="tableManager" class="tool-section active">
+  <div class="meter-container mb-3">
+    <div id="meter" class="meter" style="width:100%"></div>
+  </div>
+
+  <div class="row g-2 mb-3">
+    <div class="col-md-5 col-6">
+      <input id="colName" class="form-control" placeholder="Column name">
+    </div>
+    <div class="col-md-3 col-6">
+      <input id="colWidth" class="form-control" type="number" placeholder="Width % (default 5)">
+    </div>
+    <div class="col-md-4 col-12">
+      <button class="btn btn-primary w-100" onclick="addColumn()">+ Add Column</button>
+    </div>
+  </div>
+
+  <div class="revealer-base mb-3">
+    <div class="table-wrapper">
+      <table id="mainTable" class="table table-bordered table-sm mb-0">
+        <thead>
+          <tr id="headerRow"></tr>
+        </thead>
+        <tbody>
+          <tr id="dataRow"></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="revealerID" class="revealer-area" style="height: 67px;">
+      100% unused
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4 offset-3">
+      <h6>Columns</h6>
+      <ul id="colList" class="list-group"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Draft Generator Section -->
+<div id="draftGenerator" class="tool-section">
+  <!-- Buttons (Mobile First: stacked) -->
+  <div class="d-grid gap-2 mb-3">
+    <button class="btn btn-primary" onclick="generateWorkDraft()">
+      Work Draft Generator
+    </button>
+
+    <div class="row g-2">
+      <div class="col-6">
+        <input type="date" id="customDate" class="form-control" onchange="generateCustomDate()">
+      </div>
+      <div class="col-6">
+        <button class="btn btn-success w-100" onclick="generateTodayDate()">
+          Today's Date
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Output Area -->
+  <div class="mb-2 position-relative">
+    
+    <!-- Copy Icon -->
+    <button class="btn btn-sm btn-light position-absolute top-0 end-0 m-2 shadow-sm"
+            onclick="copyText()"
+            title="Copy">
+      <i class="bi bi-clipboard"></i>
+    </button>
+
+    <textarea id="outputText"
+              class="form-control"
+              placeholder="Generated draft will appear here..."
+              oninput="autoResize(this)"></textarea>
+  </div>
+</div>
+
+</div>
+
+<script>
+// Global variables for table manager
+let columns = [];
+let colCount = 0;
+let isDragging = false;
+let dragIndex = null;
+let startX = 0;
+let startWidth = 0;
+let nextStartWidth = 0;
+
+// Tool switching
+function switchTool() {
+  const selector = document.getElementById('toolSelector');
+  const selectedTool = selector.value;
+  
+  // Hide all tool sections
+  document.querySelectorAll('.tool-section').forEach(section => {
+    section.classList.remove('active');
+  });
+  
+  // Show selected tool section
+  document.getElementById(selectedTool).classList.add('active');
+}
+
+// ---------- Table Manager Functions ----------
+function recalc() {
+  const used = columns.reduce((s, c) => s + c.width, 0);
+  const remaining = 100 - used;
+
+  // Update meter width and color
+  if (remaining === 0) {
+    meter.style.width = "100%";
+    meter.style.background = '#dc3545';
+    meter.classList.add('full');
+    meter.innerText = "Space fully allocated";
+  } else {
+    meter.style.width = remaining + "%";
+    meter.style.background = '#198754';
+    meter.classList.remove('full');
+    meter.innerText = "";
+  }
+
+  revealerID.style.width = remaining + "%";
+  revealerID.style.left = used + "%";
+  revealerID.innerText = remaining > 0 ? remaining + "% unused" : "";
+}
+
+function render() {
+  headerRow.innerHTML = "";
+  dataRow.innerHTML = "";
+  colList.innerHTML = "";
+
+  columns.forEach((col, i) => {
+
+    const th = document.createElement("th");
+    th.style.width = col.width + "%";
+    th.title = col.name;
+    th.innerHTML = `
+      ${col.name}
+      <i class="bi bi-pencil edit" onclick="rename(${i})"></i>
+      <div class="resizer" onmousedown="startResize(event, ${i})"></div>
+    `;
+    headerRow.appendChild(th);
+
+    const td = document.createElement("td");
+    td.innerHTML = `
+      ${col.width}%
+      <i class="bi bi-pencil edit" onclick="editWidth(${i})"></i>
+    `;
+    dataRow.appendChild(td);
+
+    const li = document.createElement("li");
+    li.className = "list-group-item";
+    li.innerHTML = `
+      <div class="d-flex align-items-center gap-2">
+        <span class="text-muted fw-semibold" style="width:30px;">
+          ${i + 1}.
+        </span>
+
+        <span class="flex-grow-1 text-truncate">
+          ${col.name}
+        </span>
+
+        <span class="flex-grow-1 border-bottom mx-2" style="height:1px;"></span>
+
+        <span class="badge bg-primary">
+          ${col.width}%
+        </span>
+      </div>
+    `;
+    colList.appendChild(li);
+  });
+
+  const used = columns.reduce((s, c) => s + c.width, 0);
+  if (used < 100) {
+    const remaining = 100 - used;
+
+    const th = document.createElement("th");
+    th.style.width = remaining + "%";
+    th.className = "spacer-col";
+    headerRow.appendChild(th);
+
+    const td = document.createElement("td");
+    td.className = "spacer-col";
+    dataRow.appendChild(td);
+  }
+
+  recalc();
+}
+
+function addColumn() {
+  let name = colName.value.trim();
+  let width = parseInt(colWidth.value) || 5;
+
+  const used = columns.reduce((s, c) => s + c.width, 0);
+  if (used + width > 100) return alert("Not enough remaining space");
+
+  if (!name) {
+    colCount++;
+    name = "Column " + colCount;
+  }
+
+  columns.push({ name, width });
+  colName.value = "";
+  colWidth.value = "";
+  render();
+}
+
+function rename(i) {
+  const n = prompt("Rename column", columns[i].name);
+  if (n) {
+    columns[i].name = n.trim();
+    render();
+  }
+}
+
+function editWidth(i) {
+  const n = parseInt(prompt("New width %", columns[i].width));
+  if (isNaN(n) || n < 1) return;
+
+  const other = columns.reduce((s, c, idx) => idx === i ? s : s + c.width, 0);
+  if (other + n > 100) return alert("Not enough remaining space");
+
+  columns[i].width = n;
+  render();
+}
+
+/* DRAG RESIZE */
+function startResize(e, i) {
+  isDragging = true;
+  dragIndex = i;
+  startX = e.clientX;
+  startWidth = columns[i].width;
+
+  nextStartWidth = (i + 1 < columns.length)
+    ? columns[i + 1].width
+    : (100 - columns.reduce((s,c)=>s+c.width,0));
+
+  document.addEventListener("mousemove", onDrag);
+  document.addEventListener("mouseup", stopDrag);
+}
+
+function onDrag(e) {
+  if (!isDragging) return;
+
+  const rect = mainTable.getBoundingClientRect();
+  const delta = ((e.clientX - startX) / rect.width) * 100;
+
+  let newWidth = Math.max(1, Math.round(startWidth + delta));
+  let newNext = Math.max(1, Math.round(nextStartWidth - delta));
+
+  if (newWidth + newNext > startWidth + nextStartWidth) return;
+
+  columns[dragIndex].width = newWidth;
+  if (dragIndex + 1 < columns.length) {
+    columns[dragIndex + 1].width = newNext;
+  }
+
+  render();
+}
+
+function stopDrag() {
+  isDragging = false;
+  document.removeEventListener("mousemove", onDrag);
+  document.removeEventListener("mouseup", stopDrag);
+}
+
+// ---------- Draft Generator Functions ----------
+function generateWorkDraft() {
+  const template =
+`\`\`\`yml
+Work        :
+Flow        :
+Dal         :
+BO          :
+Controller  :
+View        :
+Ticket      :
+\`\`\`
+- Description  
+\`\`\`txt
+
+\`\`\``;
+
+  const ta = document.getElementById('outputText');
+  ta.value = template;
+  autoResize(ta);
+}
+
+function generateTodayDate() {
+  const today = new Date();
+
+  const daysEng = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const daysHin = ["रविवार","सोमवार","मंगलवार","बुधवार","गुरुवार","शुक्रवार","शनिवार"];
+
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+
+  const dayName = daysEng[today.getDay()];
+  const dayHin = daysHin[today.getDay()];
+
+  const template =
+`#### Date: \`${dd}-${mm}-${yyyy} (${dayName} | ${dayHin})\``;
+
+  const ta = document.getElementById('outputText');
+  ta.value = template;
+  autoResize(ta);
+}
+
+function generateCustomDate() {
+  const customDateInput = document.getElementById('customDate');
+  const selectedDate = customDateInput.value;
+  
+  if (!selectedDate) {
+    return; // Don't show alert, just return silently
+  }
+
+  const date = new Date(selectedDate);
+
+  const daysEng = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const daysHin = ["रविवार","सोमवार","मंगलवार","बुधवार","गुरुवार","शुक्रवार","शनिवार"];
+
+  const dd = String(date.getDate()).padStart(2, '0');
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const yyyy = date.getFullYear();
+
+  const dayName = daysEng[date.getDay()];
+  const dayHin = daysHin[date.getDay()];
+
+  const template =
+`#### Date: \`${dd}-${mm}-${yyyy} (${dayName} | ${dayHin})\``;
+
+  const ta = document.getElementById('outputText');
+  ta.value = template;
+  autoResize(ta);
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = (el.scrollHeight) + 'px';
+}
+
+function copyText() {
+  const textArea = document.getElementById('outputText');
+  textArea.select();
+  document.execCommand('copy');
+}
+
+// Initialize
+recalc();
+</script>
+</body>
+</html>

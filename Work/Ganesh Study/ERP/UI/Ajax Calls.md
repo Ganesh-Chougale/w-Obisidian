@@ -9,7 +9,8 @@ $.ajax({
         $("#mainContent").html(response);
     },
     error: function (xhr, status, error) {
-        alert("Error: " + xhr.status + ": " + xhr.statusText);
+        console.error("AJAX Error Status: " + xhr.status + " (" + error + ")");
+        console.error("Server Response: ", xhr.responseText);
     }
 })
 ```  
