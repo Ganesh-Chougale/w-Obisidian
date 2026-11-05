@@ -7,7 +7,8 @@
 ## B. Work Section
 ```yml
 Menu Path   : 
-                - Procurement => Purchase Order => Rental Po Order (Supplier ddl based on new I_BOM_SUP, & based on SubGlAcNo following Material ddl)
+                - Procurement => Purchase Order => Rental Po Order => Create
+                (Supplier ddl based on new I_BOM_SUP, & based on SubGlAcNo following Material ddl, overflowY auto)
                 - Procurement => Approve => Rental Po Order (old bug fixing)
                 - 
 ```  

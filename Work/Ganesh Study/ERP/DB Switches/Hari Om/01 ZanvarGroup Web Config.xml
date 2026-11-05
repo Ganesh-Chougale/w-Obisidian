@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <configSections>
+
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+  </configSections>
+  <appSettings>
+    <add key="config:EnableTiles" value="1" />
+    <add key="config:EnableLoader" value="1" />
+    <add key="config:Project" value="ZanvarGroup" />
+    <add key="config:Company" value="ASHTA LINERS PVT. LTD.> R.S. NO. 334/2 B, SANGLI-ISLAMPUR ROAD, ASHTA TAL.-WALWA, DIST.-SANGLI 416301" />
+    <add key="config:CurrentTheme" value="" />
+    <add key="ImagePath" value="E:\\EmployeePhoto\" />
+    <add key="CompanyId" value="101" />
+    <add key="config:CompanyShortName" value="HO_ENT_ERP_LIVE" />
+    <add key="config:ShortName" value="HO_ENT_ERP_LIVE" />
+    <add key="config:SystemDataBase" value="HARIOM_MASTERS" />
+    <add key="config:ERPDataBase" value="HO_ENT_ERP_LIVE" />
+    <add key="config:DocReportPath" value="/ZDOCREPORT/" />
+    <add key="config:ReportPath" value="/ZREPORT/" />
+    <add key="config:ReportServerUrl" value="http://10.10.1.18:80/ReportServer" />
+    <add key="config:ReportServerUserName" value="administrator" />
+    <add key="config:ReportServerPassword" value="C0den@me" />
+    <add key="config:OldApplicationUrl" value="http://10.10.1.7:8101" />
+    <add key="aspnet:MaxJsonDeserializerMembers" value="2147483647" />
+    <add key="MastersService" value="http://localhost:56122/api/" />
+    <add key="HariomService" value="http://10.10.1.18:8301" />
+    <add key="ErpService" value="http://10.10.1.7:8312" />
+    <add key="domainname" value="localhost" />
+    <add key="CookieExpireTimeInMinutes" value="1440" />
+    <add key="config:BiUrl" value="http://10.10.2.181/bi/" />
+    <add key="config:CopyRights" value="Zanvar Technology And Consulting Services © " />
+    <add key="config:GroupName" value="Zanvar Group of Industries" />
+    <add key="RequirePushNotification" value="true" />
+    <add key="OneSignalBaseUrl" value="https://onesignal.com/api/v1/notifications" />
+    <add key="OneSignalAppKey" value="47b1e78e-7c06-4c3f-a04c-0af972279f00" />
+    <add key="OneSignalAuthorization" value="NzFlMzdkOTUtZWVjNi00NjVhLWJmNTktOTk2N2VhY2JmZDQ3" />
+    <add key="config:MvcPort" value="56113" />
+    <add key="config:ChatServerUrl" value="http://localhost:62952/" />
+    <add key="config:CompanyStateCode" value="27" />
+    <add key="config:UserType" value="0" />
+    <add key="config:Gstin" value="27AADCS7789Q1Z6" />
+    <add key="config:PrdQrCodePath" value="\\10.10.5.65\\QrCode" />
+    <add key="CalibCompanyKey" value="1" />
+    <add key="AppNotificationBaseUrl" value="https://fcm.googleapis.com/fcm/send" />
+		<add key="AppNotificationId" value="744629793103" />    
+    <add key="GetVehicleNumberUserName" value="admin" />
+    <add key="GetVehicleNumberPassword" value="admin" />
+    <add key="GetVehicleNumberTokenApi" value="http://10.10.5.84/API/Web/Login" />
+    <add key="GetVehicleNumberApi" value="http://10.10.5.84/API/AI/processAlarm/Get" />    
+    <add key="SurepassFastagDetail" value="https://sandbox.surepass.app/api/v1/fastag/fastag-to-rc-advanced" />
+    <add key="SurepassToken" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc3NDMzNDczMywianRpIjoiOTdmOGQ5NTAtMTEzYS00MWE4LWIzYzQtMjMzNTJhZmEyNjRiIiwidHlwZSI6ImFjY2VzcyIsImlkZW50aXR5IjoiZGV2LnphbnZhcl9nQHN1cmVwYXNzLmlvIiwibmJmIjoxNzc0MzM0NzMzLCJleHAiOjE3NzUxOTg3MzMsImVtYWlsIjoiemFudmFyX2dAc3VyZXBhc3MuaW8iLCJ0ZW5hbnRfaWQiOiJtYWluIiwidXNlcl9jbGFpbXMiOnsic2NvcGVzIjpbInVzZXIiXX19.B5ZtEHXUI9Kw1sfN9qy2UnYCKvOWBkj02TooKF6ra8I" />
+		<add key="AppNotificationAutorization" value="AAAArV9k8U8:APA91bHV8CzRi8Vpc0rIuQtoseozUSufea0xc_bhzpwcDSeUBQ3dQAgsTFwB5skvncklFUGMg9rwii27vqBiQYFY4Rzs6ryjiczsXsjzYTGdQzr2M5JZumYiy8Rgb2eMLksViOZ_ZOMo" />
+    <add key="PirAutoReadingUrl" value="http://localhost:5000/get-com-port-data" />
+    <add key="GetWeightScaleDataUrl" value="http://10.10.5.85:5000/get_counting_info" />
+    <add key="GetPLCConnectionIP" value="10.20.1.200"/>
+
+  </appSettings>
+  <system.web.extensions>
+    <scripting>
+      <webServices>
+        <jsonSerialization maxJsonLength="2147483647"></jsonSerialization>
+      </webServices>
+    </scripting>
+  </system.web.extensions>
+  <connectionStrings>
+    <!--<add name="DefaultConnection" connectionString="Data Source=(localdb)\V11.0;Initial Catalog=SmartAdminMvc;Integrated Security=SSPI" providerName="System.Data.SqlClient" />-->
+    <!-- <add name="DefaultConnection" connectionString="Data Source=10.10.1.18;Initial Catalog=SmartAdminMvc;Integrated Security=SSPI" providerName="System.Data.SqlClient" />-->
+    <add name="MasterDBConnection" connectionString="Data Source=DESKTOP-J57A6GE;Initial Catalog=HARIOM_MASTERS;Integrated Security=False;MultipleActiveResultSets=True;uid = sa; password =sa1234#;Connection Timeout=900" providerName="System.Data.SqlClient" />
+    <add name="TransactionDBConnection" connectionString="Data Source=DESKTOP-J57A6GE;Initial Catalog=HO_ENT_ERP_LIVE;Integrated Security=False;MultipleActiveResultSets=True;uid = sa; password =sa1234#;Connection Timeout=900" providerName="System.Data.SqlClient" />
+    <add name="ReportDBConnection" connectionString="Data Source=10.10.1.18;Initial Catalog=ERP_REPORT;Integrated Security=False;MultipleActiveResultSets=True;uid = sa; password =sa1234#;Connection Timeout=900" providerName="System.Data.SqlClient" />
+    <add name="CalibrationDBConneection" connectionString="Data Source=10.10.4.22;Initial Catalog=WEB_CALIBRATION;Integrated Security=False;MultipleActiveResultSets=True;uid = sa; password =sa1234#;Connection Timeout=900" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+  <system.web>
+    <sessionState timeout="2880"></sessionState>
+    <authentication mode="Forms">
+      <forms loginUrl="http://localhost:50788/Account/Login" timeout="2880" name="SingleSignOn" slidingExpiration="true" />
+    </authentication>
+    <customErrors mode="Off"></customErrors>
+    <compilation debug="true" targetFramework="4.5">
+      <buildProviders>
+        <add extension=".rdlc" type="Microsoft.Reporting.RdlBuildProvider, Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+      </buildProviders>
+      <assemblies>
+      </assemblies>
+    </compilation>
+    <httpRuntime targetFramework="4.5" executionTimeout="500" maxRequestLength="20480" />
+    <machineKey validationKey="E4451576F51E0562D91A1748DF7AB3027FEF3C2CCAC46D756C833E1AF20C7BAEFFACF97C7081ADA4648918E0B56BF27D1699A6EB2D9B6967A562CAD14767F163" decryptionKey="6159C46C9E288028ED26F5A65CED7317A83CB3485DE8C592" validation="HMACSHA256" decryption="AES" />
+    <httpHandlers>
+      <add path="Reserved.ReportViewerWebControl.axd" verb="*" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" validate="false" />
+      <add verb="*" path="captimage.axd" type="Syncfusion.JavaScript.ImageHandler, Syncfusion.EJ, Version=18.3450.0.51, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    </httpHandlers>
+    <pages>
+      <namespaces>
+      </namespaces>
+    </pages>
+  </system.web>
+  <system.webServer>
+    <staticContent>
+      <!--<mimeMap fileExtension=".json" mimeType="application/json" />-->
+    </staticContent>
+
+    <validation validateIntegratedModeConfiguration="false" />
+    <handlers>
+      <add name="ReportViewerWebControlHandler" preCondition="integratedMode" verb="*" path="Reserved.ReportViewerWebControl.axd" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+      <add verb="*" path="captimage.axd" name="syncfusion_generatetools" type="Syncfusion.JavaScript.ImageHandler, Syncfusion.EJ, Version=18.3450.0.51, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    </handlers>
+    <modules runAllManagedModulesForAllRequests="true" />
+  </system.webServer>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Helpers" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.WebPages" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-5.2.2.0" newVersion="5.2.2.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="WebGrease" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-1.6.5135.21930" newVersion="1.6.5135.21930" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-13.0.0.0" newVersion="13.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Antlr3.Runtime" publicKeyToken="eb42632606e9261f" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.5.0.2" newVersion="3.5.0.2" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.ReportViewer.Common" publicKeyToken="89845dcd8080cc91" />
+        <bindingRedirect oldVersion="10.0.0.0-11.0.0.0" newVersion="11.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.ReportViewer.WebForms" publicKeyToken="89845dcd8080cc91" />
+        <bindingRedirect oldVersion="10.0.0.0-11.0.0.0" newVersion="11.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.1.0.0" newVersion="3.1.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.1.0.0" newVersion="3.1.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security.Cookies" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.1.0.0" newVersion="3.1.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security.OAuth" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.1.0.0" newVersion="3.1.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Data" publicKeyToken="b77a5c561934e089" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="v12.0" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+</configuration>
