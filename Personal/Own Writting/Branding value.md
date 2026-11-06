@@ -1,7 +1,3 @@
-Absolutely. These six things are worth understanding because they solve **different problems**. They are not six versions of the same thing.
-
-Think of your future work as moving through this pipeline:
-
 ```text
 YOU CREATE THE WORK
         ↓
@@ -21,8 +17,6 @@ RECOGNITION
 ```
 
 But there is some flexibility in the order. Let's break each one down.
-
----
 
 # 1. India Copyright Office — "This work is legally mine"
 
